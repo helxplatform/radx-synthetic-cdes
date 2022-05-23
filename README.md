@@ -48,6 +48,7 @@ valid_inputs: # for any type of response
     - this is also a valid response
     ...
 ```
+Only one of these fields should be specified for a response, and others should either be omitted or set to null.
 
 ### Generating synthetic CDEs
 Use a CDE template to generate synthetic CDE data.

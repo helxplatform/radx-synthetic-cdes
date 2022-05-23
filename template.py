@@ -50,15 +50,15 @@ def generate_template_csv(mapping_file, output_path):
                     if response_type == "text":
                         # If lorem is specified, a lorem ipsum generator will be used.
                         var_field["response_value_generator"]["lorem"] = {
-                            "num_sentences": [1, 4],
-                            "sentence_length": [1, 50]
+                            "num_sentences": [1, 2],
+                            "sentence_length": [1, 10]
                         }
                         # If valid_inputs is specified, a random choice from the list will be used
                         var_field["response_value_generator"]["valid_inputs"] = None
                     if response_type == "integer":
                         # If range is specified, a random integer within the range will be used.
                         # If valid_inputs is specified, a random integer from the list will be used.
-                        var_field["response_value_generator"]["range"] = [0, 0]
+                        var_field["response_value_generator"]["range"] = [0, 10]
                         var_field["response_value_generator"]["valid_inputs"] = None
                     variable_template.append(var_field)
 
