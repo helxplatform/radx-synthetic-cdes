@@ -38,7 +38,7 @@ template-global-cookbook:
 #generate: Generate synthetic CDE data from a CDE template.
 generate:
 ifndef TEMPLATE
-	$(error TEMPLATE not set (controls how CDE data is generated))
+	$(error TEMPLATE not set (should point to a CDE template file))
 endif
 ifndef ROW_COUNT
 	$(error ROW_COUNT not set (determines how many rows of data to generate))
