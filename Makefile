@@ -2,7 +2,7 @@ PYTHON       = /usr/bin/env python3
 VERSION_FILE = ./_version.py
 VERSION      = $(shell cut -d " " -f 3 ${VERSION_FILE})
 
-TEMPLATE := cde_template.yaml
+TEMPLATE :=
 OUTPUT_PATH :=
 
 .DEFAULT_GOAL = help
