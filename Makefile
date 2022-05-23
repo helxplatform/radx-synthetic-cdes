@@ -2,7 +2,7 @@ PYTHON       = /usr/bin/env python3
 VERSION_FILE = ./_version.py
 VERSION      = $(shell cut -d " " -f 3 ${VERSION_FILE})
 
-CDE_TEMPLATE := cde_template.yaml
+TEMPLATE := cde_template.yaml
 OUTPUT_PATH :=
 
 .DEFAULT_GOAL = help
@@ -37,8 +37,11 @@ template-global-cookbook:
 
 #generate: Generate synthetic CDE data from a CDE template.
 generate:
+ifndef TEMPLATE
+	$(error TEMPLATE not set (controls how CDE data is generated))
+endif
 ifndef ROW_COUNT
 	$(error ROW_COUNT not set (determines how many rows of data to generate))
 endif
-	${PYTHON} generate.py --template ${CDE_TEMPLATE} --row_count ${ROW_COUNT} \
+	${PYTHON} generate.py --template ${TEMPLATE} --row_count ${ROW_COUNT} \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
