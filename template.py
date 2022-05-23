@@ -76,6 +76,8 @@ def generate_template_csv(mapping_file, output_path):
         out_file.write(f"""\
 # Template generated using v{__version__}.
 # Source mapping file: "{mapping_file}".
+# 
+# {len(template['variables'])} variables and {sum([len(template['variables'][variable]) for variable in template['variables']])} possible responses.
 #
 # Notes:
 # - All responses under a variable with {{frequency: null}} will have the remaining frequency distribution divided evenly between them.
@@ -112,7 +114,7 @@ if __name__ == "__main__":
         "--mapping_file",
         help="RADx CDE mapping file, e.g. the RADx global cookbook",
         action="store",
-        default="templating_data/radx_global_cookbook.csv"
+        required=True
     )
     parser.add_argument(
         "-o",

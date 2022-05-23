@@ -118,7 +118,7 @@ if __name__ == "__main__":
         "--template",
         help="CDE template specifying how to generate the mock CDE",
         action="store",
-        default="cde_template.yaml"
+        required=True
     )
     parser.add_argument(
         "-n",
