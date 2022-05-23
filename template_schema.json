@@ -1,0 +1,99 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Template File",
+    "type": "object",
+    "properties": {
+        "variables": {
+            "type": "object",
+            "description": "CDE variable name (key) and associated response-generation config",
+            "additionalProperties": {
+                "type": "list",
+                "items": {
+                    "frequency": {
+                        "type": ["number", "null"],
+                        "minimum": 0,
+                        "maximum": 1,
+                        "optional": false
+                    },
+                    "response_name": {
+                        "type": "string",
+                        "description": "Response name (auto-generated)",
+                        "optional": false
+                    },
+                    "response_value": {
+                        "type": "number",
+                        "description": "Response value (auto-generated)"
+                    },
+                    "response_value_generator": {
+                        "type": "object",
+                        "description": "For special responses ('text', 'integer'), extra config is required to generate a response_value",
+                        "properties": {
+                            "lorem": {
+                                "type": "object",
+                                "description": "Generate random sentences. Only allowed for the 'text' response.",
+                                "properties": {
+                                    "num_sentences": {
+                                        "type": "array",
+                                        "description": "Minimum/maximum number of sentences that can be generated",
+                                        "prefixItems": [
+                                            {
+                                                "type": "integer",
+                                                "description": "Minimum number of sentences that can be generated.",
+                                                "minimum": 1
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "description": "Maximum number of sentences that can be generated.",
+                                                "minimum": 1
+                                            }
+                                        ]
+                                    },
+                                    "sentence_length": {
+                                        "type": "array",
+                                        "description": "Minimum/maximum number of characters that a sentence can be",
+                                        "prefixItems": [
+                                            {
+                                                "type": "integer",
+                                                "description": "Minimum number of words per sentence.",
+                                                "minimum": 1
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "description": "Maximum number of words per sentence.",
+                                                "minimum": 1
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "range": {
+                                "type": "array",
+                                "description": "Generate a random integer in an inclusive range. Only allowed for the 'integer' response.",
+                                "prefixItems": [
+                                    {
+                                        "type": "integer",
+                                        "description": "Minimum value.",
+                                        "minimum": 0
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "description": "Maximum value.",
+                                        "minimum": 0
+                                    }
+                                ]
+                            },
+                            "valid_inputs": {
+                                "type": "array",
+                                "description": "Choose a random pregenerated response value from a list. Allowed for 'text' and 'integer' responses.",
+                                "items": {
+                                    "type": ["string", "integer"],
+                                    "description": "A random value that can be chosen as the response value"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
