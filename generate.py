@@ -103,6 +103,23 @@ def generate_cde(template_file, row_count, output_path=None):
 
     preprocess_template(template)
 
+    if row_count is None:
+        if "row_count" in template:
+            row_count = template["row_count"]
+        else:
+            raise Exception(f"""\
+Please specify the `row_count` field in "{template_file}" (or the `--row_count` argument if using the command line). Ex:
+# ...
+# ...
+row_count: <rows_to_generate>
+output_path: ...
+variables:
+    ...\
+""")
+    if output_path is None:
+        output_path = template.get("output_path", None)
+
+
     [cde_header, cde_rows] = generate_rows(template, row_count)
 
     save_cde(cde_header, cde_rows, output_path)
@@ -118,7 +135,7 @@ if __name__ == "__main__":
         "--template",
         help="CDE template specifying how to generate the mock CDE",
         action="store",
-        required=True
+        default="cde_template.yaml"
     )
     parser.add_argument(
         "-n",
@@ -126,7 +143,7 @@ if __name__ == "__main__":
         help="Number of rows of synthetic CDE data to generate.",
         action="store",
         type=int,
-        required=True
+        default=None
     )
     parser.add_argument(
         "-o",

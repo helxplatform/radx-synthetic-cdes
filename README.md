@@ -26,6 +26,19 @@ make template-global-cookbook OUTPUT_PATH="cde_template.yaml"
 
 #### Template configuration
 
+##### Row count & output file path
+These options can be used to configure how many records of data to generate and where to output the synthetic CDE file.
+```yaml
+row_count: <number_of_records_to_generate>
+output_path: <output_file_name_or_path>
+variables:
+    ...
+```
+
+The top-level keys `row_count` and `output_path` will be used by default in the absence of their respective cli arguments by the generation script.
+
+
+
 ##### Frequency
 The primary form of configuration in a template is the `frequency` key under each response. This should be between `0` and `1`, and the sum of all response `frequency` keys for each variable should not exceed `1`. The remaining frequency for a variable will be distributed evenly to all responses that have `frequency: null`.
 
