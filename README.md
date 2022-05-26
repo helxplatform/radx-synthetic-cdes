@@ -5,13 +5,21 @@ Tools for generating synthetic CDE data intended for use within the RADx ecosyst
 
 ## Installing
 ```bash
-python3 -m venv venv
-source ./venv/bin/activate
-make install
+> python3 -m venv venv
+> source ./venv/bin/activate
+> make install
 ```
 or simply
 ```bash
-pip3 install -r requirements.txt
+> pip3 install -r requirements.txt
+```
+
+## Quick start
+```bash
+> pip3 install -r requirements.txt
+> python3 generate.py --row_count 1000 --output_path my_synthetic_cde.csv
+...
+Generated synthetic CDE file under "my_synthetic_cde.csv" with 1000 rows and 133 variables.
 ```
 
 ## Tools
@@ -23,9 +31,9 @@ Running `generate.py` directly through a file browser/etc. will use `cde_templat
 
 Alternatively:
 ```bash
-python3 generate.py [-h] -t TEMPLATE -n ROW_COUNT [-o OUTPUT_PATH]
-# or
-make generate TEMPLATE=<template_file> ROW_COUNT=<rows_to_generate> OUTPUT_PATH="synthetic_cde_X.csv"
+> python3 generate.py [-h] -t TEMPLATE -n ROW_COUNT [-o OUTPUT_PATH]
+> # or
+> make generate TEMPLATE=<template_file> ROW_COUNT=<rows_to_generate> OUTPUT_PATH="synthetic_cde_X.csv"
 ```
 
 ### Creating CDE templates
@@ -33,11 +41,11 @@ Use a RADx mapping file (e.g. `templating_data/radx_global_cookbook.csv`) to cre
 - Templates configure how CDE data should be generated (response frequency, open-ended response generation, etc.)
 
 ```bash
-python3 template.py [-h] -m MAPPING_FILE [-o OUTPUT_PATH]
-# or
-make template RADX_TEMPLATE_FILE=<mapping_file> OUTPUT_PATH="cde_template.yaml"
-# or
-make template-global-cookbook OUTPUT_PATH="cde_template.yaml"
+> python3 template.py [-h] -m MAPPING_FILE [-o OUTPUT_PATH]
+> # or
+> make template RADX_TEMPLATE_FILE=<mapping_file> OUTPUT_PATH="cde_template.yaml"
+> # or
+> make template-global-cookbook OUTPUT_PATH="cde_template.yaml"
 ```
 
 ## Template configuration
