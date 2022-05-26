@@ -31,10 +31,6 @@ def save_cde(cde_header, cde_rows, output_path):
         for row in cde_csv:
             writer.writerow(row)
 
-    print(
-        f"Generated synthetic CDE file under \"{output_path}\" with {len(csv_rows)} rows and {len(cde_header)} variables."
-    )
-
     
 
 def preprocess_template(template):
@@ -123,6 +119,10 @@ variables:
     [cde_header, cde_rows] = generate_rows(template, row_count)
 
     save_cde(cde_header, cde_rows, output_path)
+
+    print(
+        f"Generated synthetic CDE file under \"{output_path}\" with {row_count} rows and {len(cde_header)} variables using template \"{template_file}\"."
+    )
 
 
 if __name__ == "__main__":
