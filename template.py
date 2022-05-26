@@ -115,13 +115,13 @@ Notes:
         commented_yaml.yaml_set_start_comment(document_comment, indent=0)
         commented_yaml.yaml_set_comment_before_after_key(
             "row_count",
-            "How many records of data to generate.\n" \
+            "How many records of data to generate. If null, `generate.py` will expect [-n ROW_COUNT] argument to be specified.\n" \
             "Ex: `row_count: 1000` will generate 1000 records of data when the template is run.",
             indent=0
         )
         commented_yaml.yaml_set_comment_before_after_key(
             "output_path",
-            "File name/path to output the data under.\n" \
+            "File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.\n" \
             "Ex: `output_path: my_synthetic_cde.csv` will output the synthetic CDE under `my_synthetic_cde.csv` when the template is run.",
             indent=0
         )

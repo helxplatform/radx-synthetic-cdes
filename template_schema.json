@@ -3,6 +3,14 @@
     "title": "Template File",
     "type": "object",
     "properties": {
+        "row_count": {
+            "type": ["integer", "null"],
+            "description": "Number of records to generate. Can be overriden by cli argument [-n ROW_COUNT]. If null, cli argument will be required."
+        },
+        "output_path": {
+            "type": ["string", "null"],
+            "description": "File name/path to output the generated synthetic CDE data under. Can be overriden by cli argument [-o OUTPUT_PATH]. If null and no cli argument is provided, a name will be automatically generated."
+        },
         "variables": {
             "type": "object",
             "description": "CDE variable name (key) and associated response-generation config",

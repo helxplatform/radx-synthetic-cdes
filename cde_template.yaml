@@ -25,9 +25,9 @@
 # - For additional clarification on the structure of template files, refer to template_schema.json, which is the jsonschema specification
 #   for template files.
 
-# How many records of data to generate.
-row_count: 1000
-# File name/path to output the data under.
+# How many records of data to generate. If null, `generate.py` will expect [-n ROW_COUNT] argument to be specified.
+row_count: null
+# File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.
 output_path: null
 variables:
   nih_record_id:

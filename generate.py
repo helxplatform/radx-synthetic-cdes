@@ -104,10 +104,10 @@ def generate_cde(template_file, row_count, output_path=None):
     preprocess_template(template)
 
     if row_count is None:
-        if "row_count" in template:
-            row_count = template["row_count"]
-        else:
-            raise Exception(f"""\
+        row_count = template.get("row_count", None)
+    # row_count is either not given in template or also `null`
+    if row_count is None:
+        raise Exception(f"""\
 Please specify the `row_count` field in "{template_file}" (or the `--row_count` argument if using the command line). Ex:
 # ...
 # ...
