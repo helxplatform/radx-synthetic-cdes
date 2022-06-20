@@ -34,20 +34,10 @@ variables:
     - response_name: text
       # Requires special configuration.
       response_value_generator:
-        # Generates pseudo-Latin text.
-        lorem:
-          num_sentences:
-            # Minimum number of sentences
-            - 1
-            # Maximum number of sentences
-            - 2
-          sentence_length:
-            # Minimum number of words per sentence
-            - 1
-            # Maximum number of words per sentence
-            - 10
-        # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
-        valid_inputs: null
+        udf:
+          name: test_record_id
+          args: []
+          kwargs: {}
       frequency: .95
     - response_name: Reason Unknown
       response_value: -9999
