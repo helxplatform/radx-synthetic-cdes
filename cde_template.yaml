@@ -1,4 +1,4 @@
-# Template generated using v1.0.
+﻿# Template generated using v1.0.
 # Source mapping file: "templating_data/radx_global_cookbook.csv".
 #
 # 133 variables and 3985 possible responses.
@@ -25,20 +25,19 @@
 # - For additional clarification on the structure of template files, refer to template_schema.json, which is the jsonschema specification
 #   for template files.
 
+
 # How many records of data to generate. If null, `generate.py` will expect [-n ROW_COUNT] argument to be specified.
-row_count: null
+row_count: 5000
 # File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.
-output_path: null
+output_path: RADx_Tier1CDE_SampleData_V1.csv
+relationships: global_relationships.yaml
 variables:
   nih_record_id:
     - response_name: text
-      # Requires special configuration.
       response_value_generator:
         udf:
           name: test_record_id
-          args: []
-          kwargs: {}
-      frequency: .95
+      frequency: 1.0
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -117,34 +116,34 @@ variables:
   nih_race:
     - response_name: American Indian or Alaska Native
       response_value: 0
-      frequency: null
+      frequency: 0.01
     - response_name: Black or African American
       response_value: 1
-      frequency: null
+      frequency: 0.12
     - response_name: Asian
       response_value: 2
-      frequency: null
+      frequency: 0.06
     - response_name: Native Hawaiian or  Other Pacific Islander
       response_value: 3
-      frequency: null
+      frequency: 0.005
     - response_name: White
       response_value: 4
-      frequency: null
+      frequency: 0.62
     - response_name: Middle Eastern or North African
       response_value: 5
-      frequency: null
+      frequency: 0.005
     - response_name: Two or more races
       response_value: 6
-      frequency: null
+      frequency: 0.10
     - response_name: Some other race
       response_value: 97
-      frequency: null
+      frequency: 0.01
     - response_name: Do not know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
-      frequency: null
+      frequency: 0.03
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -223,10 +222,10 @@ variables:
   nih_ethnicity:
     - response_name: No, not of Hispanic or Latino origin
       response_value: 0
-      frequency: null
+      frequency: 0.80
     - response_name: Yes, of Hispanic or Latino origin
       response_value: 1
-      frequency: null
+      frequency: 0.18
     - response_name: Other
       response_value: 97
       frequency: null
@@ -235,7 +234,7 @@ variables:
       frequency: null
     - response_name: Prefer not to answer
       response_value: 99
-      frequency: null
+      frequency: 0.01
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -280,7 +279,7 @@ variables:
       frequency: null
     - response_name: Record Not Provided
       response_value: -9965
-      frequency: null
+      frequency: 0.01
     - response_name: All Originators Omitted Element
       response_value: -9966
       frequency: null
@@ -317,11 +316,10 @@ variables:
       response_value_generator:
         udf:
           name: age_generator
-          args: []
           kwargs:
             min_age: 18
             max_age: 100
-      frequency: .99
+      frequency: .95
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -400,22 +398,22 @@ variables:
   nih_sex:
     - response_name: Female
       response_value: 0
-      frequency: null
+      frequency: 0.49
     - response_name: Male
       response_value: 1
-      frequency: null
+      frequency: 0.48
     - response_name: Intersex
       response_value: 2
-      frequency: null
+      frequency:  0.005
     - response_name: Non-binary
       response_value: 3
-      frequency: null
+      frequency: 0
     - response_name: None of these describe me
       response_value: 96
-      frequency: null
+      frequency: 0
     - response_name: Prefer not to answer
       response_value: 99
-      frequency: null
+      frequency: 0.01
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -494,24 +492,24 @@ variables:
   nih_education:
     - response_name: Have never gone to school
       response_value: 0
-      frequency: null
+      frequency: 0.005
     - response_name: Some school (Includes any education received below highschool
         graduate level)
       response_value: 1
-      frequency: null
+      frequency: 0.075
     - response_name: High school graduate or GED completed
       response_value: 2
-      frequency: null
+      frequency: 0.26
     - response_name: Some college (graduated or not), associates degree, technical
         degree, or vocational degree
       response_value: 3
-      frequency: null
+      frequency: 0.25
     - response_name: Bachelor's degree
       response_value: 4
-      frequency: null
+      frequency: 0.24
     - response_name: Other advanced degree (Master's, Doctorate, or Professional Doctorate)
       response_value: 5
-      frequency: null
+      frequency: 0.14
     - response_name: Other
       response_value: 97
       frequency: null
@@ -614,13 +612,13 @@ variables:
             - 10
         # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
         valid_inputs: null
-      frequency: .95
+      frequency: 0
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -694,20 +692,8 @@ variables:
     - response_name: text
       # Requires special configuration.
       response_value_generator:
-        # Generates pseudo-Latin text.
-        lorem:
-          num_sentences:
-            # Minimum number of sentences
-            - 1
-            # Maximum number of sentences
-            - 1
-          sentence_length:
-            # Minimum number of words per sentence
-            - 5
-            # Maximum number of words per sentence
-            - 5
-        # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
-        valid_inputs: null
+        udf:
+          name: zip_code_generator
       frequency: .95
     - response_name: Reason Unknown
       response_value: -9999
@@ -787,22 +773,22 @@ variables:
   nih_employment:
     - response_name: Yes - Employed
       response_value: 0
-      frequency: null
+      frequency: 0.56
     - response_name: No - Not Employed
       response_value: 1
-      frequency: null
+      frequency: 0.04
     - response_name: Student
       response_value: 2
-      frequency: null
+      frequency: 0.05
     - response_name: Keeping household
       response_value: 3
-      frequency: null
+      frequency: 0.15
     - response_name: Retired
       response_value: 4
-      frequency: null
+      frequency: 0.15
     - response_name: Disabled or government support
       response_value: 5
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -890,19 +876,19 @@ variables:
   nih_insurance:
     - response_name: None
       response_value: 0
-      frequency: null
+      frequency: 0.09
     - response_name: Private
       response_value: 1
-      frequency: null
+      frequency: 0.54
     - response_name: Public
       response_value: 2
-      frequency: null
+      frequency: 0.35
     - response_name: Other
       response_value: 97
       frequency: null
     - response_name: Don't know
       response_value: 98
-      frequency: null
+      frequency: 0.02
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -984,10 +970,10 @@ variables:
   nih_disability:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.8
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.12
     - response_name: Other
       response_value: 97
       frequency: null
@@ -996,7 +982,7 @@ variables:
       frequency: null
     - response_name: Prefer not to answer
       response_value: 99
-      frequency: null
+      frequency: 0.05
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -1053,7 +1039,7 @@ variables:
       frequency: null
     - response_name: Not Presented To Participant
       response_value: -9940
-      frequency: null
+      frequency: 0.03
     - response_name: Skip Logic
       response_value: -9941
       frequency: null
@@ -1075,10 +1061,10 @@ variables:
   nih_deaf:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.941
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.059
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1166,10 +1152,10 @@ variables:
   nih_blind:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.954
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.046
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1257,10 +1243,10 @@ variables:
   nih_memory:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.892
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.108
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1348,10 +1334,10 @@ variables:
   nih_walk_climb:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.823
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.137
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1439,10 +1425,10 @@ variables:
   nih_dress_bathe:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.964
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.036
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1530,10 +1516,10 @@ variables:
   nih_errand:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.932
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.068
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1621,10 +1607,10 @@ variables:
   nih_vaping_yn:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.9
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.1
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1712,10 +1698,10 @@ variables:
   nih_nicotine_yn:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.87
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.13
     - response_name: Other
       response_value: 97
       frequency: null
@@ -1803,16 +1789,16 @@ variables:
   nih_vape_freq:
     - response_name: Not at all
       response_value: 0
-      frequency: null
+      frequency: 0.9
     - response_name: Rarely
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Some Days
       response_value: 2
-      frequency: null
+      frequency: 0.03
     - response_name: Every Day
       response_value: 3
-      frequency: null
+      frequency: 0.05
     - response_name: Don't know
       response_value: 98
       frequency: null
@@ -1897,16 +1883,16 @@ variables:
   nih_cig_smoke_freq:
     - response_name: Not at all
       response_value: 0
-      frequency: null
+      frequency: 0.87
     - response_name: Rarely
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Some Days
       response_value: 2
-      frequency: null
+      frequency: 0.02
     - response_name: Every Day
       response_value: 3
-      frequency: null
+      frequency: 0.06
     - response_name: Don't know
       response_value: 98
       frequency: null
@@ -1991,10 +1977,10 @@ variables:
   nih_smoking_yn:
     - response_name: No
       response_value: 0
-      frequency: .5
+      frequency: 0.85
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.15
     - response_name: Other
       response_value: 97
       frequency: null
@@ -2100,7 +2086,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -2191,7 +2177,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -2333,7 +2319,7 @@ variables:
       frequency: null
     - response_name: Not Presented To Participant
       response_value: -9940
-      frequency: null
+      frequency: 1.0
     - response_name: Skip Logic
       response_value: -9941
       frequency: null
@@ -2355,10 +2341,10 @@ variables:
   nih_lifetime_use_alcohol:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.14
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.86
     - response_name: Other
       response_value: 97
       frequency: null
@@ -2446,19 +2432,19 @@ variables:
   nih_alcohol_yrs:
     - response_name: Never
       response_value: 0
-      frequency: null
+      frequency: 0.14
     - response_name: Monthly Or Less
       response_value: 1
-      frequency: null
+      frequency: 0.21
     - response_name: Two To Four Times Per Month
       response_value: 2
-      frequency: null
+      frequency: 0.21
     - response_name: Two To Three Times Per Week
       response_value: 3
-      frequency: null
+      frequency: 0.21
     - response_name: Four Or More Times Per Week
       response_value: 4
-      frequency: null
+      frequency: 0.21
     - response_name: Don't know
       response_value: 98
       frequency: null
@@ -2618,7 +2604,7 @@ variables:
       frequency: null
     - response_name: Not Presented To Participant
       response_value: -9940
-      frequency: null
+      frequency: 1.0
     - response_name: Skip Logic
       response_value: -9941
       frequency: null
@@ -2640,16 +2626,16 @@ variables:
   nih_asthma:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.9
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.08
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.02
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -2731,16 +2717,16 @@ variables:
   nih_cancer:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.02
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -2822,10 +2808,10 @@ variables:
   nih_cancer_active_treatment:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.8
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.2
     - response_name: Other
       response_value: 97
       frequency: null
@@ -2913,10 +2899,10 @@ variables:
   nih_cancer_past_yr:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.8
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.2
     - response_name: Other
       response_value: 97
       frequency: null
@@ -3004,16 +2990,16 @@ variables:
   nih_cardiovascular_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.55
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.4
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.05
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3095,16 +3081,16 @@ variables:
   nih_chronic_kidney_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.83
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.15
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.02
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3186,20 +3172,20 @@ variables:
   nih_chronic_kidney_disease_treatment:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.83
     - response_name: Yes, But Not On Dialysis
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Yes And On Dialysis
       response_value: 2
-      frequency: null
+      frequency: 0.1
     - response_name: Yes, I've Had A Kidney Transplant And My Kidney Function Is Now
         Normal
       response_value: 3
-      frequency: null
+      frequency: 0.03
     - response_name: Don't Know
       response_value: 77
-      frequency: null
+      frequency: 0.01
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -3278,16 +3264,16 @@ variables:
   nih_chronic_lung_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.035
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.005
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3369,16 +3355,16 @@ variables:
   nih_diabetes:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.85
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.13
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3460,16 +3446,16 @@ variables:
   nih_hypertension:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.5
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.45
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.04
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3551,16 +3537,16 @@ variables:
   nih_immunosuppressive_condition:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0.01
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3642,16 +3628,16 @@ variables:
   nih_serious_mental_illness:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.01
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3733,16 +3719,16 @@ variables:
   nih_mental_health_disorder:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.8
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.18
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -3824,7 +3810,7 @@ variables:
   nih_sickle_cell_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 1
     - response_name: Yes
       response_value: 1
       frequency: null
@@ -3915,13 +3901,13 @@ variables:
   nih_pregnancy:
     - response_name: Not Pregnant
       response_value: 0
-      frequency: null
+      frequency: 0.97
     - response_name: Pregnant
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Don't know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -4003,16 +3989,16 @@ variables:
   nih_immunocompromised:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0.01
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -4094,16 +4080,16 @@ variables:
   nih_autoimm:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.91
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.07
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
-      frequency: null
+      frequency: 0.01
     - response_name: Prefer not to answer
       response_value: 99
       frequency: null
@@ -4185,13 +4171,13 @@ variables:
   nih_copd:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.036
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
       frequency: null
@@ -4276,13 +4262,13 @@ variables:
   nih_chronic_lung:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.066
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
       frequency: null
@@ -4367,10 +4353,10 @@ variables:
   nih_depression:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.90
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.084
     - response_name: Other
       response_value: 97
       frequency: null
@@ -4458,10 +4444,10 @@ variables:
   nih_alc_sub_abuse:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.94
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.04
     - response_name: Other
       response_value: 97
       frequency: null
@@ -4549,10 +4535,10 @@ variables:
   nih_iv_drug_use:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -4640,10 +4626,10 @@ variables:
   nih_othermh:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.99
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.01
     - response_name: Other
       response_value: 97
       frequency: null
@@ -4731,10 +4717,10 @@ variables:
   nih_other_chronic_cond:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.92
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.06
     - response_name: Other
       response_value: 97
       frequency: null
@@ -4822,13 +4808,13 @@ variables:
   nih_coronary_artery_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.91
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.07
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
       frequency: null
@@ -4913,13 +4899,13 @@ variables:
   nih_coronary_artery_disease_angina:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.97
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.01
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
       frequency: null
@@ -5004,10 +4990,10 @@ variables:
   nih_heart_attack:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.94
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.04
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5095,10 +5081,10 @@ variables:
   nih_chf:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.97
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.01
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5186,10 +5172,10 @@ variables:
   nih_stroke:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5277,13 +5263,13 @@ variables:
   nih_immunodeficiency:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0
     - response_name: Other
       response_value: 97
-      frequency: null
+      frequency: 0
     - response_name: Don’t know
       response_value: 98
       frequency: null
@@ -5368,10 +5354,10 @@ variables:
   nih_hiv:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.99
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.005
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5459,10 +5445,10 @@ variables:
   nih_anemia:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5550,10 +5536,10 @@ variables:
   nih_premature_birth:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.92
     - response_name: Yes, Between 32 - 37 Weeks
       response_value: 1
-      frequency: null
+      frequency: 0.06
     - response_name: Yes, Between 28-32 Weeks
       response_value: 2
       frequency: null
@@ -5644,10 +5630,10 @@ variables:
   nih_chd:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.91
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.07
     - response_name: Other
       response_value: 97
       frequency: null
@@ -5735,7 +5721,7 @@ variables:
   nih_cf:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 1.0
     - response_name: Yes
       response_value: 1
       frequency: null
@@ -5844,7 +5830,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -5935,7 +5921,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -6008,10 +5994,10 @@ variables:
   nih_alz:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.965
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.015
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6099,10 +6085,10 @@ variables:
   nih_anxiety:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.80
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.18
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6190,10 +6176,10 @@ variables:
   nih_arrhythmia:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.005
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6281,10 +6267,10 @@ variables:
   nih_arthritis:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.76
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.22
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6372,10 +6358,10 @@ variables:
   nih_af:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.005
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6463,10 +6449,10 @@ variables:
   nih_chronic_pain:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.8
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.18
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6554,10 +6540,10 @@ variables:
   nih_fibromyalgia:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6645,10 +6631,10 @@ variables:
   nih_gerd:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.78
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.2
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6736,7 +6722,7 @@ variables:
   nih_gestational_diabetes:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 1
     - response_name: Yes
       response_value: 1
       frequency: null
@@ -6827,10 +6813,10 @@ variables:
   nih_cholesterol:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.91
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.07
     - response_name: Other
       response_value: 97
       frequency: null
@@ -6918,10 +6904,10 @@ variables:
   nih_thyroid:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7009,7 +6995,7 @@ variables:
   nih_immuno_compromised_solid_organ:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 1.0
     - response_name: Yes
       response_value: 1
       frequency: null
@@ -7100,10 +7086,10 @@ variables:
   nih_ibd:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.005
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7191,10 +7177,10 @@ variables:
   nih_insomnia:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7282,10 +7268,10 @@ variables:
   nih_ibs:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.83
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.15
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7373,10 +7359,10 @@ variables:
   nih_liver_disease:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7464,10 +7450,10 @@ variables:
   nih_lupus:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7555,10 +7541,10 @@ variables:
   nih_migraines:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.88
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.1
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7646,10 +7632,10 @@ variables:
   nih_ms:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.003
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7737,10 +7723,10 @@ variables:
   nih_neurodegenerative:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7828,10 +7814,10 @@ variables:
   nih_neurological_condition:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.005
     - response_name: Other
       response_value: 97
       frequency: null
@@ -7937,7 +7923,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -8010,10 +7996,10 @@ variables:
   nih_obesity:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.58
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.40
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8101,10 +8087,10 @@ variables:
   nih_osteoporosis:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8192,7 +8178,7 @@ variables:
   nih_pcos:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 1
     - response_name: Yes
       response_value: 1
       frequency: null
@@ -8283,10 +8269,10 @@ variables:
   nih_psoriasis:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8392,7 +8378,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -8465,10 +8451,10 @@ variables:
   nih_rls:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8574,7 +8560,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -8647,10 +8633,10 @@ variables:
   nih_seasonal_allergies:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.90
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.08
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8756,7 +8742,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -8829,10 +8815,10 @@ variables:
   nih_sleep_apnea:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.83
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.15
     - response_name: Other
       response_value: 97
       frequency: null
@@ -8938,7 +8924,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -9029,7 +9015,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -9102,10 +9088,10 @@ variables:
   nih_t1d:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.99
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.006
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9193,10 +9179,10 @@ variables:
   nih_t2dm:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.90
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.09
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9284,10 +9270,10 @@ variables:
   nih_cough:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.4
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.58
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9375,10 +9361,10 @@ variables:
   nih_fever_chills:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.20
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.78
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9466,10 +9452,10 @@ variables:
   nih_diff_breath:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.75
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.23
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9557,10 +9543,10 @@ variables:
   nih_headache:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.85
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.13
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9648,10 +9634,10 @@ variables:
   nih_muscle_ache:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.81
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.17
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9739,10 +9725,10 @@ variables:
   nih_olfactory:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.69
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.29
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9830,10 +9816,10 @@ variables:
   nih_fatigue:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.67
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.31
     - response_name: Other
       response_value: 97
       frequency: null
@@ -9921,10 +9907,10 @@ variables:
   nih_nausea_vomiting_diarrhea:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.78
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.2
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10012,10 +9998,10 @@ variables:
   nih_abdom_pain:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.94
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.04
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10103,10 +10089,10 @@ variables:
   nih_skin_rash:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10194,10 +10180,10 @@ variables:
   nih_conjunctivitis:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10285,10 +10271,10 @@ variables:
   nih_throat_congestion_nose:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.73
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.25
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10376,10 +10362,10 @@ variables:
   nih_red_eyes:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.94
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.04
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10467,10 +10453,10 @@ variables:
   nih_high_temp:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10485,7 +10471,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -10558,10 +10544,10 @@ variables:
   nih_other_symp:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.93
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.05
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10667,7 +10653,7 @@ variables:
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -10740,10 +10726,10 @@ variables:
   nih_wheezing:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.81
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.17
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10831,10 +10817,10 @@ variables:
   nih_blue_lips:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.95
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.03
     - response_name: Other
       response_value: 97
       frequency: null
@@ -10922,10 +10908,10 @@ variables:
   nih_balance:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11013,10 +10999,10 @@ variables:
   nih_slurred_peech:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11104,10 +11090,10 @@ variables:
   nih_confusion:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.87
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.11
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11195,10 +11181,10 @@ variables:
   nih_neuro_shakes:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.80
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.18
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11286,10 +11272,10 @@ variables:
   nih_numb_extremities:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11377,10 +11363,10 @@ variables:
   nih_sweating:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.96
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.02
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11468,10 +11454,10 @@ variables:
   nih_seizures:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11559,10 +11545,10 @@ variables:
   nih_rash_toes:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.98
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.001
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11650,10 +11636,10 @@ variables:
   nih_appetite:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: 0.48
     - response_name: Yes
       response_value: 1
-      frequency: null
+      frequency: 0.5
     - response_name: Other
       response_value: 97
       frequency: null
@@ -11741,19 +11727,19 @@ variables:
   nih_health_status:
     - response_name: Excellent
       response_value: 0
-      frequency: null
+      frequency: 0.1
     - response_name: Very Good
       response_value: 1
-      frequency: null
+      frequency: 0.2
     - response_name: Good
       response_value: 2
-      frequency: null
+      frequency: 0.3
     - response_name: Fair
       response_value: 3
-      frequency: null
+      frequency: 0.2
     - response_name: Poor
       response_value: 4
-      frequency: null
+      frequency: 0.2
     - response_name: Don't know
       response_value: 98
       frequency: null
@@ -11847,7 +11833,7 @@ variables:
           - 84
         # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
         valid_inputs: null
-      frequency: .95
+      frequency: .98
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -11935,7 +11921,7 @@ variables:
           - 300
         # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
         valid_inputs: null
-      frequency: .95
+      frequency: .98
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -12014,19 +12000,19 @@ variables:
   nih_height_category:
     - response_name: 5'1" - 5'6"
       response_value: 1
-      frequency: null
+      frequency: 0
     - response_name: 5'7"-5'11"
       response_value: 2
-      frequency: null
+      frequency: 0
     - response_name: 6' and over
       response_value: 3
-      frequency: null
+      frequency: 0
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null
@@ -12099,19 +12085,19 @@ variables:
   nih_weight_category:
     - response_name: 100-150
       response_value: 1
-      frequency: null
+      frequency: 0
     - response_name: 151-200
       response_value: 2
-      frequency: null
+      frequency: 0
     - response_name: over 200
       response_value: 3
-      frequency: null
+      frequency: 0
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
     - response_name: Not Sent to Data Hub
       response_value: -9980
-      frequency: null
+      frequency: 1.0
     - response_name: Data Transfer Agreement
       response_value: -9981
       frequency: null

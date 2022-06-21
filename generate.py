@@ -97,7 +97,11 @@ def generate_rows(template, relationships, row_count):
     # After bulk generation is complete, go through and manually regenerate responses on each record using relationships.
     relationship_plan = Register.plan(relationships["relationships"])
     # for dependency_node in relationship_plan:
+    print("Starting post-processing of records.")
+    if len(relationship_plan) == 0:
+        print("- No relationships loaded.")
     for relationship in relationship_plan:
+        print(f'- Processing relationship: {relationship["name"]}')    
         for record in rows:
             modifications = Register.invoke_relationship(
                 relationship,
@@ -121,9 +125,9 @@ def generate_rows(template, relationships, row_count):
                             break
                 else:
                     raise Exception("Could not interpret modification requested by relationship:", modified_response)
-                print(f'''\
-Relationship "{relationship["name"]}" modified variable {modified_variable}: changed {record[modified_variable]["response_name"]} -> {response["response_name"]}')\
-''')
+#                 print(f'''\
+# Relationship "{relationship["name"]}" modified variable {modified_variable}: changed {record[modified_variable]["response_name"]} -> {response["response_name"]}')\
+# ''')
                 record[modified_variable] = {
                     "response_name": res["response_name"],
                     "response_value": res["response_value"]
@@ -141,6 +145,10 @@ def generate_cde(template_file, row_count, relationship_file=None, output_path=N
     """
     with open(template_file, "r") as f:
         template = yaml.round_trip_load(f)
+
+    if relationship_file is None:
+        relationship_file = template.get("relationships")
+        
     if relationship_file is not None:
         with open(relationship_file, "r") as f:
             relationships = yaml.round_trip_load(f)
@@ -194,7 +202,6 @@ if __name__ == "__main__":
         "--relationships",
         help="Template specifying specialized generation via variable relationships",
         action="store",
-        default="relationships.yaml",
         required=False
     )
     parser.add_argument(

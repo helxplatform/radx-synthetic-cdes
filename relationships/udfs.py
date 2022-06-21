@@ -12,3 +12,9 @@ def age_generator(min_age, max_age):
     """ Return a number in the inclusive range [min_age, max_age]. """
     # In the future, perhaps a probability distribution could be added.
     return randint(min_age, max_age)
+
+@udf("zip_code_generator")
+def zip_code_generator():
+    # Valid US postal codes range from 00001-99999.
+    return str(randint(1, 99999)).rjust(5, "0")
+    
