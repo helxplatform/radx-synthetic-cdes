@@ -2,3 +2,5 @@ relationships:
   - name: no_disability
     args: []
     kwargs: {}
+  - name: no_smoking
+  - name: age_associated_diseases

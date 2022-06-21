@@ -9,6 +9,7 @@ class Register:
     @classmethod
     def register_relationship(cls, name, udf, dependencies, modifies):
         cls.relationships[name] = {
+            "name": name,
             "dependencies": dependencies,
             "modifies": modifies,
             "udf": udf
@@ -32,6 +33,17 @@ class Register:
             *args,
             **kwargs
         )
+    @classmethod
+    def invoke_relationship(cls, relationship, full_record):
+        dependencies = relationship["dependencies"]
+        ret_val = cls.invoke_udf(
+            relationship["udf"],
+            full_record,
+            *relationship.get("args", []),
+            **relationship.get("kwargs", {})
+        )
+        return ret_val
+        
     @classmethod
     def plan(cls, relationships):
         """
@@ -68,27 +80,38 @@ class Register:
 
 
             for dependency_variable in dependencies:
-                for response in dependencies[dependency_variable]:
-                    for modified_variable in modifies:
-                        modified_response = modifies[modified_variable]
-                        G.add_edge(
-                            f"{dependency_variable}:{response}",
-                            f"{modified_variable}:{modified_response}"
-                        )
+                # for response in dependencies[dependency_variable]:
+                for modified_variable in modifies:
+                    # modified_response = modifies[modified_variable]
+                    G.add_edge(
+                        f"{dependency_variable}",
+                        f"{modified_variable}"
+                    )
 
         # Not super familiar with this area of network/graph theory and constructing & traversing dependency trees.
         # I think that this is the proper implementation in networkx, but I haven't tested it very thoroughly.
-        crude_plan = list(nx.topological_sort(G))
+        dependency_path = list(nx.topological_sort(G))
+        plan = []
+        for dependency in dependency_path:
+            variable_name = dependency
+            # variable_name = dependency.split(":")[0]
+            # response_name = dependency.split(":")[1]
+            for relationship in relationships:
+                if (
+                    variable_name in relationship["dependencies"]
+                    # response_name in relationship["dependencies"][variable_name]
+                ):
+                    plan.append(relationship)
+        #     [
+        #         relationship for relationship in relationships
+        #         if (
+        #             dependency_node["variable_name"] in relationship["dependencies"] and
+        #             dependency_node["response_name"] in relationship["dependencies"][dependency_node["variable_name"]]
+        #         )
+        #     ] for dependency_node in dependency_path
+        # ]
 
-        plan = [
-            {
-                "variable_name": node.split(":")[0],
-                "response_name": node.split(":")[1]
-
-            } for node in crude_plan
-        ]
-
-        return plan, G
+        return plan
 
 """
 A UDF is used as an escape hatch in response_value_generator for more sophisticated generation.

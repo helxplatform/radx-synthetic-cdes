@@ -315,21 +315,13 @@ variables:
     - response_name: text
       # Requires special configuration.
       response_value_generator:
-        # Generates pseudo-Latin text.
-        lorem:
-          num_sentences:
-            # Minimum number of sentences
-            - 1
-            # Maximum number of sentences
-            - 2
-          sentence_length:
-            # Minimum number of words per sentence
-            - 1
-            # Maximum number of words per sentence
-            - 10
-        # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
-        valid_inputs: null
-      frequency: .95
+        udf:
+          name: age_generator
+          args: []
+          kwargs:
+            min_age: 18
+            max_age: 100
+      frequency: .99
     - response_name: Reason Unknown
       response_value: -9999
       frequency: null
@@ -1999,7 +1991,7 @@ variables:
   nih_smoking_yn:
     - response_name: No
       response_value: 0
-      frequency: null
+      frequency: .5
     - response_name: Yes
       response_value: 1
       frequency: null
