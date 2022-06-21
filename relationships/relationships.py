@@ -72,16 +72,16 @@ def no_smoking(responses):
     if nih_smoking_yn["response_name"] == "No":
         return {
             "nih_vaping_yn": {
-                "response_name": "No"
+                "response_name": "Skip Logic"
             },
             "nih_nicotine_yn": {
-                "response_name": "No"
+                "response_name": "Skip Logic"
             },
             "nih_vape_freq": {
-                "response_name": "Not at all"
+                "response_name": "Skip Logic"
             },
             "nih_cig_smoke_freq": {
-                "response_name": "Not at all"
+                "response_name": "Skip Logic"
             }
         }
 
@@ -101,13 +101,13 @@ def no_alcohol(responses):
     if nih_alcohol_yn["response_name"] == "No":
         return {
             "nih_lifetime_use_alcohol": {
-                "response_name": "No"
+                "response_name": "Skip Logic"
             },
             "nih_alcohol_yrs": {
-                "response_name": "Never"
+                "response_name": "Skip Logic"
             },
             "nih_alcohol_frequency": {
-                "response_name": "Never"
+                "response_name": "Skip Logic"
             }
         }
 
@@ -147,7 +147,7 @@ def no_chronic_kidney_disease(responses):
     if nih_chronic_kidney_disease["response_name"] == "No":
         return {
             "nih_chronic_kidney_disease_treatment": {
-                "response_name": "No"
+                "response_name": "Skip Logic"
             }
         }
 
