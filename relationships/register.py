@@ -35,13 +35,19 @@ class Register:
         )
     @classmethod
     def invoke_relationship(cls, relationship, full_record):
+        name = relationship["name"]
         dependencies = relationship["dependencies"]
+        modifies = relationship["modifies"]
         ret_val = cls.invoke_udf(
             relationship["udf"],
             {variable: full_record[variable] for variable in full_record if variable in dependencies},
             *relationship.get("args", []),
             **relationship.get("kwargs", {})
         )
+        if ret_val is not None:
+            for variable in ret_val:
+                if variable not in modifies:
+                    raise Exception(f'Attempted modification of variable "{variable}" in relationship "{name}" but not listed under its `modifies` field.')
         return ret_val
         
     @classmethod
