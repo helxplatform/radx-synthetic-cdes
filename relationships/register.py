@@ -38,7 +38,7 @@ class Register:
         dependencies = relationship["dependencies"]
         ret_val = cls.invoke_udf(
             relationship["udf"],
-            full_record,
+            {variable: full_record[variable] for variable in full_record if variable in dependencies},
             *relationship.get("args", []),
             **relationship.get("kwargs", {})
         )
