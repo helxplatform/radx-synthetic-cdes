@@ -1,9 +1,10 @@
-import yaml
+import ruamel.yaml as yaml
 import csv
 import random
 from datetime import datetime
 from pathlib import Path
 from lorem.text import TextLorem
+from relationships import Register
 
 DEFAULT_CDE_OUTPUT_NAME = f"synthetic_cde_{datetime.now().strftime('%m-%d-%Y')}"
 
@@ -52,7 +53,7 @@ def preprocess_template(template):
             for response in no_freq_responses:
                 response["frequency"] = per_response_freq
 
-def generate_rows(template, row_count):
+def generate_rows(template, relationships, row_count):
     header_row = list(template["variables"].keys())
     rows = [{variable: None for variable in header_row} for i in range(row_count)]
     for variable_name in template["variables"]:
@@ -64,14 +65,21 @@ def generate_rows(template, row_count):
         )
         for i in range(row_count):
             selected_response = selected_responses[i]
+            selected_response_name = selected_response.get("response_name")
             selected_response_value = selected_response.get("response_value")
             generator_schema = selected_response.get("response_value_generator")
             if generator_schema is not None:
-                # Special response type e.g. `text`, `integer`
+                udf = generator_schema.get("udf")
                 lorem = generator_schema.get("lorem")
                 range_ = generator_schema.get("range")
                 valid_inputs = generator_schema.get("valid_inputs")
-                if lorem is not None:
+                if udf is not None:
+                    name = udf["name"]
+                    args = udf.get("args", [])
+                    kwargs = udf.get("kwargs", {})
+                    selected_response_value = Register.invoke_udf(name, *args, **kwargs)
+
+                elif lorem is not None:
                     min_sentences, max_sentences = lorem["num_sentences"] # inclusve
                     min_words, max_words = lorem["sentence_length"] # inclusive
                     lorem = TextLorem(srange=(min_words, max_words))
@@ -82,11 +90,52 @@ def generate_rows(template, row_count):
                     selected_response_value = random.randint(min_val, max_val)
                 elif valid_inputs:
                     selected_response_value = random.choice(valid_inputs)
-            rows[i][variable_name] = selected_response_value
+            rows[i][variable_name] = {
+                "response_name": selected_response_name,
+                "response_value": selected_response_value
+            }
+    # After bulk generation is complete, go through and manually regenerate responses on each record using relationships.
+    relationship_plan = Register.plan(relationships["relationships"])
+    # for dependency_node in relationship_plan:
+    print("Starting post-processing of records.")
+    if len(relationship_plan) == 0:
+        print("- No relationships loaded.")
+    for relationship in relationship_plan:
+        print(f'- Processing relationship: {relationship["name"]}')    
+        for record in rows:
+            modifications = Register.invoke_relationship(
+                relationship,
+                record
+            )
+            if modifications is None: continue
+            for modified_variable in modifications:
+                modified_response = modifications[modified_variable]
+                # These are functionally equivalent, except for special responses (i.e. text), in which it is necessary to support both.
+                response_name = modified_response.get("response_name")
+                response_value = modified_response.get("response_value")
+                if response_name is not None:
+                    for res in template["variables"][modified_variable]:
+                        if res["response_name"] == response_name:
+                            response = res
+                            break
+                elif response_value is not None:
+                    for res in template["variables"][modified_variable]:
+                        if res["response_value"] == response_value:
+                            response = res
+                            break
+                else:
+                    raise Exception("Could not interpret modification requested by relationship:", modified_response)
+#                 print(f'''\
+# Relationship "{relationship["name"]}" modified variable {modified_variable}: changed {record[modified_variable]["response_name"]} -> {response["response_name"]}')\
+# ''')
+                record[modified_variable] = {
+                    "response_name": res["response_name"],
+                    "response_value": res["response_value"]
+                }
     
-    return (header_row, rows)
+    return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
 
-def generate_cde(template_file, row_count, output_path=None):
+def generate_cde(template_file, row_count, relationship_file=None, output_path=None):
     """
     Generate a synthetic CDE file from a template file.
     :param template_file: File path to CDE generation template.
@@ -95,7 +144,18 @@ def generate_cde(template_file, row_count, output_path=None):
     :type output_path: str
     """
     with open(template_file, "r") as f:
-        template = yaml.safe_load(f)
+        template = yaml.round_trip_load(f)
+
+    if relationship_file is None:
+        relationship_file = template.get("relationships")
+        
+    if relationship_file is not None:
+        with open(relationship_file, "r") as f:
+            relationships = yaml.round_trip_load(f)
+    else:
+        relationships = {
+            "relationships": []
+        }
 
     preprocess_template(template)
 
@@ -116,7 +176,7 @@ variables:
         output_path = template.get("output_path", None)
 
 
-    [cde_header, cde_rows] = generate_rows(template, row_count)
+    [cde_header, cde_rows] = generate_rows(template, relationships, row_count)
 
     save_cde(cde_header, cde_rows, output_path)
 
@@ -138,6 +198,13 @@ if __name__ == "__main__":
         default="cde_template.yaml"
     )
     parser.add_argument(
+        "-r",
+        "--relationships",
+        help="Template specifying specialized generation via variable relationships",
+        action="store",
+        required=False
+    )
+    parser.add_argument(
         "-n",
         "--row_count",
         help="Number of rows of synthetic CDE data to generate.",
@@ -155,7 +222,13 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     template = args.template
+    relationships = args.relationships
     row_count = args.row_count
     output_path = args.output_path
 
-    generate.generate_cde(template, row_count, output_path)
+    generate.generate_cde(
+        template,
+        row_count,
+        relationship_file=relationships,
+        output_path=output_path
+    )
