@@ -9,6 +9,8 @@ relationships:
   - name: no_cancer
   - name: no_chronic_kidney_disease
   - name: age_associated_diseases
+  - name: age_health_status
+  - name: weight_sleep_apnea
   - name: pregnancy_prerequisites
   - name: gestational_diabetes
   - name: diabetes_types

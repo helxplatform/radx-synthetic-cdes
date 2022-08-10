@@ -1,5 +1,5 @@
+from random import random, choice, randint
 from .register import relationship
-from random import random
 
 """
 A relationship is a post-generation utility for correlating relationships between fields.
@@ -210,6 +210,123 @@ def age_associated_diseases(responses):
             "response_name": "Yes"
         }
     return ret_val
+
+@relationship(
+    name="age_health_status",
+    dependencies=[
+        "nih_age"
+    ],
+    modifies=[
+        "nih_health_status"
+    ]
+)
+def age_health_status(responses):
+    nih_age = responses["nih_age"]
+    age = int(nih_age["response_value"])
+
+    excellent = 0.1
+    very_good = 0.2
+    good = 0.2
+    fair = 0.2
+    poor = 0.2
+    dont_know = 0.05
+    prefer_not_to_answer = 0.05
+
+    if 0 <= age and age <= 10:
+        excellent += 0.05
+        very_good += 0.05
+        good += 0.15
+
+        fair -= 0.10
+        poor -= 0.15
+    elif 11 <= age and age <= 20:
+        excellent += 0.05
+        very_good += 0.05
+        good += 0.10
+
+        fair -= 0.075
+        poor -= 0.125
+    elif 21 <= age and age <= 40:
+        very_good += 0.05
+        good += 0.025
+
+        fair -= 0.025
+        poor -= 0.05
+    elif 41 <= age and age <= 60:
+        excellent -= 0.05
+        very_good -= 0.15
+        good -= 0.10
+        
+        fair += 0.20
+        poor += 0.10
+    elif 61 <= age and age <= 80:
+        excellent -= 0.075
+        very_good -= 0.125
+        good -= 0.125
+
+        fair += 0.125
+        poor += 0.20
+    elif 81 <= age:
+        excellent -= 0.09
+        very_good -= 0.15
+        good -= 0.15
+
+        fair += 0.14
+        poor += 0.25
+    
+    response_name = choice([
+        "excellent",
+        "very_good",
+        "good",
+        "fair",
+        "poor",
+        "dont_know",
+        "prefer_not_to_answer"
+    ], [
+        excellent,
+        very_good,
+        good,
+        fair,
+        poor,
+        dont_know,
+        prefer_not_to_answer
+    ])
+
+    return {
+        "nih_health_status": {
+            "response_name": response_name
+        }
+    }
+
+@relationship(
+    name="weight_sleep_apnea",
+    dependencies=[
+        "nih_weight"
+    ],
+    modifies=[
+        "nih_sleep_apnea"
+    ]
+)
+def weight_sleep_apnea(responses):
+    nih_weight = responses["nih_weight"]["response_value"]
+
+    weight_min, weight_max = (40, 300)
+
+    weight_norm = (nih_weight - weight_min) / (weight_max - weight_min)
+    sleep_apnea_freq = 0.15
+
+    # Quadratic curve where the bottom percentiles are skewed somewhat against sleep apnea (0.5x as likely (half as likely))
+    # and upper percentiles are skewed strongly against sleep apnea (2.5x more likely)
+    relative_risk = (weight_norm + 0.5) ** 2 + 0.25
+    chance = sleep_apnea_freq * relative_risk
+    
+    if random() < chance:
+        return {
+            "nih_sleep_apnea": {
+                "Yes"
+            }
+        }
+    
 
 @relationship(
     name="pregnancy_prerequisites",
