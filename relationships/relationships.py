@@ -326,7 +326,42 @@ def weight_sleep_apnea(responses):
                 "Yes"
             }
         }
+
+@relationship(
+    name="heart_attack_angina_cholesterol",
+    dependencies=[
+        "nih_heart_attack"
+    ],
+    modifies=[
+        "nih_cholesterol",
+        "nih_coronary_artery_disease_angina"
+    ]
+)
+def heart_attack_angina_cholesterol(responses):
+    nih_heart_attack = responses["nih_heart_attack"]
+
+    cholesterol_freq = 0.07
+    angina_freq = 0.01
     
+    if nih_heart_attack["response_name"] == "Yes":
+        # Those who have experienced heart attacks recently will have a 1.5x likelihood of having high cholesterol or angina
+        # Technically, this is actually significantly higher because if the chance isn't rolled here then the user also has to roll against the base chance.
+        # This will be fixed once relationships are transitioned to frequency modifiers rather than response modifiers.
+        cholesterol_freq *= 1.5
+        angina_freq *= 1.5
+
+        responses = {}
+        if random() < cholesterol_freq:
+            responses["nih_cholesterol"] = {
+                "Yes"
+            }
+        if random() < angina_freq:
+            responses["nih_coronary_artery_disease_angina"] = {
+                "Yes"
+            }
+        
+        if len(responses) > 0: return responses
+
 
 @relationship(
     name="pregnancy_prerequisites",

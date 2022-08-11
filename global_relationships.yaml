@@ -11,6 +11,7 @@ relationships:
   - name: age_associated_diseases
   - name: age_health_status
   - name: weight_sleep_apnea
+  - name: heart_attack_angina_cholesterol
   - name: pregnancy_prerequisites
   - name: gestational_diabetes
   - name: diabetes_types
