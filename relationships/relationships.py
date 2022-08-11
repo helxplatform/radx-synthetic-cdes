@@ -421,3 +421,48 @@ def diabetes_types(responses):
                 "response_name": "Skip Logic"
             }
         }
+
+@relationship(
+    name="covid_symptom_clustering",
+    dependencies=[],
+    modifies=[
+
+    ]
+)
+def covid_symptom_clustering(responses):
+    # There is no "covid" question in the global cookbook. So we'll just say 10% of records are going to be in a symptom cluster.
+    covid__freq = 0.1
+    cluster0 = ({
+        "nih_cough": {
+            "Yes": 0.569
+        },
+        "nih_fever_chills": {
+            "Yes": 0.148
+        },
+        "nih_diff_breath": {
+            
+        }
+    }, .321)
+    cluster1 = ({
+        
+    }, .19)
+    cluster2 = ({
+
+    }, .128)
+    cluster3 = ({
+
+    }, .141)
+    cluster4 = ({
+
+    }, .123)
+    cluster5 = ({
+
+    }, .097)
+    cluster_data = [
+        cluster0,
+        cluster1,
+        cluster2,
+        cluster3,
+        cluster4,
+        cluster5
+    ]

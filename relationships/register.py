@@ -156,30 +156,3 @@ def relationship(name, dependencies, modifies):
             return func(*args, **kwargs)
         return wrapper
     return decorator
-
-def debug_planning(file):
-    # Debug planning process.
-    import matplotlib.pyplot as plt
-    import ruamel.yaml as yaml
-
-    with open(file, "r") as f:
-        relationships = yaml.round_trip_load(f)["relationships"]
-    plan, G = Register._plan([Register._get_relationship(rel) for rel in relationships])
-
-    fig, axes = plt.subplots(nrows=2, ncols=1)
-    ax = axes.flatten()
-
-    nx.draw(G, nx.drawing.nx_pydot.graphviz_layout(G, prog="twopi"), with_labels=True, ax=ax[0])
-    ax[0].set_axis_off()
-
-    G_plan = nx.DiGraph()
-    for i, dependency in enumerate(plan):
-        if i != len(plan) - 1:
-            next = plan[i + 1]
-            print(dependency["name"], "->", next["name"])
-            G_plan.add_edge(dependency["name"], next["name"])
-
-    nx.draw(G_plan, with_labels=True, ax=ax[1])
-    ax[1].set_axis_off()
-    print([x["name"] for x in plan])
-    plt.show()
