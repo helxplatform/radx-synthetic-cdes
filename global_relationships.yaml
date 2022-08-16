@@ -15,3 +15,223 @@ relationships:
   - name: pregnancy_prerequisites
   - name: gestational_diabetes
   - name: diabetes_types
+  - name: covid_symptom_clustering
+    kwargs:
+      clusters_config:
+        # The chance that a cluster is chosen (i.e. that the relationship runs)
+        covid_freq: 0.10
+        # These are not specific to cluster and will apply as long as any cluster is chosen
+        # They may be overriden on a per-cluster basis.
+        global_symptoms:
+          nih_skin_rash:
+            Yes: 0.001
+          nih_conjunctivitis:
+            Yes: 0.02
+          nih_red_eyes:
+            Yes: 0.04
+          nih_high_temp:
+            Not Sent to Data Hub: 1.00
+          nih_no_sympt:
+            Not Sent to Data Hub: 1.00
+          nih_blue_lips:
+            Yes: 0.03
+          nih_balance:
+            Yes: 0.001
+          nih_slurred_peech:
+            Yes: 0.001
+          nih_neuro_shakes:
+            Yes: 0.18
+          nih_numb_extremities:
+            Yes: 0.02
+          nih_sweating:
+            Yes: 0.02
+          nih_seizures:
+            Yes: 0.001
+          nih_rash_toes:
+            Yes: 0.001
+        cluster_symptoms:
+          # Cluster 1
+          - frequency: 0.321
+            symptoms:
+              nih_cough:
+                Yes: 0.569
+              nih_fever_chills:
+                Yes: 0.148
+              nih_diff_breath:
+                Yes: 0.029
+              nih_headache:
+                Yes: 0.656
+              nih_muscle_ache:
+                Yes: 0.411
+              nih_olfactory:
+                Yes: 0.526
+              nih_fatigue:
+                Yes: 0.048
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.081
+              nih_abdom_pain:
+                Yes: 0.100
+              nih_throat_congestion_nose:
+                Yes: 0.589
+              nih_other_symp:
+                Yes: 0.383
+              nih_wheezing:
+                Yes: 0.081
+              nih_confusion:
+                Yes: 0.067
+              nih_appetite:
+                Yes: 0.043
+          # Cluster 2
+          - frequency: 0.190
+            symptoms:
+              nih_cough:
+                Yes: 0.670
+              nih_fever_chills:
+                Yes: 0.622
+              nih_diff_breath:
+                Yes: 0.005
+              nih_headache:
+                Yes: 0.804
+              nih_muscle_ache:
+                Yes: 0.220
+              nih_olfactory:
+                Yes: 0.469
+              nih_fatigue:
+                Yes: 0.057
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.139
+              nih_abdom_pain:
+                Yes: 0.081
+              nih_throat_congestion_nose:
+                Yes: 0.536
+              nih_other_symp:
+                Yes: 0.158
+              nih_wheezing:
+                Yes: 0.392
+              nih_confusion:
+                Yes: 0.043
+              nih_appetite:
+                Yes: 0.421
+          # Cluster 3
+          - frequency: 0.128
+            symptoms:
+              nih_cough:
+                Yes: 0.172
+              nih_fever_chills:
+                Yes: 0.182
+              nih_diff_breath: 0.024
+              nih_headache:
+                Yes: 0.722
+              nih_muscle_ache:
+                Yes: 0.196
+              nih_olfactory:
+                Yes: 0.656
+              nih_fatigue:
+                Yes: 0.062
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.555
+              nih_abdom_pain:
+                Yes: 0.196
+              nih_throat_congestion_nose:
+                Yes: 0.502
+              nih_other_symp:
+                Yes: 0.478
+              nih_wheezing:
+                Yes: 0.105
+              nih_confusion:
+                Yes: 0.072
+              nih_appetite:
+                Yes: 0.536
+          # Cluster 4
+          - frequency: 0.141
+            symptoms:
+              nih_cough:
+                Yes: 0.622
+              nih_fever_chills:
+                Yes: 0.455
+              nih_diff_breath:
+                Yes: 0.057
+              nih_headache:
+                Yes: 0.785
+              nih_muscle_ache:
+                Yes: 0.225
+              nih_olfactory:
+                Yes: 0.598
+              nih_fatigue:
+                Yes: 0.378
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.191
+              nih_abdom_pain:
+                Yes: 0.139
+              nih_throat_congestion_nose:
+                Yes: 0.258
+              nih_other_symp:
+                Yes: 0.569
+              nih_wheezing:
+                Yes: 0.555
+              nih_confusion:
+                Yes: 0.124
+              nih_appetite:
+                Yes: 0.364
+          # Cluster 5
+          - frequency: 0.123
+            symptoms:
+              nih_cough:
+                Yes: 0.560
+              nih_fever_chills:
+                Yes: 0.440
+              nih_diff_breath:
+                Yes: 0.048
+              nih_headache:
+                Yes: 0.856
+              nih_muscle_ache:
+                Yes: 0.679
+              nih_olfactory:
+                Yes: 0.378
+              nih_fatigue:
+                Yes: 0.368
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.196
+              nih_abdom_pain:
+                Yes: 0.215
+              nih_throat_congestion_nose:
+                Yes: 0.694
+              nih_other_symp:
+                Yes: 0.459
+              nih_wheezing:
+                Yes: 0.517
+              nih_confusion:
+                Yes: 0.493
+              nih_appetite:
+                Yes: 0.555
+          # Cluster 6
+          - frequency: 0.097
+            symptoms:
+              nih_cough:
+                Yes: 0.617
+              nih_fever_chills:
+                Yes: 0.493
+              nih_diff_breath:
+                Yes: 0.321
+              nih_headache:
+                Yes: 0.818
+              nih_muscle_ache:
+                Yes: 0.675
+              nih_olfactory:
+                Yes: 0.507
+              nih_fatigue:
+                Yes: 0.536
+              nih_nausea_vomiting_diarrhea:
+                Yes: 0.584
+              nih_abdom_pain:
+                Yes: 0.622
+              nih_throat_congestion_nose:
+                Yes: 0.670
+              nih_other_symp:
+                Yes: 0.574
+              nih_wheezing:
+                Yes: 0.459
+              nih_confusion:
+                Yes: 0.440
+              nih_appetite:
+                Yes: 0.651

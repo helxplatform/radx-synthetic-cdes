@@ -426,43 +426,43 @@ def diabetes_types(responses):
     name="covid_symptom_clustering",
     dependencies=[],
     modifies=[
-
+        "nih_skin_rash",
+        "nih_conjunctivitis",
+        "nih_red_eyes",
+        "nih_high_temp",
+        "nih_no_sympt",
+        "nih_blue_lips",
+        "nih_balance",
+        "nih_slurred_peech",
+        "nih_neuro_shakes",
+        "nih_numb_extremities",
+        "nih_sweating",
+        "nih_seizures",
+        "nih_rash_toes",
+        "nih_cough",
+        "nih_fever_chills",
+        "nih_diff_breath",
+        "nih_headache",
+        "nih_muscle_ache",
+        "nih_olfactory",
+        "nih_fatigue",
+        "nih_nausea_vomiting_diarrhea",
+        "nih_abdom_pain",
+        "nih_throat_congestion_nose",
+        "nih_other_symp",
+        "nih_wheezing",
+        "nih_confusion",
+        "nih_appetite"
     ]
 )
-def covid_symptom_clustering(responses):
-    # There is no "covid" question in the global cookbook. So we'll just say 10% of records are going to be in a symptom cluster.
-    covid__freq = 0.1
-    cluster0 = ({
-        "nih_cough": {
-            "Yes": 0.569
-        },
-        "nih_fever_chills": {
-            "Yes": 0.148
-        },
-        "nih_diff_breath": {
-            
+def covid_symptom_clustering(responses, clusters_config):
+    covid_freq = clusters_config["covid_freq"]
+    global_symptoms = clusters_config["global_symptoms"]
+    clusters = clusters_config["cluster_symptoms"]
+    for cluster in clusters:
+        cluster["symptoms"] = {
+            **global_symptoms,
+            **cluster["symptoms"]
         }
-    }, .321)
-    cluster1 = ({
-        
-    }, .19)
-    cluster2 = ({
+    if random() >= covid_freq: return
 
-    }, .128)
-    cluster3 = ({
-
-    }, .141)
-    cluster4 = ({
-
-    }, .123)
-    cluster5 = ({
-
-    }, .097)
-    cluster_data = [
-        cluster0,
-        cluster1,
-        cluster2,
-        cluster3,
-        cluster4,
-        cluster5
-    ]
