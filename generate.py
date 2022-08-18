@@ -113,6 +113,7 @@ def generate_rows(template, relationships, row_count):
                 # These are functionally equivalent, except for special responses (i.e. text), in which it is necessary to support both.
                 response_name = modified_response.get("response_name")
                 response_value = modified_response.get("response_value")
+                response = None
                 if response_name is not None:
                     for res in template["variables"][modified_variable]:
                         if res["response_name"] == response_name:
@@ -124,13 +125,16 @@ def generate_rows(template, relationships, row_count):
                             response = res
                             break
                 else:
-                    raise Exception("Could not interpret modification requested by relationship:", modified_response)
+                    raise Exception(f"Could not interpret modification requested by relationship. Response: {modified_response}; variable: {modified_variable}")
+                
+                if response is None:
+                    raise Exception(f"Could not find response requested by relationship. Response: {modified_response}; variable: {modified_variable}")
 #                 print(f'''\
 # Relationship "{relationship["name"]}" modified variable {modified_variable}: changed {record[modified_variable]["response_name"]} -> {response["response_name"]}')\
 # ''')
                 record[modified_variable] = {
-                    "response_name": res["response_name"],
-                    "response_value": res["response_value"]
+                    "response_name": response["response_name"],
+                    "response_value": response["response_value"]
                 }
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
