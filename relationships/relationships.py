@@ -396,7 +396,7 @@ def diabetes_types(responses):
 
 @relationship(
     name="covid_symptom_clustering",
-    dependencies=[],
+    dependencies=None,
     modifies=[
         "nih_skin_rash",
         "nih_conjunctivitis",

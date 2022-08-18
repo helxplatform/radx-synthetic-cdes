@@ -8,6 +8,13 @@ class Register:
         cls.udfs[name] = func
     @classmethod
     def register_relationship(cls, name, udf, dependencies, modifies):
+        if dependencies is None or len(dependencies) == 0:
+            # Not a "true" relationship, but convenient to treat it as one
+            dependencies = [
+                # `None` shouldn't be used as a node according to networkx docs.
+                # `0` substitutes for None here, in that a variable_name is never going to be the integer 0
+                0
+            ]
         cls.relationships[name] = {
             "name": name,
             "dependencies": dependencies,
@@ -71,28 +78,19 @@ class Register:
         but it doesn't really seem worth the effort to implement a tree dependency planner by hand.
         """
         G = nx.DiGraph()
+        
         for relationship in relationships:
 
             dependencies = relationship["dependencies"]
             modifies = relationship["modifies"]
-
-            # is_modified_by = [
-            #     relationship for relationship in relationships
-            #     if any([dependency for dependency in dependencies if dependency in relationship["modifies"]])
-            # ]
-            # modified_relationships = [
-            #     relationship for relationship in relationships
-            #     if any([modified for modified in modifies if modified in relationship["dependencies"]])
-            # ]
-
 
             for dependency_variable in dependencies:
                 # for response in dependencies[dependency_variable]:
                 for modified_variable in modifies:
                     # modified_response = modifies[modified_variable]
                     G.add_edge(
-                        f"{dependency_variable}",
-                        f"{modified_variable}"
+                        dependency_variable,
+                        modified_variable
                     )
 
         # Not super familiar with this area of network/graph theory and constructing & traversing dependency trees.
@@ -101,23 +99,9 @@ class Register:
         plan = []
         for dependency in dependency_path:
             variable_name = dependency
-            # variable_name = dependency.split(":")[0]
-            # response_name = dependency.split(":")[1]
             for relationship in relationships:
-                if (
-                    variable_name in relationship["dependencies"]
-                    # response_name in relationship["dependencies"][variable_name]
-                ):
+                if variable_name in relationship["dependencies"]:
                     plan.append(relationship)
-        #     [
-        #         relationship for relationship in relationships
-        #         if (
-        #             dependency_node["variable_name"] in relationship["dependencies"] and
-        #             dependency_node["response_name"] in relationship["dependencies"][dependency_node["variable_name"]]
-        #         )
-        #     ] for dependency_node in dependency_path
-        # ]
-
         return plan, G
 
 """
