@@ -1,4 +1,4 @@
-from random import random, choice, randint
+from random import random, choice, choices, randint
 from .register import relationship
 
 """
@@ -274,23 +274,26 @@ def age_health_status(responses):
         fair += 0.14
         poor += 0.25
     
-    response_name = choice([
-        "excellent",
-        "very_good",
-        "good",
-        "fair",
-        "poor",
-        "dont_know",
-        "prefer_not_to_answer"
-    ], [
-        excellent,
-        very_good,
-        good,
-        fair,
-        poor,
-        dont_know,
-        prefer_not_to_answer
-    ])
+    response_name = choices([
+            "excellent",
+            "very_good",
+            "good",
+            "fair",
+            "poor",
+            "dont_know",
+            "prefer_not_to_answer"
+        ],
+        weights=[
+            excellent,
+            very_good,
+            good,
+            fair,
+            poor,
+            dont_know,
+            prefer_not_to_answer
+        ],
+        k=1
+    )[0]
 
     return {
         "nih_health_status": {
@@ -323,7 +326,7 @@ def weight_sleep_apnea(responses):
     if random() < chance:
         return {
             "nih_sleep_apnea": {
-                "Yes"
+                "response_name": "Yes"
             }
         }
 
@@ -353,11 +356,11 @@ def heart_attack_angina_cholesterol(responses):
         responses = {}
         if random() < cholesterol_freq:
             responses["nih_cholesterol"] = {
-                "Yes"
+                "response_name": "Yes"
             }
         if random() < angina_freq:
             responses["nih_coronary_artery_disease_angina"] = {
-                "Yes"
+                "response_name": "Yes"
             }
         
         if len(responses) > 0: return responses

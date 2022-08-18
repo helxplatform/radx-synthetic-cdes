@@ -29,7 +29,7 @@
 # How many records of data to generate. If null, `generate.py` will expect [-n ROW_COUNT] argument to be specified.
 row_count: 5000
 # File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.
-output_path: RADx_Tier1CDE_SampleData_V1.csv
+output_path: RADx_Tier1CDE_SampleData_v1.1.csv
 relationships: global_relationships.yaml
 variables:
   nih_record_id:
@@ -37,6 +37,8 @@ variables:
       response_value_generator:
         udf:
           name: test_record_id
+          kwargs:
+            upper_id: 999999
       frequency: 1.0
     - response_name: Reason Unknown
       response_value: -9999
@@ -9361,10 +9363,10 @@ variables:
   nih_fever_chills:
     - response_name: No
       response_value: 0
-      frequency: 0.20
+      frequency: 0.78
     - response_name: Yes
       response_value: 1
-      frequency: 0.78
+      frequency: 0.20
     - response_name: Other
       response_value: 97
       frequency: null
