@@ -220,7 +220,7 @@ def age_associated_diseases(responses):
         "nih_health_status"
     ]
 )
-def age_health_status(responses):
+def age_health_status(responses, binning_config):
     nih_age = responses["nih_age"]
     age = int(nih_age["response_value"])
 
@@ -232,47 +232,16 @@ def age_health_status(responses):
     dont_know = 0.05
     prefer_not_to_answer = 0.05
 
-    if 0 <= age and age <= 10:
-        excellent += 0.05
-        very_good += 0.05
-        good += 0.15
-
-        fair -= 0.10
-        poor -= 0.15
-    elif 11 <= age and age <= 20:
-        excellent += 0.05
-        very_good += 0.05
-        good += 0.10
-
-        fair -= 0.075
-        poor -= 0.125
-    elif 21 <= age and age <= 40:
-        very_good += 0.05
-        good += 0.025
-
-        fair -= 0.025
-        poor -= 0.05
-    elif 41 <= age and age <= 60:
-        excellent -= 0.05
-        very_good -= 0.15
-        good -= 0.10
-        
-        fair += 0.20
-        poor += 0.10
-    elif 61 <= age and age <= 80:
-        excellent -= 0.075
-        very_good -= 0.125
-        good -= 0.125
-
-        fair += 0.125
-        poor += 0.20
-    elif 81 <= age:
-        excellent -= 0.09
-        very_good -= 0.15
-        good -= 0.15
-
-        fair += 0.14
-        poor += 0.25
+    for bin in binning_config:
+        start_age = bin["start"]
+        end_age = bin["end"]
+        freq_data = bin["data"]
+        if age >= start_age and age <= end_age:
+            excellent += freq_data["excellent"]
+            very_good += freq_data["very_good"]
+            good += freq_data["good"]
+            fair += freq_data["fair"]
+            poor += freq_data["poor"]
     
     response_name = choices([
             "excellent",

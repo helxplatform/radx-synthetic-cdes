@@ -9,12 +9,63 @@ relationships:
   - name: no_cancer
   - name: no_chronic_kidney_disease
   - name: age_associated_diseases
-  - name: age_health_status
   - name: weight_sleep_apnea
   - name: heart_attack_angina_cholesterol
   - name: pregnancy_prerequisites
   - name: gestational_diabetes
   - name: diabetes_types
+  - name: age_health_status
+    kwargs:
+      binning_config:
+        # Start/end are both inclusive.
+        - start: 0
+          end: 10
+          data:
+            excellent: 0.05
+            very_good: 0.05
+            good: 0.15
+            fair: -0.10
+            poor: -0.15
+        - start: 11
+          end: 20
+          data:
+            excellent: 0.05
+            very_good: 0.05
+            good: 0.10
+            fair: -0.075
+            poor: -0.05
+        - start: 21
+          end: 40
+          data:
+            excellent: 0
+            very_good: 0.05
+            good: 0.025
+            fair: -0.025
+            poor: -0.05
+        - start: 41
+          end: 60
+          data:
+            excellent: -0.05
+            very_good: -0.15
+            good: -0.10
+            fair: 0.20
+            poor: 0.10
+        - start: 61
+          end: 80
+          data:
+            excellent: -0.075
+            very_good: -0.125
+            good: -0.125
+            fair: 0.125
+            poor: 0.20
+        - start: 81
+          end: 9999
+          data:
+            excellent: -0.09
+            very_good: -0.15
+            good: -0.15
+            fair: 0.14
+            poor: 0.25
   - name: covid_symptom_clustering
     kwargs:
       clusters_config:
