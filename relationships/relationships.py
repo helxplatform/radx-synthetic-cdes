@@ -244,13 +244,13 @@ def age_health_status(responses, binning_config):
             poor += freq_data["poor"]
     
     response_name = choices([
-            "excellent",
-            "very_good",
-            "good",
-            "fair",
-            "poor",
-            "dont_know",
-            "prefer_not_to_answer"
+            "Excellent",
+            "Very Good",
+            "Good",
+            "Fair",
+            "Poor",
+            "Don't know",
+            "Prefer not to state"
         ],
         weights=[
             excellent,
@@ -436,5 +436,37 @@ def covid_symptom_clustering(responses, clusters_config):
             **global_symptoms,
             **cluster["symptoms"]
         }
-    if random() >= covid_freq: return
 
+    if random() >= covid_freq: return
+    
+    cluster = choices(
+        clusters,
+        weights=[cluster["frequency"] for cluster in clusters],
+        k=1
+    )[0]
+    
+    modified_responses = {}
+    for variable in cluster["symptoms"]:
+        responses = cluster["symptoms"][variable]
+        used_freq = sum(responses.values())
+        no_change_freq = 1 - used_freq
+
+        response_name = choices(
+            [
+                *responses.keys(),
+                None
+            ],
+            weights=[
+                *responses.values(),
+                no_change_freq
+            ],
+            k=1
+        )[0]
+        if response_name is not None:
+            modified_responses[variable] = {
+                "response_name": response_name
+            }
+    
+    return modified_responses
+        
+        
