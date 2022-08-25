@@ -8,7 +8,6 @@ relationships:
   - name: no_alcohol
   - name: no_cancer
   - name: no_chronic_kidney_disease
-  - name: weight_sleep_apnea
   - name: gestational_diabetes
   - name: diabetes_types
   - name: neurodegenerative
@@ -25,6 +24,13 @@ relationships:
           max_viable_age: 80
           min_chance: 0.005
           max_chance: 0.05
+  - name: weight_sleep_apnea
+    kwargs:
+      # Apnea risk begins to increase past 200
+      min_viable_weight: 200
+      max_viable_weight: 300
+      min_multiplier: 1
+      max_multiplier: 1.5
   - name: heart_attack_angina_cholesterol
     kwargs:
       risk_multiplier: 1.5

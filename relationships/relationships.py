@@ -17,6 +17,9 @@ Detailed info regarding implementation found in readme. Basics are as follows:
   it is interpreted that the modified response *must* be chosen (similar to frequency: 1.0 but without conflicts arising from exceeding the 1.0 frequency limit).
 """
 
+def lerp(a, b, t):
+    return a + t * (b - a)
+
 @relationship(
     name="no_disability",
     dependencies=[
@@ -164,8 +167,6 @@ def no_chronic_kidney_disease(responses):
 def age_associated_diseases(responses, config):
     nih_age = responses["nih_age"]
     age = int(nih_age["response_value"])
-    def lerp(a, b, t):
-        return a + t * (b - a)
     """
     Lerped estimate of the percentage chance that an individual of a given age has an age-progressive disease.
 
@@ -285,18 +286,19 @@ def age_health_status(responses, binning_config):
         "nih_sleep_apnea"
     ]
 )
-def weight_sleep_apnea(responses):
+def weight_sleep_apnea(responses, min_viable_weight, max_viable_weight, min_multiplier, max_multiplier):
     nih_weight = responses["nih_weight"]["response_value"]
 
     weight_min, weight_max = (40, 300)
 
-    weight_norm = (nih_weight - weight_min) / (weight_max - weight_min)
+    weight_norm = (nih_weight - min_viable_weight) / (max_viable_weight - min_viable_weight)
+    if weight_norm < 0: multiplier = min_multiplier
+    elif weight_norm > 1: multiplier = max_multiplier
+    else: multiplier = lerp(min_multiplier, max_multiplier, weight_norm)
+
     sleep_apnea_freq = 0.15
 
-    # Quadratic curve where the bottom percentiles are skewed somewhat against sleep apnea (0.5x as likely (half as likely))
-    # and upper percentiles are skewed strongly against sleep apnea (2.5x more likely)
-    relative_risk = (weight_norm + 0.5) ** 2 + 0.25
-    chance = sleep_apnea_freq * relative_risk
+    chance = sleep_apnea_freq * multiplier
     
     if random() < chance:
         return {
