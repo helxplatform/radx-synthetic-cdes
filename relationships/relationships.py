@@ -158,11 +158,10 @@ def no_chronic_kidney_disease(responses):
     ],
     modifies=[
         "nih_alz",
-        "nih_neurodegenerative",
         "nih_osteoporosis"
     ]
 )
-def age_associated_diseases(responses):
+def age_associated_diseases(responses, config):
     nih_age = responses["nih_age"]
     age = int(nih_age["response_value"])
     def lerp(a, b, t):
@@ -176,17 +175,12 @@ def age_associated_diseases(responses):
     :param min_chance: The starting chance of having a disease (for minimized age).
     :param max_chance: The ending chance of having a disease (as age maxes out).
     """
-    def disease_chance(age, min_age=50, max_age=80, min_chance=0.005, max_chance=0.05):
-        # # Starts at a 0.5% chance of disease
-        # min_chance = 0.005
-        # # Caps out at a 5% chance of disease
-        # max_chance = 0.05
-        # # Age at which the onset of an age-progressive disease is possible.
-        # min_age = 50
-        # # Age at which the chance of the onset of an age-progressive disease caps out.
-        # max_age = 88
-
-        age_prop = (age - min_age) / (max_age - min_age)
+    def disease_chance(age, min_viable_age, max_viable_age, min_chance, max_chance):
+        # Starts at a min_chance % chance of disease
+        # Caps out at a max_chance % chance of disease
+        # min_viable_age: age at which the onset of an age-progressive disease is possible.
+        # max_viable_age: age at which the chance of the onset of an age-progressive disease caps out.
+        age_prop = (age - min_viable_age) / (max_viable_age - min_viable_age)
         if age_prop < 0: return 0
         if age_prop > 1: age_prop = 1
         return lerp(min_chance, max_chance, age_prop)
@@ -194,22 +188,34 @@ def age_associated_diseases(responses):
     ret_val = {}
 
     # Begin rolling for diseases
-    if random() < disease_chance(age):
+    if random() < disease_chance(age, **config["nih_alz"]):
         ret_val["nih_alz"] = {
             "response_name": "Yes"
         }
-    if random() < disease_chance(age):
-        ret_val["nih_neurodegenerative"] = {
-            "response_name": "Yes"
-        }
-    if random() < disease_chance(
-        age,
-        min_age=40
-    ):
+    if random() < disease_chance(age, **config["nih_osteoporosis"]):
         ret_val["nih_osteoporosis"] = {
             "response_name": "Yes"
         }
     return ret_val
+
+@relationship(
+    name="neurodegenerative",
+    dependencies=[
+        "nih_alz"
+    ],
+    modifies=[
+        "nih_neurodegenerative"
+    ]
+)
+def neurodegenerative(responses):
+    nih_alz = responses["nih_alz"]
+
+    if nih_alz["response_name"] == "Yes":
+        return {
+            "nih_neurodegenerative": {
+                "response_name": "Yes"
+            }
+        }
 
 @relationship(
     name="age_health_status",
@@ -309,7 +315,7 @@ def weight_sleep_apnea(responses):
         "nih_coronary_artery_disease_angina"
     ]
 )
-def heart_attack_angina_cholesterol(responses):
+def heart_attack_angina_cholesterol(responses, risk_multiplier=1.5):
     nih_heart_attack = responses["nih_heart_attack"]
 
     cholesterol_freq = 0.07
@@ -319,8 +325,8 @@ def heart_attack_angina_cholesterol(responses):
         # Those who have experienced heart attacks recently will have a 1.5x likelihood of having high cholesterol or angina
         # Technically, this is actually significantly higher because if the chance isn't rolled here then the user also has to roll against the base chance.
         # This will be fixed once relationships are transitioned to frequency modifiers rather than response modifiers.
-        cholesterol_freq *= 1.5
-        angina_freq *= 1.5
+        cholesterol_freq *= risk_multiplier
+        angina_freq *= risk_multiplier
 
         responses = {}
         if random() < cholesterol_freq:
@@ -345,12 +351,12 @@ def heart_attack_angina_cholesterol(responses):
         "nih_pregnancy"
     ]
 )
-def pregnancy_prerequisites(responses):
+def pregnancy_prerequisites(responses, maximum_viable_age=60):
     nih_sex = responses["nih_sex"]
     nih_age = responses["nih_age"]
     age = int(nih_age["response_value"])
 
-    if nih_sex["response_name"] != "Female" or age > 60:
+    if nih_sex["response_name"] != "Female" or age > maximum_viable_age:
         # Ideally disable `Pregnant` response for non-female/too old.
         return {
             "nih_pregnancy": {

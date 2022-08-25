@@ -8,12 +8,29 @@ relationships:
   - name: no_alcohol
   - name: no_cancer
   - name: no_chronic_kidney_disease
-  - name: age_associated_diseases
   - name: weight_sleep_apnea
-  - name: heart_attack_angina_cholesterol
-  - name: pregnancy_prerequisites
   - name: gestational_diabetes
   - name: diabetes_types
+  - name: neurodegenerative
+  - name: age_associated_diseases
+    kwargs:
+      config:
+        nih_alz:
+          min_viable_age: 50
+          max_viable_age: 80
+          min_chance: 0.005
+          max_chance: 0.075
+        nih_osteoporosis:
+          min_viable_age: 40
+          max_viable_age: 80
+          min_chance: 0.005
+          max_chance: 0.05
+  - name: heart_attack_angina_cholesterol
+    kwargs:
+      risk_multiplier: 1.5
+  - name: pregnancy_prerequisites
+    kwargs:
+      maximum_viable_age: 60
   - name: age_health_status
     kwargs:
       binning_config:
@@ -70,7 +87,7 @@ relationships:
     kwargs:
       clusters_config:
         # The chance that a cluster is chosen (i.e. that the relationship runs)
-        covid_freq: 0.10
+        covid_freq: 0.50
         # These are not specific to cluster and will apply as long as any cluster is chosen
         # They may be overriden on a per-cluster basis.
         global_symptoms:
