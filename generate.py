@@ -139,7 +139,7 @@ def generate_rows(template, relationships, row_count):
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
 
-def generate_cde(template_file, row_count, relationship_file=None, output_path=None):
+def generate_cde(template_file, row_count, relationship_file=[], output_path=None):
     """
     Generate a synthetic CDE file from a template file.
     :param template_file: File path to CDE generation template.
@@ -149,17 +149,21 @@ def generate_cde(template_file, row_count, relationship_file=None, output_path=N
     """
     with open(template_file, "r") as f:
         template = yaml.round_trip_load(f)
-
-    if relationship_file is None:
-        relationship_file = template.get("relationships")
         
-    if relationship_file is not None:
-        with open(relationship_file, "r") as f:
-            relationships = yaml.round_trip_load(f)
-    else:
-        relationships = {
-            "relationships": []
-        }
+
+    if len(relationship_file) == 0:
+        relationship_file = template.get("relationships")
+        if not isinstance(relationship_file, list):
+            relationship_file = [relationship_file]
+    
+        
+    relationships = {
+        "relationships": []
+    }
+    for rel_file in relationship_file:
+        with open(rel_file, "r") as f:
+            data = yaml.round_trip_load(f)
+            relationships["relationships"] += data["relationships"]
 
     preprocess_template(template)
 
@@ -204,8 +208,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "-r",
         "--relationships",
+        nargs="*",
         help="Template specifying specialized generation via variable relationships",
         action="store",
+        default=[],
         required=False
     )
     parser.add_argument(
