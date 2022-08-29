@@ -24,5 +24,7 @@ def insomnia_vaping(responses, config):
     
     if random() < insomnia_freq:
         return {
-            "nih_insomnia": "Yes"
+            "nih_insomnia": {
+                "response_name": "Yes"
+            }
         }
