@@ -2,3 +2,8 @@
 file: fake_relationships.py
 relationships:
   - name: insomnia_vaping
+    kwargs:
+      config:
+        rarely: 1.1
+        some_days: 1.35
+        every_day: 1.75

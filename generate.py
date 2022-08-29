@@ -2,7 +2,6 @@ import ruamel.yaml as yaml
 import csv
 import random
 import os
-import sys
 from importlib.machinery import SourceFileLoader
 from datetime import datetime
 from pathlib import Path
