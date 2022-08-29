@@ -1,5 +1,5 @@
 from random import random, choice, choices, randint
-from .register import relationship
+from relationships.register import relationship
 
 """
 A relationship is a post-generation utility for correlating relationships between fields.

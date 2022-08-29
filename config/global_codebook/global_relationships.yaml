@@ -1,4 +1,7 @@
-# The relationships configured under `relationships` are going to actually be used during generation.
+file: global_relationships.py
+# We can define as many relationships as we want in the Python file.
+# But only the relationships configured under `relationships` here are going to actually be used during generation.
+# We can add a "#" to the start of all the lines concerning a specific relationship to disable it.
 relationships:
   - name: no_disability
     # This function takes no additional args/kwargs. It is simply here to demonstrtate how one may specify these arguments.

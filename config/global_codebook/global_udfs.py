@@ -1,5 +1,5 @@
 from random import randint, choice
-from .register import udf
+from relationships.register import udf
 
 """
 UDFs are currently ran once during generation, and that is the only time.

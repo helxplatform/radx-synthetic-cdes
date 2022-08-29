@@ -1,6 +1,9 @@
 import ruamel.yaml as yaml
 import csv
 import random
+import os
+import sys
+from importlib.machinery import SourceFileLoader
 from datetime import datetime
 from pathlib import Path
 from lorem.text import TextLorem
@@ -139,31 +142,59 @@ def generate_rows(template, relationships, row_count):
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
 
-def generate_cde(template_file, row_count, relationship_file=[], output_path=None):
+def generate_cde(
+    template_file,
+    row_count,
+    relationship_file=[],
+    udf_file=[],
+    output_path=None
+):
     """
     Generate a synthetic CDE file from a template file.
-    :param template_file: File path to CDE generation template.
-    :type template_file: str
+    :param template_file: File path(s) to CDE generation template.
+    :type template_file: str | List[str]
+    :param udf_file: File path(s) to Python files defining UDFs used within template.
+    :type udf_file: str | List[str]
     :param output_path: Output path of the generated synthetic CDE file
     :type output_path: str
     """
     with open(template_file, "r") as f:
         template = yaml.round_trip_load(f)
-        
 
-    if len(relationship_file) == 0:
-        relationship_file = template.get("relationships")
-        if not isinstance(relationship_file, list):
-            relationship_file = [relationship_file]
+    template_udf_file = template.get("udfs")
+    if not isinstance(template_udf_file, list):
+        template_udf_file = [template_udf_file]
+    udf_file += template_udf_file
+
+    template_relationship_file = template.get("relationships")
+    if not isinstance(template_relationship_file, list):
+        template_relationship_file = [template_relationship_file]
+    relationship_file += template_relationship_file
     
-        
+    # Load UDFs
+    for udf_f in udf_file:
+        before_udf_count = len(Register.udfs)
+        SourceFileLoader(
+            udf_f,
+            os.path.join(os.path.dirname(template_file), udf_f)
+        ).load_module()
+        print(f"Loaded {len(Register.udfs) - before_udf_count} UDFs into the register from {udf_f}.")
+
+    # Load relationships    
     relationships = {
         "relationships": []
     }
     for rel_file in relationship_file:
-        with open(rel_file, "r") as f:
+        with open(os.path.join(os.path.dirname(template_file), rel_file), "r") as f:
             data = yaml.round_trip_load(f)
             relationships["relationships"] += data["relationships"]
+
+            before_relationship_count = len(Register.relationships)
+            SourceFileLoader(
+                data["file"],
+                os.path.join(os.path.dirname(template_file), data["file"])
+            ).load_module()
+            print(f"Loaded {len(Register.relationships) - before_relationship_count} relationships into the register from {rel_file}.")
 
     preprocess_template(template)
 
@@ -203,13 +234,22 @@ if __name__ == "__main__":
         "--template",
         help="CDE template specifying how to generate the mock CDE",
         action="store",
-        default="cde_template.yaml"
+        default="config/global_codebook/cde_template.yaml"
     )
     parser.add_argument(
         "-r",
         "--relationships",
         nargs="*",
         help="Template specifying specialized generation via variable relationships",
+        action="store",
+        default=[],
+        required=False
+    )
+    parser.add_argument(
+        "-u",
+        "--udfs",
+        nargs="*",
+        help="Specify Python UDF definitions",
         action="store",
         default=[],
         required=False
@@ -233,6 +273,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     template = args.template
     relationships = args.relationships
+    udfs = args.udfs
     row_count = args.row_count
     output_path = args.output_path
 
@@ -240,5 +281,6 @@ if __name__ == "__main__":
         template,
         row_count,
         relationship_file=relationships,
+        udf_file=udfs,
         output_path=output_path
     )

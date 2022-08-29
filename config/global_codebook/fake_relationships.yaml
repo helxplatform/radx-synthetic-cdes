@@ -1,0 +1,4 @@
+# Fake relationships, just something that a user can discover
+file: fake_relationships.py
+relationships:
+  - name: insomnia_vaping

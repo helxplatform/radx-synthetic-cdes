@@ -30,7 +30,12 @@
 row_count: 5000
 # File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.
 output_path: RADx_Tier1CDE_SampleData_v1.1.csv
-relationships: global_relationships.yaml
+relationships:
+  - global_relationships.yaml
+  - fake_relationships.yaml
+udfs:
+  # Specify udf definitions that we need to import here
+  - global_udfs.py
 variables:
   nih_record_id:
     - response_name: text
