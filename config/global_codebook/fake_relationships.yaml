@@ -1,4 +1,5 @@
-# Fake relationships, just something that a user can discover
+# These relationships are not necessarily backed by any data.
+# They are just supposed to be something that a user can discover in the dataset.
 file: fake_relationships.py
 relationships:
   - name: insomnia_vaping

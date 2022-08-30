@@ -35,7 +35,10 @@ if __name__ == "__main__":
         val = field.split("=", 1)
         if len(val) == 1:
             variable = val[0]
-            values = [[variable, response_value] for response_value in counts[variable]]
+            values = sorted(
+                [[variable, response_value] for response_value in counts[variable]],
+                key=lambda x: x[1]
+            )
         else:
             values = [val]
         for value in values:

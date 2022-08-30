@@ -1,4 +1,4 @@
-from random import randint, choice
+from random import random, randint, choice, choices
 from relationships.register import udf
 
 """
@@ -33,10 +33,13 @@ def test_record_id(upper_id=999999):
     return f"TEST_{x}"
 
 @udf("age_generator")
-def age_generator(min_age, max_age):
-    """ Return a number in the inclusive range [min_age, max_age]. """
-    # In the future, perhaps a probability distribution could be added.
-    return randint(min_age, max_age)
+def age_generator(binning_config):
+    # Choose a bin based on frequency fields
+    bin = choices(binning_config, weights=[bin["frequency"] for bin in binning_config], k=1)[0]
+    start = bin["start"]
+    end = bin["end"]
+    return str(randint(start, end))
+            
 
 @udf("zip_code_generator")
 def zip_code_generator():

@@ -32,6 +32,7 @@ row_count: 5000
 output_path: RADx_Tier1CDE_SampleData_v1.1.csv
 relationships:
   - global_relationships.yaml
+  - preprocessing_relationships.yaml
   - fake_relationships.yaml
 udfs:
   # Specify udf definitions that we need to import here
@@ -324,8 +325,35 @@ variables:
         udf:
           name: age_generator
           kwargs:
-            min_age: 18
-            max_age: 100
+            binning_config:
+              # Start/end are inclusive.
+              - start: 0
+                end: 17
+                frequency: .2212
+              - start: 18
+                end: 24
+                frequency: .0910
+              - start: 25
+                end: 34
+                frequency: .1399
+              - start: 35
+                end: 44
+                frequency: .1279
+              - start: 45
+                end: 54
+                frequency: .1225
+              - start: 55
+                end: 64
+                frequency: .1287
+              - start: 65
+                end: 74
+                frequency: .0988
+              - start: 75
+                end: 84
+                frequency: .0499
+              - start: 85
+                end: 9999
+                frequency: .0202
       frequency: .95
     - response_name: Reason Unknown
       response_value: -9999

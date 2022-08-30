@@ -1,12 +1,24 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
 import matplotlib.pyplot as plt
 import ruamel.yaml as yaml
+from importlib.machinery import SourceFileLoader
 from relationships import *
 
-def debug_planning(file):
+def debug_planning(files):
     # Debug planning process.
-
-    with open(file, "r") as f:
-        relationships = yaml.round_trip_load(f)["relationships"]
+    relationships = []
+    for file in files:
+        with open(file, "r") as f:
+            rel_file = yaml.round_trip_load(f)
+            relationships += rel_file["relationships"]
+            
+            bindings_file = rel_file["file"]
+            SourceFileLoader(
+                bindings_file,
+                os.path.join(os.path.dirname(file), bindings_file)
+            ).load_module()
     plan, G = Register._plan([Register._get_relationship(rel) for rel in relationships])
 
     fig, axes = plt.subplots(nrows=1, ncols=1)
@@ -37,9 +49,8 @@ def debug_planning(file):
 if __name__ == "__main__":
     import sys
     import os
-    try:
-        relationship_file = os.path.join(os.path.dirname(__file__), sys.argv[1])
-    except:
-        print("Please provide the path to a relationships config file as the first positional argument.")
+    if len(sys.argv) == 1:
+        print("Please provide the path to one or more config files as positional arguments.")
         sys.exit(1)
-    debug_planning(relationship_file)
+    relationship_files = [os.path.join(os.path.dirname(__file__), f) for f in sys.argv[1:]]
+    debug_planning(relationship_files)
