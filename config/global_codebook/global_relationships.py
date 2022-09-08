@@ -276,27 +276,37 @@ def age_health_status(responses, binning_config):
     }
 
 @relationship(
-    name="weight_sleep_apnea",
+    name="bmi_sleep_apnea",
     dependencies=[
-        "nih_weight"
+        "nih_weight",
+        "nih_height"
     ],
     modifies=[
         "nih_sleep_apnea"
     ]
 )
-def weight_sleep_apnea(responses, min_viable_weight, max_viable_weight, min_multiplier, max_multiplier):
-    nih_weight = responses["nih_weight"]["response_value"]
+def bmi_sleep_apnea(responses, slope, b, min_freq, max_freq):
+    nih_weight = responses["nih_weight"]
+    nih_height = responses["nih_height"]
+    
+    if nih_weight["response_name"] != "integer" or nih_height["response_name"] != "integer":
+        return
 
-    weight_min, weight_max = (40, 300)
+    weight_lb = int(nih_weight["response_value"])
+    height_in = int(nih_height["response_value"])
 
-    weight_norm = (nih_weight - min_viable_weight) / (max_viable_weight - min_viable_weight)
-    if weight_norm < 0: multiplier = min_multiplier
-    elif weight_norm > 1: multiplier = max_multiplier
-    else: multiplier = lerp(min_multiplier, max_multiplier, weight_norm)
+    lb_kg_conversion_factor = 0.45359237
+    in_m_conversion_factor = 0.0254
 
-    sleep_apnea_freq = 0.15
+    # Weight in kilograms
+    weight_kg = weight_lb * lb_kg_conversion_factor
+    # Height in meters
+    height_m = height_in * in_m_conversion_factor
 
-    chance = sleep_apnea_freq * multiplier
+    bmi = weight_kg / (height_m ** 2)
+
+    chance = max(min_freq, min(max_freq, slope*bmi + b))
+    
     
     if random() < chance:
         return {

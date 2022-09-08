@@ -25,13 +25,12 @@ relationships:
           max_viable_age: 80
           min_chance: 0.005
           max_chance: 0.05
-  - name: weight_sleep_apnea
+  - name: bmi_sleep_apnea
     kwargs:
-      # Apnea risk begins to increase past 200
-      min_viable_weight: 200
-      max_viable_weight: 300
-      min_multiplier: 1
-      max_multiplier: 1.5
+      slope: 0.0299
+      b: -0.59
+      min_freq: 0
+      max_freq: 0.975
   - name: heart_attack_angina_cholesterol
     kwargs:
       risk_multiplier: 1.5
