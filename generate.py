@@ -157,7 +157,8 @@ def generate_cde(
     :param output_path: Output path of the generated synthetic CDE file
     :type output_path: str
     """
-    with open(os.path.join(os.path.dirname(__file__), template_file), "r") as f:
+    template_file = os.path.join(os.path.dirname(__file__), template_file)
+    with open(template_file, "r") as f:
         template = yaml.round_trip_load(f)
 
     template_udf_file = template.get("udfs")
@@ -173,9 +174,10 @@ def generate_cde(
     # Load UDFs
     for udf_f in udf_file:
         before_udf_count = len(Register.udfs)
+        print(os.path.join(os.path.dirname(__file__), template_file))
         SourceFileLoader(
             udf_f,
-            os.path.join(os.path.dirname(template_file), udf_f)
+            os.path.join(os.path.dirname(__file__), os.path.dirname(template_file), udf_f)
         ).load_module()
         print(f"Loaded {len(Register.udfs) - before_udf_count} UDFs into the register from {udf_f}.")
 
@@ -191,7 +193,7 @@ def generate_cde(
             before_relationship_count = len(Register.relationships)
             SourceFileLoader(
                 data["file"],
-                os.path.join(os.path.dirname(template_file), data["file"])
+                os.path.join(os.path.dirname(__file__), os.path.dirname(template_file), data["file"])
             ).load_module()
             print(f"Loaded {len(Register.relationships) - before_relationship_count} relationships into the register from {rel_file}.")
 
