@@ -1,4 +1,5 @@
 import csv
+import os
 import math
 import argparse
 
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     fp = args.file
     fields = args.fields
 
-    with open(fp, "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), fp), "r") as f:
         rows = [r for r in csv.DictReader(f)]
     
     counts = {}

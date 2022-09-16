@@ -29,7 +29,7 @@ def save_cde(cde_header, cde_rows, output_path):
     csv_rows = [[cde_row[variable] for variable in cde_header] for cde_row in cde_rows]
     cde_csv = [cde_header] + csv_rows
 
-    with open(output_path, "w+") as out_file:
+    with open(os.path.join(os.path.dirname(__file__), output_path), "w+") as out_file:
         writer = csv.writer(out_file, delimiter=",")
         for row in cde_csv:
             writer.writerow(row)
@@ -157,7 +157,7 @@ def generate_cde(
     :param output_path: Output path of the generated synthetic CDE file
     :type output_path: str
     """
-    with open(template_file, "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), template_file), "r") as f:
         template = yaml.round_trip_load(f)
 
     template_udf_file = template.get("udfs")
