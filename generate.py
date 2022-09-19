@@ -253,9 +253,6 @@ def generate_cde(
             try:
                 survey_variables_config = survey_cases["variables"]
             except: raise Exception(f"Please specify the `variables` field in \"{survey_cases}\"")
-
-            if case not in valid_cases:
-                raise Exception(f"The specified case \"{case}\" is not declared as a valid case: {valid_cases}")
             
             survey_case_config = SurveyCaseConfig(
                 valid_cases,
@@ -276,6 +273,8 @@ case: {survey_case_config.valid_cases[0]}
 variables:
     ...\
 """)
+    if case not in survey_case_config.valid_cases:
+        raise Exception(f"The specified case \"{case}\" is not declared as a valid case: {survey_case_config.valid_cases}")
 
 
     template_udf_file = template.get("udfs")
