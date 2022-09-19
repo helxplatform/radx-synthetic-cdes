@@ -249,6 +249,7 @@ variables:
 
     survey_case_config = None
     if survey_cases:
+        print(f"Loading survey case template file {survey_cases}")
         with open(os.path.join(os.path.dirname(template_file), survey_cases), "r") as f:
             survey_cases = yaml.round_trip_load(f)
             try:
@@ -284,12 +285,11 @@ variables:
     # Load UDFs
     for udf_f in udf_file:
         before_udf_count = len(Register.udfs)
-        print(os.path.join(os.path.dirname(__file__), template_file))
         SourceFileLoader(
             udf_f,
             os.path.join(os.path.dirname(__file__), os.path.dirname(template_file), udf_f)
         ).load_module()
-        print(f"Loaded {len(Register.udfs) - before_udf_count} UDFs into the register from {udf_f}.")
+        print(f"Loaded {len(Register.udfs) - before_udf_count} UDFs into the register from {udf_f}")
 
     # Load relationships    
     relationships = {
@@ -305,7 +305,7 @@ variables:
                 data["file"],
                 os.path.join(os.path.dirname(__file__), os.path.dirname(template_file), data["file"])
             ).load_module()
-            print(f"Loaded {len(Register.relationships) - before_relationship_count} relationships into the register from {rel_file}.")
+            print(f"Loaded {len(Register.relationships) - before_relationship_count} relationships into the register from {rel_file}")
 
     preprocess_template(template)
 
