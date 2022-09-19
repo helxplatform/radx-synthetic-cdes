@@ -180,27 +180,27 @@ def generate_rows(template: Template, survey_case_config: SurveyCaseConfig, rela
                     "response_value": response["response_value"]
                 }
         
-        if survey_case_config:
-            case = survey_case_config.case
-            print(f"Modifying records according to format specified by survey case {case}")
-            for record in rows:
-                for variable in record:
-                    variable_case = survey_case_config.survey_variables_config.get(variable, {}).get(case, True)
-                    if variable_case == True or variable_case == "yes" or variable_case == "Yes":
-                        # This variable is enabled on the survey. No modification required.
-                        continue
-                    elif variable_case == False or variable_case == "no" or variable_case == "No":
-                        # This variable is disabled on the survey. Use the default disabled response.
-                        selected_response = survey_case_config.default_disabled_response
-                    else:
-                        # This variable is disabled on the survey. Use the specified response.
-                        selected_response = variable_case
-                    
-                    response = process_response_template(selected_response)
-                    record[variable] = {
-                        "response_name": response["response_name"],
-                        "response_value": response["response_value"]
-                    }
+    if survey_case_config:
+        case = survey_case_config.case
+        print(f"Modifying records according to format specified by survey case {case}")
+        for record in rows:
+            for variable in record:
+                variable_case = survey_case_config.survey_variables_config.get(variable, {}).get(case, True)
+                if variable_case == True or variable_case == "yes" or variable_case == "Yes":
+                    # This variable is enabled on the survey. No modification required.
+                    continue
+                elif variable_case == False or variable_case == "no" or variable_case == "No":
+                    # This variable is disabled on the survey. Use the default disabled response.
+                    selected_response = survey_case_config.default_disabled_response
+                else:
+                    # This variable is disabled on the survey. Use the specified response.
+                    selected_response = variable_case
+                
+                response = process_response_template(selected_response)
+                record[variable] = {
+                    "response_name": response["response_name"],
+                    "response_value": response["response_value"]
+                }
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
 
