@@ -33,7 +33,7 @@ output_path: RADx_Tier1CDE_SampleData_v1.1.csv
 # Defines the valid "survey" cases that can be generated from this template file. Can be overriden by [-s SURVEY_CASES] argument.
 survey_cases: abc_survey_modifiers.yaml
 # The survey case to use. Can be overriden by [-c CASE] argument.
-case: a
+# case: a
 relationships:
   - global_relationships.yaml
   - preprocessing_relationships.yaml

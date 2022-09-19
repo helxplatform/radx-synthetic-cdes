@@ -239,7 +239,7 @@ def generate_cde(
 
     if survey_cases and not case:
         raise Exception(
-            """\
+            f"""\
 Survey cases provided but no case is specified.
 Please specify the `case` field in "{template_file}" (or the `--case` argument if using the command line). Ex:
 case: survey_A
@@ -370,7 +370,7 @@ if __name__ == "__main__":
         "--survey_cases",
         help="""\
 Template specifying which variables to include/exclude from the template for a given 'survey'. \
-If no survey cases are specified, the entire template is treated as a single, unified template.""",
+If no survey cases are specified, the entire template is treated as a single survey.""",
         action="store",
         required=False
     )
