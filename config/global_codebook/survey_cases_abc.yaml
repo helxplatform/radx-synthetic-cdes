@@ -1,0 +1,290 @@
+# Declare valid survey cases
+cases:
+  - a
+  - b
+  - c
+# Default response used for a disabled case unless otherwise specified
+default_disabled_response:
+  response_name: Element Never Presented for Collection
+  response_value: -9944
+# For any given variable, if a case declared in the top-level `cases` field is omitted, it is inferred to be enabled
+# If a variable is not specified under `variables`, it is inferred to be enabled for all cases.
+# "yes"/"Yes" is equivalent to specifying true, and "no"/"No" is equivalent to specifying false
+#   * Technical note: this project uses ruamel.yaml/YAML spec v1.2, so this may be misleading.
+#   * `yes` and `no` are coerced to `true` and `false` in YAML 1.1. But we are explicitly casting these to booleans after parsing.
+variables:
+  nih_disability:
+    a: no
+    b: yes
+    c: no
+  nih_deaf:
+    a: no
+    b: yes
+    c: no
+  nih_blind:
+    a: no
+    b: yes
+    c: no
+  nih_memory:
+    a: no
+    b: yes
+    c: no
+  nih_walk_climb:
+    a: no
+    b: yes
+    c: no
+  nih_dress_bathe:
+    a: no
+    b: yes
+    c: no
+  nih_errand:
+    a: no
+    b: yes
+    c: no
+  nih_vaping_yn:
+    a: no
+    b: no
+    c: yes
+  nih_nicotine_yn:
+    a: no
+    b: no
+    c: yes
+  nih_vape_freq:
+    a: no
+    b: no
+    c: yes
+  nih_cig_smoke_freq:
+    a: no
+    b: no
+    c: yes
+  nih_smoking_yn:
+    a: no
+    b: no
+    c: yes
+  nih_history_smoking:
+    a: no
+    b: no
+    c: yes
+  nih_tobacco:
+    a: no
+    b: yes
+    c: no
+  nih_alcohol_yn:
+    a: yes
+    b: no
+    c: yes
+  nih_lifetime_use_alcohol:
+    a: no
+    b: yes
+    c: no
+  nih_alcohol_yrs:
+    a: no
+    b: yes
+    c: no
+  nih_alcohol_frequency:
+    a: no
+    b: yes
+    c: no
+  nih_asthma:
+    a: no
+    b: yes
+    c: no
+  nih_cancer:
+    a: yes
+    b: no
+    c: yes
+  nih_cancer_active_treatment:
+    a: yes
+    b: no
+    c: yes
+  nih_cancer_past_yr:
+    a: no
+    b: yes
+    c: no
+  nih_serious_mental_illness:
+    a: yes
+    b: no
+    c: no
+  nih_mental_health_disorder:
+    a: no
+    b: no
+    c: yes
+  nih_copd:
+    a: yes
+    b: no
+    c: yes
+  nih_depression:
+    a: no
+    b: yes
+    c: no
+  nih_alc_sub_abuse:
+    a: no
+    b: yes
+    c: no
+  nih_othermh:
+    a: no
+    b: yes
+    c: no
+  nih_coronary_artery_disease:
+    a: no
+    b: yes
+    c: no
+  nih_coronary_artery_disease_angina:
+    a: yes
+    b: no
+    c: yes
+  nih_heart_attack:
+    a: no
+    b: yes
+    c: no
+  nih_chf:
+    a: yes
+    b: no
+    c: no
+  nih_chd:
+    a: yes
+    b: no
+    c: yes
+  nih_copd_plus:
+    a: no
+    b: yes
+    c: no
+  nih_anxiety:
+    a: no
+    b: yes
+    c: no
+  nih_arrhythmia:
+    a: yes
+    b: no
+    c: yes
+  nih_af:
+    a: yes
+    b: no
+    c: yes
+  nih_gestational_diabetes:
+    a: no
+    b: yes
+    c: no
+  nih_ibd:
+    a: yes
+    b: no
+    c: yes
+  nih_ibs:
+    a: no
+    b: yes
+    c: no
+  # nih_liver_disease
+  # nih_lupus
+  # nih_migraines
+  # nih_ms
+  # nih_neurodegenerative
+  # nih_neurological_condition
+  # nih_no_chronic_condition
+  # nih_obesity
+  # nih_osteoporosis
+  # nih_pcos
+  # nih_psoriasis
+  # nih_renal
+  # nih_rls
+  # nih_ra
+  # nih_seasonal_allergies
+  nih_heart_condition:
+    a: no
+    b: yes
+    c: no
+  # nih_sleep_apnea
+  nih_substance_use:
+    a: yes
+    b: no
+    c: yes
+  nih_t1d:
+    a: yes
+    b: no
+    c: yes
+  # nih_t2dm
+  # nih_cough
+  # nih_fever_chills
+  # nih_diff_breath
+  # nih_headache
+  # nih_muscle_ache
+  nih_olfactory:
+    a: no
+    b: no
+    c: yes
+  nih_fatigue:
+    a: yes
+    b: no
+    c: yes
+  # nih_nausea_vomiting_diarrhea
+  # nih_abdom_pain
+  nih_skin_rash:
+    a: yes
+    b: no
+    c: no
+  nih_conjunctivitis:
+    a: no
+    b: yes
+    c: no
+  # nih_throat_congestion_nose
+  nih_red_eyes:
+    a: yes
+    b: no
+    c: yes
+  # nih_high_temp
+  # nih_other_symp
+  # nih_no_sympt
+  # nih_wheezing
+  nih_blue_lips:
+    a: yes
+    b: no
+    c: no
+  # nih_balance
+  nih_slurred_peech:
+    a: no
+    b: yes
+    c: no
+  nih_confusion:
+    a: no
+    b: no
+    c: yes
+  nih_neuro_shakes:
+    a: yes
+    b: no
+    c: yes
+  # nih_numb_extremities
+  nih_sweating:
+    a: yes
+    b: no
+    c: yes
+  nih_seizures:
+    a: yes
+    b: no
+    c: yes
+  nih_rash_toes:
+    a: yes
+    b: no
+    c: no
+  nih_appetite:
+    a: no
+    b: no
+    c: yes
+  nih_health_status:
+    a: no
+    b: yes
+    c: no
+  nih_height:
+    a: yes
+    b: no
+    c: yes
+  nih_weight:
+    a: yes
+    b: no
+    c: yes
+  nih_height_category:
+    a: no
+    b: yes
+    c: no
+  nih_weight_category:
+    a: no
+    b: yes
+    c: no
