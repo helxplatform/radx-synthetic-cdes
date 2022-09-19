@@ -46,3 +46,10 @@ def zip_code_generator():
     # Valid US postal codes range from 00001-99999.
     return str(randint(1, 99999)).rjust(5, "0")
     
+@udf("weight_distribution")
+def weight_distribution():
+    ...
+    
+@udf("height_distribution")
+def height_distribution():
+    ...

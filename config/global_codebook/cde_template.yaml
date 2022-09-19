@@ -11860,14 +11860,12 @@ variables:
     - response_name: integer
       # Requires special configuration.
       response_value_generator:
-        # Chooses a random integer in the inclusive range.
+        # This should be overriden by a relationship.
         range:
           # Minimum value
           - 40
           # Maximum value
           - 84
-        # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
-        valid_inputs: null
       frequency: .98
     - response_name: Reason Unknown
       response_value: -9999
@@ -11948,14 +11946,12 @@ variables:
     - response_name: integer
       # Requires special configuration.
       response_value_generator:
-        # Chooses a random integer in the inclusive range.
+        # This should be overriden by a relationship.
         range:
           # Minimum value
           - 40
           # Maximum value
           - 300
-        # Randomly chooses a value from the list. Example: ['a', 'b', 'c'] or [1, 2, 3]
-        valid_inputs: null
       frequency: .98
     - response_name: Reason Unknown
       response_value: -9999
