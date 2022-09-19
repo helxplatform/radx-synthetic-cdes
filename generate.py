@@ -237,16 +237,6 @@ def generate_cde(
     # Use `case` from template if not specified by a CLI aargument
     if not case: case = template.get("case")
 
-    if survey_cases and not case:
-        raise Exception(
-            f"""\
-Survey cases provided but no case is specified.
-Please specify the `case` field in "{template_file}" (or the `--case` argument if using the command line). Ex:
-case: survey_A
-variables:
-    ...\
-""")
-
     survey_case_config = None
     if survey_cases:
         print(f"Loading survey case template file {survey_cases}")
@@ -263,6 +253,9 @@ variables:
             try:
                 survey_variables_config = survey_cases["variables"]
             except: raise Exception(f"Please specify the `variables` field in \"{survey_cases}\"")
+
+            if case not in valid_cases:
+                raise Exception(f"The specified case \"{case}\" is not declared as a valid case: {valid_cases}")
             
             survey_case_config = SurveyCaseConfig(
                 valid_cases,
@@ -270,6 +263,19 @@ variables:
                 default_disabled_response,
                 survey_variables_config
             )
+    
+    if survey_cases and not case:
+        raise Exception(
+            f"""\
+Survey cases provided but no case is specified.
+Please specify the `case` field in "{template_file}" (or the `--case` argument if using the command line). Ex:
+# ...
+# ...
+survey_cases: ...
+case: {survey_case_config.valid_cases[0]}
+variables:
+    ...\
+""")
 
 
     template_udf_file = template.get("udfs")
