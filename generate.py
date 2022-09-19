@@ -2,6 +2,7 @@ import ruamel.yaml as yaml
 import csv
 import random
 import os
+from typing import NamedTuple, TypedDict, Union, List, Dict, Tuple, Any
 from importlib.machinery import SourceFileLoader
 from datetime import datetime
 from pathlib import Path
@@ -9,6 +10,40 @@ from lorem.text import TextLorem
 from relationships import Register
 
 DEFAULT_CDE_OUTPUT_NAME = f"synthetic_cde_{datetime.now().strftime('%m-%d-%Y')}"
+
+class ResponseTemplate(TypedDict):
+    response_name: str
+    response_value: Union[int, None]
+    response_value_generator: Union[Dict, None]
+    frequency: Union[int, None]
+
+class Response(TypedDict):
+    response_name: str
+    response_value: int
+
+class Template(TypedDict):
+    row_count: Union[int, None]
+    output_path: Union[str, None]
+    survey_cases: Union[str, None]
+    case: Union[str, None]
+    relationships: Union[List, None]
+    udfs: Union[List, None]
+
+    variables: List[ResponseTemplate]
+
+class RelationshipTemplate(TypedDict):
+    name: str
+    args: Union[List[Any], None]
+    kwargs: Union[Dict[str, Any], None]
+
+class RelationshipsTemplate(TypedDict):
+    relationships: List[RelationshipTemplate]
+
+class SurveyCaseConfig(NamedTuple):
+    valid_cases: List[str]
+    case: str
+    default_disabled_response: ResponseTemplate
+    survey_variables_config: Dict[str, Dict[str, Union[bool, ResponseTemplate]]]
 
 def save_cde(cde_header, cde_rows, output_path):
     """
@@ -34,9 +69,39 @@ def save_cde(cde_header, cde_rows, output_path):
         for row in cde_csv:
             writer.writerow(row)
 
+def process_response_template(selected_response: ResponseTemplate) -> Response:
+    # This function assumes that required UDFs have already been loaded into the Register
+    selected_response_name = selected_response.get("response_name")
+    selected_response_value = selected_response.get("response_value")
+    generator_schema = selected_response.get("response_value_generator")
+    if generator_schema is not None:
+        udf = generator_schema.get("udf")
+        lorem = generator_schema.get("lorem")
+        range_ = generator_schema.get("range")
+        valid_inputs = generator_schema.get("valid_inputs")
+        if udf is not None:
+            name = udf["name"]
+            args = udf.get("args", [])
+            kwargs = udf.get("kwargs", {})
+            selected_response_value = Register.invoke_udf(name, *args, **kwargs)
+        elif lorem is not None:
+            min_sentences, max_sentences = lorem["num_sentences"] # inclusve
+            min_words, max_words = lorem["sentence_length"] # inclusive
+            lorem = TextLorem(srange=(min_words, max_words))
+            sentences = [lorem.sentence() for i in range(random.randint(min_sentences, max_sentences))]
+            selected_response_value = " ".join(sentences) # sentences automatically end in periods.
+        elif range_:
+            min_val, max_val = range_ # inclusive
+            selected_response_value = random.randint(min_val, max_val)
+        elif valid_inputs:
+            selected_response_value = random.choice(valid_inputs)
     
+    return Response(
+        response_name=selected_response_name,
+        response_value=selected_response_value
+    )
 
-def preprocess_template(template):
+def preprocess_template(template: Template):
     for variable_name in template["variables"]:
         responses = template["variables"][variable_name]
         no_freq_responses = []
@@ -55,7 +120,7 @@ def preprocess_template(template):
             for response in no_freq_responses:
                 response["frequency"] = per_response_freq
 
-def generate_rows(template, relationships, row_count):
+def generate_rows(template: Template, survey_case_config: SurveyCaseConfig, relationships: RelationshipsTemplate, row_count: int):
     header_row = list(template["variables"].keys())
     rows = [{variable: None for variable in header_row} for i in range(row_count)]
     for variable_name in template["variables"]:
@@ -67,34 +132,10 @@ def generate_rows(template, relationships, row_count):
         )
         for i in range(row_count):
             selected_response = selected_responses[i]
-            selected_response_name = selected_response.get("response_name")
-            selected_response_value = selected_response.get("response_value")
-            generator_schema = selected_response.get("response_value_generator")
-            if generator_schema is not None:
-                udf = generator_schema.get("udf")
-                lorem = generator_schema.get("lorem")
-                range_ = generator_schema.get("range")
-                valid_inputs = generator_schema.get("valid_inputs")
-                if udf is not None:
-                    name = udf["name"]
-                    args = udf.get("args", [])
-                    kwargs = udf.get("kwargs", {})
-                    selected_response_value = Register.invoke_udf(name, *args, **kwargs)
-
-                elif lorem is not None:
-                    min_sentences, max_sentences = lorem["num_sentences"] # inclusve
-                    min_words, max_words = lorem["sentence_length"] # inclusive
-                    lorem = TextLorem(srange=(min_words, max_words))
-                    sentences = [lorem.sentence() for i in range(random.randint(min_sentences, max_sentences))]
-                    selected_response_value = " ".join(sentences) # sentences automatically end in periods.
-                elif range_:
-                    min_val, max_val = range_ # inclusive
-                    selected_response_value = random.randint(min_val, max_val)
-                elif valid_inputs:
-                    selected_response_value = random.choice(valid_inputs)
+            response = process_response_template(selected_response)
             rows[i][variable_name] = {
-                "response_name": selected_response_name,
-                "response_value": selected_response_value
+                "response_name": response["response_name"],
+                "response_value": response["response_value"]
             }
     # After bulk generation is complete, go through and manually regenerate responses on each record using relationships.
     relationship_plan = Register.plan(relationships["relationships"])
@@ -138,12 +179,36 @@ def generate_rows(template, relationships, row_count):
                     "response_name": response["response_name"],
                     "response_value": response["response_value"]
                 }
+        
+        if survey_case_config:
+            case = survey_case_config.case
+            print(f"Modifying records according to format specified by survey case {case}")
+            for record in rows:
+                for variable in record:
+                    variable_case = survey_case_config.survey_variables_config.get(variable, {}).get(case, True)
+                    if variable_case == True or variable_case == "yes" or variable_case == "Yes":
+                        # This variable is enabled on the survey. No modification required.
+                        continue
+                    elif variable_case == False or variable_case == "no" or variable_case == "No":
+                        # This variable is disabled on the survey. Use the default disabled response.
+                        selected_response = survey_case_config.default_disabled_response
+                    else:
+                        # This variable is disabled on the survey. Use the specified response.
+                        selected_response = variable_case
+                    
+                    response = process_response_template(selected_response)
+                    record[variable] = {
+                        "response_name": response["response_name"],
+                        "response_value": response["response_value"]
+                    }
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
 
 def generate_cde(
     template_file,
     row_count,
+    survey_cases=None,
+    case=None,
     relationship_file=[],
     udf_file=[],
     output_path=None
@@ -152,6 +217,12 @@ def generate_cde(
     Generate a synthetic CDE file from a template file.
     :param template_file: File path(s) to CDE generation template.
     :type template_file: str | List[str]
+    :param row_count: Number of records to generate.
+    :type row_count: int
+    :param survey_cases: Path to template specifying which variables to include/exclude from the template for a given "survey". 
+    :type survey_cases: str | None
+    :param case: The specific survey case to use.
+    :type case: str | None
     :param udf_file: File path(s) to Python files defining UDFs used within template.
     :type udf_file: str | List[str]
     :param output_path: Output path of the generated synthetic CDE file
@@ -161,15 +232,54 @@ def generate_cde(
     with open(template_file, "r") as f:
         template = yaml.round_trip_load(f)
 
+    # Use `survey_cases` from template if not specified by a CLI argument.
+    if not survey_cases: survey_cases = template.get("survey_cases")
+    # Use `case` from template if not specified by a CLI aargument
+    if not case: case = template.get("case")
+
+    if survey_cases and not case:
+        raise Exception(
+            """\
+Survey cases provided but no case is specified.
+Please specify the `case` field in "{template_file}" (or the `--case` argument if using the command line). Ex:
+case: survey_A
+variables:
+    ...\
+""")
+
+    survey_case_config = None
+    if survey_cases:
+        with open(os.path.join(os.path.dirname(template_file), survey_cases), "r") as f:
+            survey_cases = yaml.round_trip_load(f)
+            try:
+                valid_cases = survey_cases["cases"]
+            except: raise Exception(f"Please specify the `cases` field in \"{survey_cases}\"")
+
+            try:
+                default_disabled_response = survey_cases["default_disabled_response"]
+            except: raise Exception(f"Please specify the `default_disabled_response` field in \"{survey_cases}\"")
+
+            try:
+                survey_variables_config = survey_cases["variables"]
+            except: raise Exception(f"Please specify the `variables` field in \"{survey_cases}\"")
+            
+            survey_case_config = SurveyCaseConfig(
+                valid_cases,
+                case,
+                default_disabled_response,
+                survey_variables_config
+            )
+
+
     template_udf_file = template.get("udfs")
-    if not isinstance(template_udf_file, list):
-        template_udf_file = [template_udf_file]
-    udf_file += template_udf_file
+    if template_udf_file:
+        if not isinstance(template_udf_file, list): template_udf_file = [template_udf_file]
+        udf_file += template_udf_file
 
     template_relationship_file = template.get("relationships")
-    if not isinstance(template_relationship_file, list):
-        template_relationship_file = [template_relationship_file]
-    relationship_file += template_relationship_file
+    if template_relationship_file:
+        if not isinstance(template_relationship_file, list): template_relationship_file = [template_relationship_file]
+        relationship_file += template_relationship_file
     
     # Load UDFs
     for udf_f in udf_file:
@@ -216,7 +326,7 @@ variables:
         output_path = template.get("output_path", None)
 
 
-    [cde_header, cde_rows] = generate_rows(template, relationships, row_count)
+    [cde_header, cde_rows] = generate_rows(template, survey_case_config, relationships, row_count)
 
     save_cde(cde_header, cde_rows, output_path)
 
@@ -256,6 +366,22 @@ if __name__ == "__main__":
         required=False
     )
     parser.add_argument(
+        "-s",
+        "--survey_cases",
+        help="""\
+Template specifying which variables to include/exclude from the template for a given 'survey'. \
+If no survey cases are specified, the entire template is treated as a single, unified template.""",
+        action="store",
+        required=False
+    )
+    parser.add_argument(
+        "-c",
+        "--case",
+        help="The specific survey case to run from the survey cases template file",
+        action="store",
+        required=False
+    )
+    parser.add_argument(
         "-n",
         "--row_count",
         help="Number of rows of synthetic CDE data to generate.",
@@ -276,11 +402,15 @@ if __name__ == "__main__":
     relationships = args.relationships
     udfs = args.udfs
     row_count = args.row_count
+    survey_cases = args.survey_cases
+    case = args.case
     output_path = args.output_path
 
     generate.generate_cde(
         template,
         row_count,
+        survey_cases,
+        case,
         relationship_file=relationships,
         udf_file=udfs,
         output_path=output_path

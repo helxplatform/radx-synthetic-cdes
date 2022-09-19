@@ -7,11 +7,19 @@ cases:
 default_disabled_response:
   response_name: Element Never Presented for Collection
   response_value: -9944
-# For any given variable, if a case declared in the top-level `cases` field is omitted, it is inferred to be enabled
+# For any given variable, if a case declared in the top-level `cases` field is omitted, it is inferred to be enabled.
 # If a variable is not specified under `variables`, it is inferred to be enabled for all cases.
-# "yes"/"Yes" is equivalent to specifying true, and "no"/"No" is equivalent to specifying false
+# "yes"/"Yes" is equivalent to specifying true, and "no"/"No" is equivalent to specifying false.
 #   * Technical note: this project uses ruamel.yaml/YAML spec v1.2, so this may be misleading.
 #   * `yes` and `no` are coerced to `true` and `false` in YAML 1.1. But we are explicitly casting these to booleans after parsing.
+# If the "no" response needs to differ from the one provided by `default_disabled_response`,
+# you can pass a response rather than a boolean value for a given case, e.g.:
+# nih_disability:
+#   a:
+#     response_name: Element Never Presented for Collection
+#     response_value: -9944
+#   b: yes
+#   c: yes
 variables:
   nih_disability:
     a: no

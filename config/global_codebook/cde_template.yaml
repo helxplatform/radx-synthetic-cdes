@@ -30,7 +30,10 @@
 row_count: 5000
 # File name/path to output the data under (or `null` to auto-generate a name). Can be overriden by [-o OUTPUT_PATH] argument.
 output_path: RADx_Tier1CDE_SampleData_v1.1.csv
+# Defines the valid "survey" cases that can be generated from this template file. Can be overriden by [-s SURVEY_CASES] argument.
 survey_cases: abc_survey_modifiers.yaml
+# The survey case to use. Can be overriden by [-c CASE] argument.
+case: a
 relationships:
   - global_relationships.yaml
   - preprocessing_relationships.yaml
