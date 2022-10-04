@@ -41,7 +41,6 @@ class RelationshipsTemplate(TypedDict):
 
 class SurveyCaseConfig(NamedTuple):
     valid_cases: List[str]
-    case: str
     default_disabled_response: ResponseTemplate
     survey_variables_config: Dict[str, Dict[str, Union[bool, ResponseTemplate]]]
 
@@ -112,7 +111,7 @@ def preprocess_template(template: Template):
             else:
                 total_freq += response["frequency"]
         if total_freq > 1:
-            raise Exception(f"Sum of response frequencies for variable \"{variable_name}\" should not exceed 1.0 (total_freq={total_freq})")
+            print(Exception(f"Sum of response frequencies for variable \"{variable_name}\" should not exceed 1.0 (total_freq={total_freq})"))
         if len(no_freq_responses) > 0:
             remaining_freq = 1 - total_freq
             per_response_freq = remaining_freq / len(no_freq_responses)
@@ -120,7 +119,7 @@ def preprocess_template(template: Template):
             for response in no_freq_responses:
                 response["frequency"] = per_response_freq
 
-def generate_rows(template: Template, survey_case_config: SurveyCaseConfig, relationships: RelationshipsTemplate, row_count: int):
+def generate_rows(template: Template, case: str, survey_case_config: SurveyCaseConfig, relationships: RelationshipsTemplate, row_count: int):
     header_row = list(template["variables"].keys())
     rows = [{variable: None for variable in header_row} for i in range(row_count)]
     for variable_name in template["variables"]:
@@ -181,7 +180,6 @@ def generate_rows(template: Template, survey_case_config: SurveyCaseConfig, rela
                 }
         
     if survey_case_config:
-        case = survey_case_config.case
         print(f"Modifying records according to format specified by survey case {case}")
         for record in rows:
             for variable in record:
@@ -203,12 +201,47 @@ def generate_rows(template: Template, survey_case_config: SurveyCaseConfig, rela
                 }
     
     return (header_row, [{variable: record[variable]["response_value"] for variable in record} for record in rows])
+def generate_cde_case(
+    template_file,
+    template,
+    relationships,
+    row_count,
+    survey_case_config,
+    case,
+    output_path
+):
+    preprocess_template(template)
+
+    if row_count is None:
+        row_count = template.get("row_count", None)
+    # row_count is either not given in template or also `null`
+    if row_count is None:
+        raise Exception(f"""\
+Please specify the `row_count` field in "{template_file}" (or the `--row_count` argument if using the command line). Ex:
+# ...
+# ...
+row_count: <rows_to_generate>
+output_path: ...
+variables:
+    ...\
+""")
+    if output_path is None:
+        output_path = template.get("output_path", None)
+
+
+    [cde_header, cde_rows] = generate_rows(template, case, survey_case_config, relationships, row_count)
+
+    save_cde(cde_header, cde_rows, output_path)
+
+    print(
+        f"Generated synthetic CDE file under \"{output_path}\" with {row_count} rows and {len(cde_header)} variables using template \"{template_file}\"."
+    )
 
 def generate_cde(
     template_file,
     row_count,
     survey_cases=None,
-    case=None,
+    case=[],
     relationship_file=[],
     udf_file=[],
     output_path=None
@@ -222,7 +255,7 @@ def generate_cde(
     :param survey_cases: Path to template specifying which variables to include/exclude from the template for a given "survey". 
     :type survey_cases: str | None
     :param case: The specific survey case to use.
-    :type case: str | None
+    :type case: str | List[str]
     :param udf_file: File path(s) to Python files defining UDFs used within template.
     :type udf_file: str | List[str]
     :param output_path: Output path of the generated synthetic CDE file
@@ -235,7 +268,10 @@ def generate_cde(
     # Use `survey_cases` from template if not specified by a CLI argument.
     if not survey_cases: survey_cases = template.get("survey_cases")
     # Use `case` from template if not specified by a CLI aargument
-    if not case: case = template.get("case")
+    if len(case) == 0: 
+        case = template.get("case")
+        if isinstance(case, str): 
+            case = [case]
 
     survey_case_config = None
     if survey_cases:
@@ -256,7 +292,6 @@ def generate_cde(
             
             survey_case_config = SurveyCaseConfig(
                 valid_cases,
-                case,
                 default_disabled_response,
                 survey_variables_config
             )
@@ -273,8 +308,9 @@ case: {survey_case_config.valid_cases[0]}
 variables:
     ...\
 """)
-    if case not in survey_case_config.valid_cases:
-        raise Exception(f"The specified case \"{case}\" is not declared as a valid case: {survey_case_config.valid_cases}")
+    for _case in case:
+        if _case not in survey_case_config.valid_cases:
+            raise Exception(f"The specified case \"{_case}\" is not declared as a valid case: {survey_case_config.valid_cases}")
 
 
     template_udf_file = template.get("udfs")
@@ -311,33 +347,31 @@ variables:
                 os.path.join(os.path.dirname(__file__), os.path.dirname(template_file), data["file"])
             ).load_module()
             print(f"Loaded {len(Register.relationships) - before_relationship_count} relationships into the register from {rel_file}")
+    if len(case) != 0:
+        for _case in case:
+            [*out_name, ext] = output_path.split(".")
+            out_name[0] += f"_case_{_case}"
+            out_name = ".".join([*out_name, ext])
 
-    preprocess_template(template)
-
-    if row_count is None:
-        row_count = template.get("row_count", None)
-    # row_count is either not given in template or also `null`
-    if row_count is None:
-        raise Exception(f"""\
-Please specify the `row_count` field in "{template_file}" (or the `--row_count` argument if using the command line). Ex:
-# ...
-# ...
-row_count: <rows_to_generate>
-output_path: ...
-variables:
-    ...\
-""")
-    if output_path is None:
-        output_path = template.get("output_path", None)
-
-
-    [cde_header, cde_rows] = generate_rows(template, survey_case_config, relationships, row_count)
-
-    save_cde(cde_header, cde_rows, output_path)
-
-    print(
-        f"Generated synthetic CDE file under \"{output_path}\" with {row_count} rows and {len(cde_header)} variables using template \"{template_file}\"."
-    )
+            generate_cde_case(
+                template_file,
+                template,
+                relationships,
+                row_count,
+                survey_case_config,
+                _case,
+                out_name
+            )
+    else:
+        generate_cde_case(
+            template_file,
+            template,
+            relationships,
+            row_count,
+            survey_case_config,
+            None,
+            output_path
+        )
 
 
 if __name__ == "__main__":
@@ -382,9 +416,11 @@ If no survey cases are specified, the entire template is treated as a single sur
     parser.add_argument(
         "-c",
         "--case",
+        nargs="*",
         help="The specific survey case to run from the survey cases template file",
         action="store",
-        required=False
+        required=False,
+        default=[]
     )
     parser.add_argument(
         "-n",
