@@ -1,5 +1,5 @@
 pyyaml==5.4.1
-ruamel.yaml==0.2.6
+ruamel.yaml==0.17.21
 click==7.1.2
 lorem==0.1.1
 networkx==2.5.1
