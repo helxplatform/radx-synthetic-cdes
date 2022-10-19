@@ -166,6 +166,8 @@ def no_chronic_kidney_disease(responses):
 )
 def age_associated_diseases(responses, config):
     nih_age = responses["nih_age"]
+    if nih_age["response_name"] != "text":
+        return
     age = int(nih_age["response_value"])
     """
     Lerped estimate of the percentage chance that an individual of a given age has an age-progressive disease.
@@ -409,3 +411,48 @@ def diabetes_types(responses):
                 "response_name": "Skip Logic"
             }
         }
+@relationship(
+    name="age_height_association",
+    dependencies=[
+        "nih_sex",
+        "nih_age"
+    ],
+    modifies=[
+        "nih_height"
+    ]
+)
+def height_weight(responses, binning_config):
+    nih_sex = responses["nih_sex"]["response_name"]
+    nih_age = responses["nih_age"]
+
+    if nih_sex != "Male" and nih_sex != "Female":
+        # nih_sex = choices(["Male", "Female"], k=1, weights=[.5, .5])[0]
+        return
+    if nih_age["response_name"] != "text":
+        return
+
+    age = int(nih_age["response_value"])
+
+    if nih_sex == "Male":
+        data = binning_config["male"]
+    if nih_sex == "Female":
+        data = binning_config["female"]
+    
+    for bin in data:
+        start_age = bin["start"]
+        end_age = bin["end"]
+        freq_data = bin["data"]
+        if age >= start_age and age <= end_age:
+            break
+
+    bin_data = bin["data"]
+    heights = list(bin_data.keys())
+    weights = list(bin_data.values())
+    height_choice = choices(heights, weights=weights, k=1)[0]
+    return {
+        "nih_height": {
+            "response_name": "integer",
+            "response_value": height_choice
+        }
+    }
+    

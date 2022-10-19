@@ -361,7 +361,7 @@ variables:
                 end: 84
                 frequency: .0499
               - start: 85
-                end: 9999
+                end: 100
                 frequency: .0202
       frequency: .95
     - response_name: Reason Unknown

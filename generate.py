@@ -156,7 +156,10 @@ def generate_rows(template: Template, case: str, survey_case_config: SurveyCaseC
                 response_name = modified_response.get("response_name")
                 response_value = modified_response.get("response_value")
                 response = None
-                if response_name is not None:
+
+                if response_name is not None and response_value is not None:
+                    response = modified_response
+                elif response_name is not None:
                     for res in template["variables"][modified_variable]:
                         if res["response_name"] == response_name:
                             response = res
