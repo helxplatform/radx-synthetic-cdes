@@ -421,7 +421,7 @@ def diabetes_types(responses):
         "nih_height"
     ]
 )
-def height_weight(responses, binning_config):
+def age_height(responses, binning_config):
     nih_sex = responses["nih_sex"]["response_name"]
     nih_age = responses["nih_age"]
 

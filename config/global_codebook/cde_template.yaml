@@ -11872,9 +11872,9 @@ variables:
         # This should be overriden by a relationship.
         range:
           # Minimum value
-          - 40
+          - 58
           # Maximum value
-          - 84
+          - 78
       frequency: .98
     - response_name: Reason Unknown
       response_value: -9999
