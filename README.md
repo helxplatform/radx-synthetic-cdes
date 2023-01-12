@@ -44,6 +44,17 @@ make template RADX_TEMPLATE_FILE=<mapping_file> OUTPUT_PATH="cde_template.yaml"
 # or
 make template-global-cookbook OUTPUT_PATH="cde_template.yaml"
 ```
+Alternatively, use a DataDictionary Mapping file (e.g `templating_data/RADxUP_DataDictionary_2022-10-24.csv`)
+to create a template for generating CDE data.
+- Templates configure how CDE data should be generated (response frequency, open-ended response generation, etc.)
+
+```bash
+python3 template.py [-h] -m MAPPING_FILE [-o OUTPUT_PATH]
+# or
+make template RADX_TEMPLATE_FILE=<mapping_file> OUTPUT_PATH="cde_template.yaml"
+# or
+make template-global-cookbook OUTPUT_PATH="cde_template.yaml"
+```
 
 ## Template configuration
 

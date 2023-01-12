@@ -3,6 +3,7 @@ VERSION_FILE = ./_version.py
 VERSION      = $(shell cut -d " " -f 3 ${VERSION_FILE})
 
 TEMPLATE := cde_template.yaml
+TEMPLATE2 := cde_template_data_dictionary.yaml
 OUTPUT_PATH :=
 
 .DEFAULT_GOAL = help
@@ -31,9 +32,16 @@ endif
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 #template-global-cookbook: Generate CDE template using the global RADx cookbook data.
-template-global-cookbook:
-	${PYTHON} template.py --mapping_file templating_data/radx_global_cookbook.csv \
+#template: Generate a CDE template using the Data Dictionary.
+
+# template-global-cookbook:
+# 	${PYTHON} template.py --mapping_file templating_data/radx_global_cookbook.csv \
+# 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+
+template-global-datadictionary:
+	${PYTHON} template.py --mapping_file templating_data/RADxUP_DataDictionary_2022-10-24.csv \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+
 
 #generate: Generate synthetic CDE data from a CDE template.
 generate:
@@ -44,4 +52,13 @@ ifndef ROW_COUNT
 	$(error ROW_COUNT not set (determines how many rows of data to generate))
 endif
 	${PYTHON} generate.py --template ${TEMPLATE} --row_count ${ROW_COUNT} \
+		$(if ${OUTPUT_PATH}, --output_path2 ${OUTPUT_PATH},)
+
+ifndef TEMPLATE2
+	$(error TEMPLATE2 not set (should point to a CDE template file))
+endif
+ifndef ROW_COUNT
+	$(error ROW_COUNT not set (determines how many rows of data to generate))
+endif
+	${PYTHON} generate.py --template ${TEMPLATE2} --row_count ${ROW_COUNT} \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
