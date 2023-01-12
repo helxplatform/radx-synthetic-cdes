@@ -34,7 +34,7 @@ make generate TEMPLATE=<template_file> ROW_COUNT=<rows_to_generate> OUTPUT_PATH=
 ```
 
 ### Creating CDE templates
-Use a RADx mapping file (e.g. `templating_data/radx_global_cookbook.csv`) to create a template for generating CDE data.
+Use a RADx mapping file (e.g. `templating_data/radx_global_codebook.csv`) to create a template for generating CDE data.
 - Templates configure how CDE data should be generated (response frequency, open-ended response generation, etc.)
 
 ```bash

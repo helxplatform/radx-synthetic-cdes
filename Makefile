@@ -34,9 +34,9 @@ endif
 #template-global-cookbook: Generate CDE template using the global RADx cookbook data.
 #template: Generate a CDE template using the Data Dictionary.
 
-# template-global-cookbook:
-# 	${PYTHON} template.py --mapping_file templating_data/radx_global_cookbook.csv \
-# 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+template-global-cookbook:
+	${PYTHON} template.py --mapping_file templating_data/radx_global_codebook.csv \
+		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 template-global-datadictionary:
 	${PYTHON} template.py --mapping_file templating_data/RADxUP_DataDictionary_2022-10-24.csv \
