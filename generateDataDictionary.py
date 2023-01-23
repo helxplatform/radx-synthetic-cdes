@@ -9,7 +9,7 @@ from pathlib import Path
 from lorem.text import TextLorem
 from relationships import Register
 
-DEFAULT_CDE_OUTPUT_NAME = f"synthetic_cde_{datetime.now().strftime('%m-%d-%Y')}"
+DEFAULT_CDE_OUTPUT_NAME = f"synthetic_datadictionary_cde_{datetime.now().strftime('%m-%d-%Y')}"
 
 class ResponseTemplate(TypedDict):
     response_name: str
@@ -387,7 +387,7 @@ if __name__ == "__main__":
         "--template",
         help="CDE template specifying how to generate the mock CDE",
         action="store",
-        default="config/global_codebook/cde_template.yaml"
+        default="config/global_codebook/cde_template_data_dictionary.yaml"
     )
     parser.add_argument(
         "-r",

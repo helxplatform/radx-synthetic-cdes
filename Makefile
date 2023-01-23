@@ -25,11 +25,17 @@ install:
 
 #template: Generate template for use in CDE generation.
 template:
-ifndef RADX_TEMPLATE_FILE
-	$(error RADX_TEMPLATE_FILE not specified)
-endif
-	${PYTHON} template.py --mapping_file ${RADX_TEMPLATE_FILE} \
-		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+# ifndef RADX_TEMPLATE_FILE
+# 	$(error RADX_TEMPLATE_FILE not specified)
+# endif
+# 	${PYTHON} template.py --mapping_file ${RADX_TEMPLATE_FILE} \
+# 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+
+# ifndef RADX_TEMPLATE_FILE
+# 	$(error RADX_TEMPLATE_FILE not specified)
+# endif
+# 	${PYTHON} template_datadictionary.py --mapping_file ${RADX_TEMPLATE_FILE} \
+# 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 #template-global-cookbook: Generate CDE template using the global RADx cookbook data.
 #template: Generate a CDE template using the Data Dictionary.
@@ -39,26 +45,22 @@ template-global-cookbook:
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 template-global-datadictionary:
-	${PYTHON} template.py --mapping_file templating_data/RADxUP_DataDictionary_2022-10-24.csv \
+	${PYTHON} template_datadictionary.py --mapping_file templating_data/RADxUP_DataDictionary_2022-10-24.csv \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 
 #generate: Generate synthetic CDE data from a CDE template.
 generate:
-ifndef TEMPLATE
+ifndef TEMPLATE || TEMPLATE2
 	$(error TEMPLATE not set (should point to a CDE template file))
 endif
 ifndef ROW_COUNT
 	$(error ROW_COUNT not set (determines how many rows of data to generate))
 endif
+ifndef TEMPLATE
 	${PYTHON} generate.py --template ${TEMPLATE} --row_count ${ROW_COUNT} \
 		$(if ${OUTPUT_PATH}, --output_path2 ${OUTPUT_PATH},)
-
-ifndef TEMPLATE2
-	$(error TEMPLATE2 not set (should point to a CDE template file))
-endif
-ifndef ROW_COUNT
-	$(error ROW_COUNT not set (determines how many rows of data to generate))
-endif
+else TEMPLATE2
 	${PYTHON} generate.py --template ${TEMPLATE2} --row_count ${ROW_COUNT} \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+endif
