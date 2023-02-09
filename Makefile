@@ -25,11 +25,11 @@ install:
 
 #template: Generate template for use in CDE generation.
 template:
-# ifndef RADX_TEMPLATE_FILE
-# 	$(error RADX_TEMPLATE_FILE not specified)
-# endif
-# 	${PYTHON} template.py --mapping_file ${RADX_TEMPLATE_FILE} \
-# 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+ifndef RADX_TEMPLATE_FILE
+	$(error RADX_TEMPLATE_FILE not specified)
+endif
+	${PYTHON} template.py --mapping_file ${RADX_TEMPLATE_FILE} \
+		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 # ifndef RADX_TEMPLATE_FILE
 # 	$(error RADX_TEMPLATE_FILE not specified)
@@ -41,7 +41,7 @@ template:
 #template: Generate a CDE template using the Data Dictionary.
 
 template-global-cookbook:
-	${PYTHON} template.py --mapping_file templating_data/radx_global_codebook.csv \
+	${PYTHON} template.py --mapping_file templating_data/Tier1_Data_Dictionary.csv \
 		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 
 template-global-datadictionary:
