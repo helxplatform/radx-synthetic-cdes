@@ -24,7 +24,7 @@ def generate_template_csv(mapping_file, output_path):
         i = 0
         for row in reader:
             variable_template = []
-            variable_name = row["Variable / Field Name"]
+            variable_name = row["Field Type"]
             possible_responses = [
                 # Split mapping into (value, name). Important to only split the first comma, since the name can also include commas
                 # E.g. "0, No, not of Hispanic or Latino origin" -> ("0", "No, not of Hispanic or Latino origin")
