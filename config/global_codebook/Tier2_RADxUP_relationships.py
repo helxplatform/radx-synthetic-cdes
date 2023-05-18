@@ -1,5 +1,7 @@
 from random import random, choice, choices, randint
+import pandas as pd
 from relationships.register import relationship
+import random
 
 """
 A relationship is a post-generation utility for correlating relationships between fields.
@@ -70,16 +72,17 @@ def race_ethn_race(responses):
         }
 
 @relationship(
-    name="race_ethn_race",
+    name="race_ethn_race_islander",
     dependencies=[
-        "race_ethn_race"
+        "race_ethn_race",
+        "race_ethn_race_islander"
     ],
     modifies=[
             "race_ethn_islander_detail_2"
     ]
 )
 def race_ethn_islander(responses):
-   race_ethn_race = responses["race_ethn_race"]
+   race_ethn_race = responses["race_ethn_race_islander"]
    if race_ethn_race["response_name"] == "1":
         return {
             "race_ethn_islander_detail_2": {
@@ -231,17 +234,17 @@ def vaccine_acceptance(responses):
     ],
     modifies=[
         "pregnancy_status"
-    ]
+    ]   
 )
 def bio_sex_birth_2(responses):
     bio_sex_birth_2 = responses["bio_sex_birth_2"]
-    if bio_sex_birth_2["response_name"] != "1":
+    if bio_sex_birth_2["response_name"] == "1":
         return {
-            "flu_vaccine_season_3": {
-                "response_name": "1"
+            "pregnancy_status": {
+                "response_name": "0"
             }
         }
-
+    
 @relationship(
     name="household_famgen_3",
     dependencies=[
@@ -382,6 +385,159 @@ def current_employment_status(responses):
                 "response_name": "9"
             }
         }
+@relationship(
+    name="household_homeless",
+    dependencies=[
+        "household_homeless",
+
+    ],
+    modifies=[
+        "household_congregate_3"
+    ]
+)
+# added fillers 
+def household_homeless(responses):
+    household_homeless_status = responses["household_homeless"]
+    if household_homeless_status["response_name"] == "1":
+        return {
+            "household_congregate_3": {
+                "response_name": "1"
+            }
+        }
+
+@relationship(
+    name="household_congregate_3",
+    dependencies=[
+        "household_congregate_3",
+    ],
+    modifies=[
+        "household_other"
+    ]
+)
+# added fillers 
+def household_congregate_3(responses):
+    household_congregate_3_status = responses["household_congregate_3"]
+    if household_congregate_3_status["response_name"] == "90":
+        return {
+            "household_other": {
+                "household_other": "1"
+            }
+        }
+    
+@relationship(
+    name="take_presc_meds",
+    dependencies= "take_presc_meds",
+    modifies=[
+        "name_of_rx_med1",
+        "name_of_rx_med2",
+        "name_of_rx_med3",
+        "name_of_rx_med4",
+        "name_of_rx_med5",
+        "name_of_rx_med6",
+        "name_of_rx_med7",
+        "name_of_rx_med8",
+        "name_of_rx_med9",
+        "name_of_rx_med10",
+        "name_of_rx_med11",
+        "name_of_rx_med12",
+        "name_of_rx_med13",
+        "name_of_rx_med14",
+        "name_of_rx_med15"
+    ]
+)
+# added fillers 
+def take_presc_meds(responses):
+    take_presc_meds_status = responses["take_presc_meds"]
+    if take_presc_meds_status["response_name"] == "No":
+        return {
+            "name_of_rx_med1": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med2": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med3": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med4": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med5": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med6": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med7": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med8": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med9": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med10": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med11": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med12": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med13": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med14": {
+                "response_name": "Skip Logic"
+            },
+            "name_of_rx_med15": {
+                "response_name": "Skip Logic"
+            }
+        }
+    elif take_presc_meds_status["response_name"] == "Yes" :
+        df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/drugsdata.csv')
+    
+        #Generate a random number between 0 and 15
+        num_drugs = random.randint(0, 15)
+        
+        #Chose the random drug without duplicates in group
+        chosen_drugs = []
+        drug_classes = set()
+        for i in range(num_drugs):
+            while True:
+                rand_num = random.randint(0, 100000)/100000
+                
+                #find where the number lies along the cumulative percentage
+                #didnt work bc what if the random number was for no row in the cumulative percentage
+                # drug_row = df[df['Cumulative Percentage'] >= rand_num].iloc[0]
+
+                #going to change this 
+                filtered_rows = df[df['Cumulative Percentage'] >= rand_num]
+                if not filtered_rows.empty:
+                    drug_row = filtered_rows.iloc[0]
+                    #use the drug and note the drug class
+                    drug_name = drug_row['Medicine']
+                    drug_class = drug_row['Drug Class']
+                    
+                    #make sure drug class doesnt match any previous ones, append to chosen drug if not
+                    if drug_class not in drug_classes:
+                        drug_classes.add(drug_class)
+                        chosen_drugs.append((drug_name, drug_class))
+                        break
+                    modified_responses = {}
+
+                    for i, (drug_name, _) in enumerate(chosen_drugs):
+                        response_key = f"name_of_rx_med{i+1}"
+                        if response_key in responses:
+                            modified_responses[response_key] = {
+                                "response_name": drug_name
+                            }
+                    #works
+                    return modified_responses
+        
+   
 
 # @relationship(
 #     name="no_chronic_kidney_disease",

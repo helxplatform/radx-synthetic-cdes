@@ -1,115 +1,15 @@
-# These are general relationships required for response consistency across variables within the global codebook.
-file: global_relationships.py
+# These are general relationships required for response consistency across variables within the Tier2_RADxUP_relationships.
+file: Tier2_RADxUP_relationships.py
 # We can define as many relationships as we want in the Python file.
 # But only the relationships configured under `relationships` here are going to actually be used during generation.
 # We can add a "#" to the start of all the lines concerning a specific relationship to disable it.
 relationships:
-  - name: no_disability
-  - name: no_smoking
-  - name: no_alcohol
-  - name: no_cancer
-  - name: no_chronic_kidney_disease
-  - name: gestational_diabetes
-  - name: diabetes_types
-  - name: neurodegenerative
-  - name: age_associated_diseases
-    kwargs:
-      config:
-        nih_alz:
-          min_viable_age: 50
-          max_viable_age: 80
-          min_chance: 0.005
-          max_chance: 0.075
-        nih_osteoporosis:
-          min_viable_age: 40
-          max_viable_age: 80
-          min_chance: 0.005
-          max_chance: 0.05
-  - name: bmi_sleep_apnea
-    kwargs:
-      slope: 0.0299
-      b: -0.59
-      min_freq: 0
-      max_freq: 0.975
-  - name: heart_attack_angina_cholesterol
-    kwargs:
-      risk_multiplier: 1.5
-  - name: pregnancy_prerequisites
-    kwargs:
-      maximum_viable_age: 60
-  - name: age_health_status
-    kwargs:
-      binning_config:
-        # Start/end are both inclusive.
-        - start: 0
-          end: 17
-          data:
-            excellent: 0.5924
-            very_good: 0.29
-            good: 0.1015
-            fair: 0.014
-            poor: 0.0021
-        - start: 18
-          end: 24
-          data:
-            excellent: 0.437
-            very_good: 0.3491
-            good: 0.1741
-            fair: 0.0357
-            poor: 0.0041
-        - start: 25
-          end: 34
-          data:
-            excellent: 0.305
-            very_good: 0.3907
-            good: 0.2312
-            fair: 0.0615
-            poor: 0.0116
-        - start: 35
-          end: 44
-          data:
-            excellent: 0.2463
-            very_good: 0.375
-            good: 0.251
-            fair: 0.0989
-            poor: 0.0288
-        - start: 45
-          end: 54
-          data:
-            excellent: 0.182
-            very_good: 0.3585
-            good: 0.2974
-            fair: 0.1235
-            poor: 0.0386
-        - start: 55
-          end: 64
-          data:
-            excellent: 0.1239
-            very_good: 0.33
-            good: 0.3352
-            fair: 0.1601
-            poor: 0.0508
-        - start: 65
-          end: 74
-          data:
-            excellent: 0.10
-            very_good: 0.2696
-            good: 0.366
-            fair: 0.1984
-            poor: 0.066
-        - start: 75
-          end: 84
-          data:
-            excellent: 0.0099
-            very_good: 0.2924
-            good: 0.4101
-            fair: 0.2164
-            poor: 0.0712
-        - start: 85
-          end: 9999
-          data:
-            excellent: 0.0001
-            very_good: 0.2761
-            good: 0.419
-            fair: 0.2287
-            poor: 0.0761
+  - name: no_consent
+  - name: race_ethn_race
+  - name: race_ethn_race_islander
+  - name: positive_covid
+  - name: self_reported_height_coded
+  - name: self_reported_weight_units
+  - name: vaccine_acceptance
+  - name: bio_sex_birth_2   
+  - name: take_presc_meds

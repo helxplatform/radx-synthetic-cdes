@@ -1,0 +1,284 @@
+Rank,Medicine,Drug Class,Active Ingredient(s),Drug To Use,Prescriptions,Patients,Percentage Of Time,Cumulative Percentage
+tbd,Avodart,5-alpha reductase inhibitor,Dutasteride,Avodart,,,0.00002,0.00002
+90,Proscar,5-alpha reductase inhibitor,Finasteride,Proscar,"8,185,106","2,156,558",0.00333,0.00335
+tbd,Aceon,ACE inhibitor,Perindopril,Aceon,,,0.00002,0.00336
+196,Altace,ACE inhibitor,Ramipril,Altace,"2,466,660","772,772",0.00119,0.00456
+141,Lotensin,ACE inhibitor,Benazepril,Lotensin,"4,374,519","1,026,815",0.00159,0.00615
+27,Prinivil,ACE inhibitor,Lisinopril,Prinivil,"102,156,580","22,715,897",0.03512,0.04127
+tbd,Vasotec,ACE inhibitor,Enalapril,Vasotec,,,0.00002,0.04128
+tbd,Cardura,Alpha-1 blocker,Doxazosin,Cardura,,,0.00002,0.04130
+24,Flomax,Alpha-1 blocker,Tamsulosin,Flomax,"24,692,402","5,856,108",0.00905,0.05035
+tbd,Hytrin,Alpha-1 blocker,Terazosin,Hytrin,,,0.00002,0.05037
+tbd,Uroxatral,Alpha-1 blocker,Alfuzosin,Uroxatral,,,0.00002,0.05038
+175,Alphagan,Alpha-2 agonist,Brimonidine,Brimonidine,"3,271,308","860,260",0.00133,0.05171
+36,Bayer,Analgesic,Aspirin,Aspirin,"17,287,372","4,741,732",0.00733,0.05904
+187,Codeine,Analgesic,Opioid,Codeine,"2,791,617","1,314,846",0.00203,0.06107
+118,Fioricet,Analgesic,Acetaminophen,Fioricet,"1,870,054","905,716",0.00140,0.06247
+tbd,Methadose,Analgesic,Methadone,Methadone,,,0.00002,0.06249
+61.5,Oxycodone,Analgesic,Oxycodone,Oxycodone,"22,375,985","6,794,552",0.01050,0.07299
+118,Percocet,Analgesic,Acetaminophen,Percocet,"1,870,054","905,716",0.00140,0.07439
+tbd,Pyridium,Analgesic,Phenazopyridine,Pyridium,,,0.00002,0.07441
+118,Tylenol,Analgesic,Acetaminophen,Tylenol,"1,870,054","905,716",0.00140,0.07581
+16,Vicodin,Analgesic,Hydrocodone,Vicodin,"30,100,356","8,587,152",0.01328,0.08909
+tbd,Lidoderm,Anesthetic,Lidocaine,Lidocaine,,,0.00002,0.08910
+181,Lomaira,Anorectic,Phentermine,Phentermine,"3,071,041","824,329",0.00127,0.09038
+182,"Orafate, Carafate",Antiacid,Sucralfate,Sucralfate,"2,971,604","836,122",0.00129,0.09167
+198,Nexterone,Antiarrhythmic,Amiodarone,Amiodarone,"2,445,496","677,240",0.00105,0.09272
+188,Tambocor,Antiarrhythmic,Flecainide,Flecainide,"2,707,962","558,077",0.00086,0.09358
+40,Amoxil,Antibacterial,Amoxicillin,Amoxil,"7,961,454","6,390,326",0.00988,0.10346
+68,Zithromax,Antibacterial,Azithromycin,Azithromycin,"10,155,807","7,405,927",0.01145,0.11491
+tbd,Bactroban,Antibacterial,Mupirocin,Bactroban,,,0.00002,0.11492
+tbd,Biaxin,Antibacterial,Clarithromycin,Clarithromycin,,,0.00002,0.11494
+tbd,Cleocin,Antibacterial,Clindamycin,Cleocin,,,0.00002,0.11495
+tbd,Flagyl,Antibacterial,Metronidazole,Flagyl,,,0.00002,0.11497
+167,Macrobid,Antibacterial,Nitrofurantoin,Macrobid,"3,456,512","2,390,228",0.00370,0.11866
+tbd,Sumycin,Antibacterial,Tetracycline  ,Tetracycline  ,,,0.00002,0.11868
+40,Augmentin,Antibiotic,Amoxicillin,Augmentin,"7,961,454","6,390,326",0.00988,0.12856
+107,Clavulanate,Antibiotic,Amoxicillin,Clavulanate,"6,086,124","4,558,138",0.00705,0.13561
+125,Clindacin,Antibiotic,Clindamycin,Clindamycin,"5,130,999","2,709,249",0.00419,0.13979
+121,Sulfamethoxazole,Antibiotic,Trimethoprim,Sulfamethoxazole,"5,425,466","3,404,743",0.00526,0.14506
+tbd,Alimta,Anticancer,Pemetrexed,Alimta,,,0.00002,0.14507
+tbd,Avastin,Anticancer,Bevacizumab,Avastin,,,0.00002,0.14509
+112,Aricept,Anticholinergic,Donepezil,Aricept,"5,899,553","1,436,971",0.00222,0.14731
+110,Spiriva,Anticholinergic,Tiotropium,Spiriva,"5,933,058","1,191,833",0.00184,0.14915
+58,Coumadin,Anticoagulant,Warfarin,Coumadin,"11,467,999","2,424,821",0.00375,0.15290
+48,Eliquis,Anticoagulant,Apixaban,Eliquis,"13,918,650","3,305,979",0.00511,0.15801
+tbd,Heparin Sodium,Anticoagulant,Heparin,Heparin,,,0.00002,0.15803
+tbd,Pradaxa,Anticoagulant,Dabigatran,Pradaxa,,,0.00002,0.15804
+86,Xarelto,Anticoagulant,Rivaroxaban,Xarelto,"8,644,837","2,090,497",0.00323,0.16128
+109,Depacon,Anticonvulsant,Valproate,Depacon,"6,000,123","909,451",0.00141,0.16268
+tbd,Dilantin,Anticonvulsant,Phenytoin,Dilantin,,,0.00002,0.16270
+10,Neurontin,Anticonvulsant,Gabapentin,Gabapentin,"49,961,066","10,571,700",0.01634,0.17904
+92,Keppra,Anticonvulsant,Levetiracetam,Keppra,"7,967,535","1,469,443",0.00227,0.18131
+62,Lamictal,Anticonvulsant,Lamotrigine,Lamictal,"10,801,628","1,713,712",0.00265,0.18396
+78,Lyrica,Anticonvulsant,Pregabalin,Lyrica,"9,227,867","1,711,184",0.00265,0.18661
+144,Trileptal,Anticonvulsant,Oxcarbazepine,Oxcarbazepine,"4,276,699","567,473",0.00088,0.18748
+185,Tegretol,Anticonvulsant,Carbamazepine,Tegretol,"2,858,880","440,198",0.00068,0.18817
+57,Topamax,Anticonvulsant,Topiramate,Topamax,"11,482,269","2,124,766",0.00328,0.19145
+27,Cymbalta,Antidepressant,Duloxetine,Cymbalta,"22,546,920","4,461,604",0.00690,0.19835
+176,Pristiq,Antidepressant,Desvenlafaxine,Desvenlafaxine,"3,267,575","624,316",0.00097,0.19931
+21,Desyrel,Antidepressant,Trazodone,Desyrel,"26,210,731","5,294,364",0.00819,0.20750
+81,Elavil,Antidepressant,Amitriptyline,Elavil,"9,083,401","1,850,495",0.00286,0.21036
+197,Eskalith,Antidepressant,Lithium,Lithium,"2,460,054","396,292",0.00061,0.21097
+104,Remeron,Antidepressant,Mirtazapine,Mirtazapine,"6,601,131","1,160,871",0.00179,0.21277
+155,Pamelor,Antidepressant,Nortriptyline,Pamelor,"3,815,024","695,323",0.00107,0.21384
+tbd,Tofranil,Antidepressant,Imipramine,Tofranil,,,0.00002,0.21386
+18,Wellbutrin,Antidepressant,Bupropion,Wellbutrin,"28,889,368","5,801,282",0.00897,0.22283
+87,Amaryl,Antidiabetic,Glimepiride,Amaryl,"8,566,883","1,899,338",0.00294,0.22576
+200,DiaBeta,Antidiabetic,Glyburide,DiaBeta,"2,417,882","506,025",0.00078,0.22654
+3,Glucophage,Antidiabetic,Metformin,Glucophage,"92,591,486","20,122,987",0.03111,0.25765
+49,Glucotrol,Antidiabetic,Glipizide,Glucotrol,"13,674,142","3,383,057",0.00523,0.26288
+80,NovoLog,Antidiabetic,Insulin Aspart,Insulin Aspart,"9,124,642","1,929,132",0.00298,0.26587
+124,Levemir,Antidiabetic,Insulin Detemir,Insulin Detemir,"5,164,647","1,111,229",0.00172,0.26758
+32,Lantus,Antidiabetic,Insulin Glargine,Insulin Glargine,"17,973,209","3,662,505",0.00566,0.27325
+tbd,HumuLIN,Antidiabetic,Insulin isophane,Insulin isophane,,,0.00002,0.27326
+71,HumaLOG,Antidiabetic,Insulin Lispro,Insulin Lispro,"10,013,738","2,272,153",0.00351,0.27677
+74,Januvia,Antidiabetic,Sitagliptin,Januvia,"9,885,657","1,937,355",0.00300,0.27977
+102,Jardiance,Antidiabetic,Empagliflozin,Jardiance,"6,724,608","1,607,647",0.00249,0.28226
+129,Ozempic,Antidiabetic,Semaglutide,Semaglutide,"4,827,483","1,126,514",0.00174,0.28400
+154,Sitagliptin,Antidiabetic,Metformin,Sitagliptin,"3,847,462","726,067",0.00112,0.28512
+136,Tresiba,Antidiabetic,Insulin Degludec,Tresiba,"4,600,262","932,573",0.00144,0.28656
+96,Trulicity,Antidiabetic,Dulaglutide,Trulicity,"7,657,320","1,506,236",0.00233,0.28889
+tbd,Kytril,Antiemetic,Granisetron,Kytril,,,0.00002,0.28891
+83,Zofran,Antiemetic,Ondansetron,Zofran,"8,773,584","4,247,796",0.00657,0.29547
+174,Diflucan,Antifungal,Fluconazole,Diflucan,"3,308,929","2,031,951",0.00314,0.29861
+tbd,Lotrisone,Antifungal,Clotrimazole,Lotrisone,,,0.00002,0.29863
+170,Nizoral Topical,Antifungal,Ketoconazole,Nizoral Topical,"3,417,349","1,674,690",0.00259,0.30122
+tbd,Colcrys,Anti-gout,Colchicine,Colcrys,,,0.00002,0.30123
+42,Zyloprim,Anti-gout,Allopurinol,Zyloprim,"15,303,283","3,606,249",0.00558,0.30681
+173,Optivar,Antihistamine,Azelastine,Azelastine,"3,334,304","1,210,421",0.00187,0.30868
+192,Benadryl,Antihistamine,Diphenhydramine,Benadryl,"2,614,773","564,389",0.00087,0.30955
+tbd,Tussionex PennKinetic,Antihistamine,Chlorpheniramine,Chlorpheniramine,,,0.00002,0.30957
+73,Claritin,Antihistamine,Loratadine,Claritin,"9,914,365","2,695,131",0.00417,0.31373
+70,Vistaril,Antihistamine,Hydroxyzine,Hydroxyzine,"10,058,837","2,967,009",0.00459,0.31832
+179,Xyzal,Antihistamine,Levocetirizine,Levocetirizine,"3,108,431","803,646",0.00124,0.31956
+142,Bonine,Antihistamine,Meclizine,Meclizine,"4,349,444","1,742,409",0.00269,0.32226
+52,Zyrtec,Antihistamine,Cetirizine,Zyrtec,"13,125,543","3,357,330",0.00519,0.32745
+100,Zetia,Antihyperlipidemic,Ezetimibe,Zetia,"7,029,302","1,822,350",0.00282,0.33027
+103,Apresoline,Antihypertensive,Hydralazine,Apresoline,"6,663,220","1,649,246",0.00255,0.33282
+44,Avalide,Antihypertensive,Irbesartan,Avalide,"10,369,025","2,507,976",0.00388,0.33669
+148,Avapro,Antihypertensive,Irbesartan,Avapro,"4,028,832","933,587",0.00144,0.33814
+91.5,Benicar,Antihypertensive,Olmesartan,Benicar,"14,827,478","3,671,583",0.00568,0.34381
+133,Thalitone,Antihypertensive,Chlorthalidone,Chlorthalidone,"4,707,841","1,269,577",0.00196,0.34578
+75,Catapres,Antihypertensive,Clonidine,Clonidine,"9,867,546","1,956,023",0.00302,0.34880
+44,Hyzaar,Antihypertensive,Hydrochlorothiazide,Hyzaar,"10,369,025","2,507,976",0.00388,0.35268
+51,Cozaar,Antihypertensive,Losartan,Losartan,"62,764,338","14,745,985",0.02280,0.37547
+190,Minipress,Antihypertensive,Prazosin,Minipress,"2,675,264","460,446",0.00071,0.37619
+123,Diovan,Antihypertensive,Valsartan,Valsartan,"5,173,072","1,328,940",0.00205,0.37824
+126,Plaquenil,Anti-malarial,Hydroxychloroquine,Hydroxychloroquine,"4,992,835","1,224,515",0.00189,0.38013
+111,Imitrex,Anti-migraine,Sumatriptan,Imitrex,"5,915,272","1,658,061",0.00256,0.38270
+tbd,Relpax,Anti-migraine,Eletriptan,Relpax,,,0.00002,0.38271
+tbd,Zomig,Anti-migraine,Zolmitriptan,Zomig,,,0.00002,0.38273
+108,Lioresal,Antimuscarinic,Baclofen,Baclofen,"6,009,146","1,519,109",0.00235,0.38508
+39,Fexmid,Antimuscarinic,Cyclobenzaprine,Cyclobenzaprine,"16,151,696","5,129,829",0.00793,0.39301
+127,Carbacot,Antimuscarinic,Methocarbamol,Methocarbamol,"4,981,836","1,822,996",0.00282,0.39582
+97,Oxytrol,Antimuscarinic,Oxybutynin,Oxybutynin,"7,098,461","1,782,229",0.00276,0.39858
+84,Zanaflex,Antimuscarinic,Tizanidine,Tizanidine,"8,705,644","2,269,444",0.00351,0.40209
+tbd,Vesicare,Antimuscarinic,Solifenacin,Vesicare,,,0.00002,0.40210
+tbd,Cogentin,Antiparkinsonian,Benztropine,Cogentin,,,0.00002,0.40212
+tbd,Inbrija,Antiparkinsonian,Levodopa,Inbrija,,,0.00002,0.40214
+tbd,Stalevo 50,Antiparkinsonian,Levodopa,Levodopa,,,0.00002,0.40215
+156,Requip,Antiparkinsonian,Ropinirole,Requip,"3,776,826","765,133",0.00118,0.40333
+29,Plavix,Antiplatelet,Clopidogrel,Plavix,"19,377,527","4,340,688",0.00671,0.41004
+89,Abilify,Antipsychotic,Aripiprazole,Abilify,"8,267,949","1,330,788",0.00206,0.41210
+tbd,Clozaril,Antipsychotic,Clozapine,Clozaril,,,0.00002,0.41212
+tbd,Haldol,Antipsychotic,Haloperidol,Haldol,,,0.00002,0.41213
+164,Zyprexa,Antipsychotic,Olanzapine,Olanzapine,"3,498,182","638,470",0.00099,0.41312
+138,Risperdal,Antipsychotic,Risperidone,Risperdal,"4,462,991","698,895",0.00108,0.41420
+64,Seroquel,Antipsychotic,Quetiapine,Seroquel,"10,574,791","1,784,327",0.00276,0.41696
+tbd,Zyprexa,Antipsychotic,Olanzapine,Zyprexa,,,0.00002,0.41697
+tbd,Atripla,Antiretroviral,Emtricitabine,Atripla,,,0.00002,0.41699
+tbd,BetaSept,Antiseptic,Chlorhexidine,Chlorhexidine,,,0.00002,0.41700
+147,Bentyl,Anti-spasmodic,Dicyclomine,Bentyl,"4,060,734","1,125,571",0.00174,0.41874
+199,Lovaza,Anti-triglyceride,Omega-3-acid Ethyl Esters,Lovaza,"2,418,806","674,805",0.00104,0.41979
+157,Zonatuss,Antitussive,Benzonatate,Benzonatate,"3,689,272","2,686,915",0.00415,0.42394
+tbd,Robitussen,Antitussive,Dextromethorphan,Robitussen,,,0.00002,0.42396
+178,Tamiflu,Antiviral,Oseltamivir,Tamiflu,"3,185,814","2,838,901",0.00439,0.42835
+tbd,Valcyte,Antiviral,Valganciclovir,Valcyte,,,0.00002,0.42836
+119,Valtrex,Antiviral,Valacyclovir,Valtrex,"5,466,726","2,410,470",0.00373,0.43209
+162,Zovirax,Antiviral,Acyclovir,Zovirax,"3,517,810","1,100,883",0.00170,0.43379
+55,Buspar,Anxiolytic,Buspirone,Buspirone,"11,820,023","2,562,053",0.00396,0.43775
+65,Ativan,Benzodiazepine,Lorazepam,Ativan,"10,559,374","2,492,279",0.00385,0.44160
+44,Klonopin,Benzodiazepine,Clonazepam,Klonopin,"14,758,212","2,498,126",0.00386,0.44547
+tbd,Restoril,Benzodiazepine,Temazepam,Restoril,,,0.00002,0.44548
+128,Valium,Benzodiazepine,Diazepam,Valium,"4,972,397","1,184,256",0.00183,0.44731
+37,Xanax,Benzodiazepine,Alprazolam,Xanax,"16,780,805","3,632,458",0.00562,0.45293
+26,Coreg,Beta blocker,Carvedilol,Coreg,"23,159,628","4,948,170",0.00765,0.46058
+88,Inderal,Beta blocker,Propranolol,Inderal,"8,470,628","1,906,375",0.00295,0.46353
+6,Lopressor,Beta blocker,Metoprolol,Lopressor,"66,413,692","15,007,908",0.02320,0.48673
+53,Tenormin,Beta blocker,Atenolol,Tenormin,"12,860,512","3,143,500",0.00486,0.49159
+143,Timoptic,Beta blocker,Timolol,Timolol,"4,295,412","949,166",0.00147,0.49305
+tbd,Zebeta,Beta blocker,Bisoprolol,Zebeta,,,0.00002,0.49307
+tbd,Advair,Beta-2 agonist,Salmeterol,Advair,,,0.00002,0.49309
+14,Combivent Respimat,Beta-2 agonist,Albuterol,Albuterol,"30,974,174","8,951,010",0.01384,0.50692
+150,Ipratropium,Beta-2 agonist,Albuterol,Ipratropium,"3,967,936","902,034",0.00139,0.50832
+14,ProAir,Beta-2 agonist,Albuterol  ,ProAir,"30,974,174","8,951,010",0.01384,0.52216
+160,Myrbetriq,Beta-3 adrenergic agonist,Mirabegron,Mirabegron,"3,570,676","838,764",0.00130,0.52345
+tbd,PC Pen VK,Beta-lactam antibacterial,Penicillin,Penicillin,,,0.00002,0.52347
+120,Desogestrel,Birth control,Ethinyl Estradiol,Desogestrel,"5,444,043","1,185,053",0.00183,0.52530
+145,Drospirenone,Birth control,Ethinyl Estradiol,Drospirenone,"4,124,207","996,093",0.00154,0.52684
+194,Etonogestrel,Birth control,Ethinyl Estradiol,Etonogestrel,"2,540,913","693,822",0.00107,0.52791
+159,Levonorgestrel,Birth control,Ethinyl Estradiol,Levonorgestrel,"3,588,502","1,157,623",0.00179,0.52970
+91,Norethindrone,Birth control,Ethinyl Estradiol,Norethindrone,"19,218,777","4,146,907",0.00641,0.53611
+63,Norgestimate,Birth control,Ethinyl Estradiol,Norgestimate,"10,686,537","2,556,898",0.00395,0.54007
+94,Fosamax,Bisphosphonate,Alendronate,Alendronate,"7,923,120","2,010,411",0.00311,0.54318
+tbd,Boniva,Bisphosphonate,Ibandronate,Ibandronate,,,0.00002,0.54319
+tbd,Reclast,Bisphosphonate,Zoledronic acid,Reclast,,,0.00002,0.54321
+tbd,Actonel,Bisphosphonate,Risedronate,Risedronate,,,0.00002,0.54322
+tbd,Sensipar,Calcimimetic,Cinacalcet,Cinacalcet,,,0.00002,0.54324
+169,Benazepril,Calcium channel blocker,Amlodipine,Amlodipine,"3,434,363","711,394",0.00110,0.54434
+76,Tiazac,Calcium channel blocker,Diltiazem,Diltiazem,"9,787,088","2,114,110",0.00327,0.54761
+135,Procardia,Calcium channel blocker,Nifedipine,Nifedipine,"4,657,308","1,032,862",0.00160,0.54920
+5,Norvasc,Calcium channel blocker,Amlodipine,Norvasc,"69,786,684","16,799,810",0.02597,0.57517
+151,Verelan,Calcium channel blocker,Verapamil,Verapamil,"3,936,378","874,295",0.00135,0.57653
+195,Timolol,Carbonic anhydrase inhibitor,Dorzolamide,Dorzolamide,"2,482,440","604,169",0.00093,0.57746
+tbd,Omnicef,Cephalosporin,Cefdinir,Cefdinir,,,0.00002,0.57748
+tbd,Ceftin,Cephalosporin,Cefuroxime,Cefuroxime,,,0.00002,0.57749
+101,Keflex,Cephalosporin,Cephalexin,Cephalexin,"7,011,968","4,975,921",0.00769,0.58518
+22,Dextroamphetamine,CNS stimulant,Dextroamphetamine; Dextroamphetamine Saccharate; Amphetamine; Amphetamine Aspartate,Dextroamphetamine,"26,080,151","3,633,541",0.00562,0.59080
+130,Focalin,CNS stimulant,Dexmethylphenidate,Focalin,"4,802,551","681,537",0.00105,0.59185
+85,Vyvanse,CNS stimulant,Lisdexamfetamine,Lisdexamfetamine,"8,647,783","1,326,189",0.00205,0.59391
+41,Ritalin,CNS stimulant,Methylphenidate,Methylphenidate,"15,449,350","2,441,634",0.00377,0.59768
+171,ClobaDerm,Corticosteroid,Clobetasol,Clobetasol,"3,395,469","1,640,838",0.00254,0.60022
+23,Flonase Nasal Spray,Corticosteroid,Fluticasone,Fluticasone,"24,777,490","7,805,740",0.01207,0.61228
+61,Formoterol,Corticosteroid,Budesonide,Formoterol,"11,114,689","2,348,352",0.00363,0.61591
+149,Ala-Cort,Corticosteroid,Hydrocortisone,Hydrocortisone,"3,998,412","2,172,726",0.00336,0.61927
+161,Medrol,Corticosteroid,Methylprednisolone,Methylprednisolone,"3,535,987","2,456,989",0.00380,0.62307
+153,Flo-Pred,Corticosteroid,Prednisolone,Prednisolone,"3,894,468","2,082,074",0.00322,0.62629
+30,Rayos,Corticosteroid,Prednisone,Prednisone,"19,044,926","9,203,354",0.01423,0.64052
+56,Salmeterol,Corticosteroid,Fluticasone,Salmeterol,"11,577,409","2,562,481",0.00396,0.64448
+106,Aristocort,Corticosteroid,Triamcinolone,Triamcinolone,"6,422,561","3,926,352",0.00607,0.65055
+115,Vilanterol,Corticosteroid,Fluticasone,Vilanterol,"5,678,546","1,087,587",0.00168,0.65223
+tbd,Dyrenium,Diuretic,Triamterene,Dyrenium,,,0.00002,0.65225
+131,Dyrenium,Diuretic,Triamterene,Dyrenium,"4,783,812","1,167,750",0.00181,0.65405
+19,Lasix,Diuretic,Furosemide,Furosemide,"26,786,296","6,405,654",0.00990,0.66396
+44,Microzide,Diuretic,Hydrochlorothiazide,Microzide,"10,369,025","2,507,976",0.00388,0.66783
+51,Aldactone,Diuretic,Spironolactone,Spironolactone,"13,354,566","3,131,156",0.00484,0.67267
+tbd,Enbrel,DMARD,Etanercept,Etanercept,,,0.00002,0.67269
+113,Otrexup,DMARD,Methotrexate,Methotrexate,"5,824,013","1,130,078",0.00175,0.67444
+193,Mirapex,Dopamine agonist,Pramipexole,Pramipexole,"2,589,438","580,226",0.00090,0.67533
+tbd,Reglan,Dopamine antagonist,Metoclopramide,Metoclopramide,,,0.00002,0.67535
+95,TriCor,Fibrate,Fenofibrate,Fenofibrate,"7,668,856","1,672,430",0.00259,0.67794
+189,Lopid,Fibrate,Gemfibrozil,Gemfibrozil,"2,679,954","585,900",0.00091,0.67884
+132,Cipro,Fluoroquinolone,Ciprofloxacin,Ciprofloxacin,"4,759,043","3,141,345",0.00486,0.68370
+tbd,Levaquin,Fluoroquinolone,Levofloxacin,Levofloxacin,,,0.00002,0.68371
+tbd,Avelox,Fluoroquinolone,Moxifloxacin,Moxifloxacin,,,0.00002,0.68373
+116,Feosol,Form of iron,Ferrous sulfate,Feosol,"5,652,902","1,828,969",0.00283,0.68656
+105,Cobalamin,Form of vitamin B12,Cyanocobalamin,Cyanocobalamin,"6,596,311","1,696,951",0.00262,0.68918
+tbd,Niaspan,Form of vitamin B3,Niacin,Niacin,,,0.00002,0.68919
+67,Folvite,Form of vitamin B9,Folic Acid,Folic Acid,"10,334,172","2,557,764",0.00395,0.69315
+46,Alfacalcidol,Form of vitamin D2,Ergocalciferol,Ergocalciferol,"14,670,983","4,448,964",0.00688,0.70003
+60,Calciferol,Form of vitamin D3,Cholecalciferol,Cholecalciferol,"11,115,876","2,977,877",0.00460,0.70463
+146,Saxenda,GLP-1 agonist,Liraglutide,Liraglutide,"4,063,184","957,309",0.00148,0.70611
+66,Pepcid,H2 antagonist,Famotidine,Famotidine,"10,441,964","3,383,683",0.00523,0.71134
+177,Zantac,H2 antagonist,Ranitidine,Ranitidine,"3,260,051","1,094,672",0.00169,0.71303
+tbd,Sovaldi,HCV polymerase inhibitor,Sofosbuvir,Sofosbuvir,,,0.00002,0.71305
+tbd,Renvela,Hyperphosphatemic,Sevelamer,Sevelamer,,,0.00002,0.71307
+47,Ambien,Hypnotic,Zolpidem,Ambien,"14,272,253","2,592,750",0.00401,0.71707
+tbd,Lunesta,Hypnotic,Eszopiclone,Lunesta,,,0.00002,0.71709
+tbd,Sonata,Hypnotic,Zaleplon,Sonata,,,0.00002,0.71710
+33,Klotrix,Hypokalemic,Potassium Chloride,Potassium Chloride,"17,811,732","4,637,643",0.00717,0.72427
+tbd,Gilenya,Immunomodulator,Fingolimod,Fingolimod,,,0.00002,0.72429
+tbd,SandIMMUNE,Immunosuppressant,Cyclosporin,Cyclosporin,,,0.00002,0.72431
+tbd,Isentress,Integrase inhibitor,Raltegravir,Raltegravir,,,0.00002,0.72432
+163,Dulcoease,Laxative,Docusate,Docusate,"3,511,398","1,662,829",0.00257,0.72689
+tbd,Constulose,Laxative,Lactulose,Lactulose,,,0.00002,0.72691
+tbd,Ex-Lax,Laxative,Senna,Senna,,,0.00002,0.72692
+14,Singulair,Leukotriene inhibitor,Montelukast,Montelukast,"31,984,479","7,227,021",0.01117,0.73810
+tbd,Fragmin,LMWH,Dalteparin,Dalteparin,,,0.00002,0.73811
+tbd,Lovenox,LMWH,Enoxaparin,Enoxaparin,,,0.00002,0.73813
+tbd,Xgeva,Monoclonal antibody,Denosumab,Denosumab,,,0.00002,0.73814
+tbd,Remicade,Monoclonal antibody,Infliximab,Infliximab,,,0.00002,0.73816
+tbd,Xolair,Monoclonal antibody,Omalizumab,Omalizumab,,,0.00002,0.73817
+tbd,Herceptin,Monoclonal antibody,Trastuzumab,Trastuzumab,,,0.00002,0.73819
+tbd,Stelara,Monoclonal antibody,Ustekinumab,Ustekinumab,,,0.00002,0.73820
+186,Suboxone,Narcotic,Buprenorphine,Buprenorphine,"2,850,298","331,721",0.00051,0.73872
+tbd,Duragesic Skin Patch,Narcotic,Fentanyl,Fentanyl,,,0.00002,0.73873
+140,Zomorph,Narcotic,Morphine,Morphine,"4,384,336","667,722",0.00103,0.73976
+35,Ultram,Narcotic,Tramadol,Tramadol,"17,475,419","4,878,951",0.00754,0.74731
+114,Imdur,Nitrate,Isosorbide,Isosorbide,"5,795,198","1,395,825",0.00216,0.74946
+165,NitroStat Sublingual,Nitrate,Nitroglycerin,Nitroglycerin,"3,483,186","1,228,296",0.00190,0.75136
+152,Namenda,NMDA antagonist,Memantine,Memantine,"3,928,015","815,190",0.00126,0.75262
+0,EpiPen,Nonselective adrenergic agonist,Epinephrine,EpiPen,0,"10,000",0.00002,0.75264
+180,Arimidex,Nonsteroidal aromatase inhibitor,Anastrozole,Anastrozole,"3,090,061","727,779",0.00113,0.75376
+tbd,Strattera,Norepinephrine reuptake inhibitor,Atomoxetine,Atomoxetine,,,0.00002,0.75378
+98,Celebrex,NSAID,Celecoxib,Celecoxib,"7,089,211","1,800,049",0.00278,0.75656
+72,Cataflam,NSAID,Diclofenac,Diclofenac,"9,926,749","3,647,127",0.00564,0.76220
+38,Advil,NSAID,Ibuprofen,Ibuprofen,"16,533,209","8,896,328",0.01375,0.77596
+28,Mobic,NSAID,Meloxicam,Meloxicam,"19,808,581","6,057,630",0.00937,0.78532
+184,Delzicol,NSAID,Mesalamine,Mesalamine,"2,949,823","601,145",0.00093,0.78625
+tbd,Relafen,NSAID,Nabumetone,Nabumetone,,,0.00002,0.78626
+91,Aleve,NSAID,Naproxen,Naproxen,"8,184,638","3,381,034",0.00523,0.79149
+183,Viagra,PDE5 inhibitor,Sildenafil,Sildenafil,"2,963,291","1,080,675",0.00167,0.79316
+tbd,Cialis,PDE5 inhibitor,Tadalafil,Tadalafil,,,0.00002,0.79318
+tbd,Levitra,PDE5 inhibitor,Vardenafil,Vardenafil,,,0.00002,0.79319
+166,Lumigan,Prostaglandin,Bimatoprost,Bimatoprost,"3,483,064","720,422",0.00111,0.79431
+77,Xalatan,Prostaglandin,Latanoprost,Xalatan,"9,722,630","2,650,387",0.00410,0.79840
+122,Nexium,Proton-pump inhibitor,Esomeprazole,Esomeprazole,"5,204,950","1,257,544",0.00194,0.80035
+191,Prevacid,Proton-pump inhibitor,Lansoprazole,Lansoprazole,"2,623,738","617,945",0.00096,0.80130
+8,Prilosec,Proton-pump inhibitor,Omeprazole,Omeprazole,"56,300,064","13,879,629",0.02146,0.82276
+20,Protonix,Proton-pump inhibitor,Pantoprazole,Pantoprazole,"26,604,040","6,814,036",0.01053,0.83330
+tbd,AcipHex,Proton-pump inhibitor,Rabeprazole,Rabeprazole,,,0.00002,0.83331
+tbd,Epogen,Reproductive steroid,Epoetin alfa,Epogen,,,0.00002,0.83333
+59,EstroGel,Reproductive steroid,Estradiol,EstroGel,"11,307,655","3,131,982",0.00484,0.83817
+tbd,Premarin,Reproductive steroid,Conjugated estrogens,Premarin,,,0.00002,0.83818
+158,Prometrium,Reproductive steroid,Progesterone,Prometrium,"3,617,743","983,405",0.00152,0.83971
+tbd,Evista,Reproductive steroid,Raloxifene,Raloxifene,,,0.00002,0.83972
+172,AndroGel,Reproductive steroid,Testosterone,Testosterone,"3,359,583","946,138",0.00146,0.84118
+tbd,Invokana,SGLT-2 inhibitor,Canagliflozin,Canagliflozin,,,0.00002,0.84120
+43,Effexor,SNRI,Venlafaxine,Venlafaxine,"15,022,423","2,863,619",0.00443,0.84563
+31,Celexa,SSRI,Citalopram,Citalopram,"18,549,176","3,683,842",0.00570,0.85132
+15,Lexapro,SSRI,Escitalopram,Escitalopram,"30,605,646","6,342,599",0.00981,0.86113
+25,Prozac,SSRI,Fluoxetine,Fluoxetine,"23,403,050","4,717,183",0.00729,0.86842
+tbd,Luvox,SSRI,Fluvoxamine,Fluvoxamine,,,0.00002,0.86843
+82,Paxil,SSRI,Paroxetine,Paroxetine,"9,029,667","1,813,642",0.00280,0.87124
+12,Zoloft,SSRI,Sertraline,Sertraline,"38,219,814","7,768,366",0.01201,0.88325
+17,Crestor,Statin,Rosuvastatin,Crestor,"29,750,488","7,393,686",0.01143,0.89468
+1,Lipitor,Statin,Atorvastatin,Lipitor,"114,509,814","26,640,141",0.04119,0.93586
+99,Mevacor,Statin,Lovastatin,Mevacor,"7,033,634","1,609,729",0.00249,0.93835
+34,Pravachol,Statin,Pravastatin,Pravachol,"17,549,151","4,132,511",0.00639,0.94474
+13,Zocor,Statin,Simvastatin,Zocor,"36,600,871","8,557,525",0.01323,0.95797
+79,Vibramycin,Tetracycline antibiotic,Doxycycline,Vibramycin,"9,152,604","5,132,350",0.00793,0.96591
+168,Actos,Thiazolidinedione,Pioglitazone,Actos,"3,443,215","872,309",0.00135,0.96726
+2,Synthroid,Thyroid hormone,Levothyroxine,Synthroid,"98,970,640","20,225,373",0.03127,0.99852
+134,Maxalt,Triptan,Rizatriptan,Rizatriptan,"4,667,144","955,189",0.00148,1.00000

@@ -2,8 +2,8 @@ PYTHON       = /usr/bin/env python3
 VERSION_FILE = ./_version.py
 VERSION      = $(shell cut -d " " -f 3 ${VERSION_FILE})
 
-TEMPLATE := cde_template.yaml
-TEMPLATE2 := cde_template_data_dictionary.yaml
+TEMPLATE := cde_template_data_dictionary.yaml
+# TEMPLATE2 := cde_template_data_dictionary.yaml
 OUTPUT_PATH :=
 
 .DEFAULT_GOAL = help
@@ -51,16 +51,16 @@ template-global-datadictionary:
 
 #generate: Generate synthetic CDE data from a CDE template.
 generate:
-ifndef TEMPLATE || TEMPLATE2
+ifndef TEMPLATE
 	$(error TEMPLATE not set (should point to a CDE template file))
 endif
-ifndef ROW_COUNT
-	$(error ROW_COUNT not set (determines how many rows of data to generate))
-endif
+# ifndef ROW_COUNT
+# 	$(error ROW_COUNT not set (determines how many rows of data to generate))
+# endif
 ifndef TEMPLATE
 	${PYTHON} generate.py --template ${TEMPLATE} --row_count ${ROW_COUNT} \
 		$(if ${OUTPUT_PATH}, --output_path2 ${OUTPUT_PATH},)
 else TEMPLATE2
 	${PYTHON} generate.py --template ${TEMPLATE2} --row_count ${ROW_COUNT} \
-		$(if ${OUTPUT_PATH}, --output_path ${OUTPUT_PATH},)
+		$(if ${UTPUT_PATH}, --output_path ${OUTPUT_PATH},)
 endif
