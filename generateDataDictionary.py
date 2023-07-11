@@ -13,13 +13,13 @@ DEFAULT_CDE_OUTPUT_NAME = f"synthetic_datadictionary_cde_{datetime.now().strftim
 
 class ResponseTemplate(TypedDict):
     response_name: str
-    response_value: Union[int, None]
-    response_value_generator: Union[Dict, None]
+    response_value: Union[int, str]
+    response_value_generator: Union[Dict, str]
     frequency: Union[int, None]
 
 class Response(TypedDict):
     response_name: str
-    response_value: int
+    response_value: Union[int, str]
 
 class Template(TypedDict):
     row_count: Union[int, None]
@@ -73,7 +73,14 @@ def process_response_template(selected_response: ResponseTemplate) -> Response:
     selected_response_name = selected_response.get("response_name")
     selected_response_value = selected_response.get("response_value")
     generator_schema = selected_response.get("response_value_generator")
-    if generator_schema is not None:
+    if selected_response_value is not None and isinstance(selected_response_value, str):
+        # Handle string response values
+        return Response(
+            response_name=selected_response_name,
+            response_value=selected_response_value
+        )
+    
+    elif generator_schema is not None:
         udf = generator_schema.get("udf")
         lorem = generator_schema.get("lorem")
         range_ = generator_schema.get("range")
@@ -379,7 +386,7 @@ variables:
 
 if __name__ == "__main__":
     import argparse
-    import generate
+    import generateDataDictionary
     
     parser = argparse.ArgumentParser(description="Generate synthetic CDE file")
     parser.add_argument(
@@ -450,7 +457,7 @@ If no survey cases are specified, the entire template is treated as a single sur
     case = args.case
     output_path = args.output_path
 
-    generate.generate_cde(
+    generateDataDictionary.generate_cde(
         template,
         row_count,
         survey_cases,
