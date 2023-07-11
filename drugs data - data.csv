@@ -32,7 +32,7 @@ tbd,Biaxin,Antibacterial,Clarithromycin,Clarithromycin,,,0.00002,0.11494
 tbd,Cleocin,Antibacterial,Clindamycin,Cleocin,,,0.00002,0.11495
 tbd,Flagyl,Antibacterial,Metronidazole,Flagyl,,,0.00002,0.11497
 167,Macrobid,Antibacterial,Nitrofurantoin,Macrobid,"3,456,512","2,390,228",0.00370,0.11866
-tbd,Sumycin,Antibacterial,Tetracycline  ,Tetracycline  ,,,0.00002,0.11868
+tbd,Sumycin,Antibacterial,Tetracycline,Tetracycline,,,0.00002,0.11868
 40,Augmentin,Antibiotic,Amoxicillin,Augmentin,"7,961,454","6,390,326",0.00988,0.12856
 107,Clavulanate,Antibiotic,Amoxicillin,Clavulanate,"6,086,124","4,558,138",0.00705,0.13561
 125,Clindacin,Antibiotic,Clindamycin,Clindamycin,"5,130,999","2,709,249",0.00419,0.13979
@@ -91,7 +91,7 @@ tbd,Colcrys,Anti-gout,Colchicine,Colcrys,,,0.00002,0.30123
 tbd,Tussionex PennKinetic,Antihistamine,Chlorpheniramine,Chlorpheniramine,,,0.00002,0.30957
 73,Claritin,Antihistamine,Loratadine,Claritin,"9,914,365","2,695,131",0.00417,0.31373
 70,Vistaril,Antihistamine,Hydroxyzine,Hydroxyzine,"10,058,837","2,967,009",0.00459,0.31832
-179,Xyzal,Antihistamine,Levocetirizine,Levocetirizine,"3,108,431","803,646",0.00124,0.31956
+179,Xyzal,Antihistamine,Levocetiaine,Levocetirizine,"3,108,431","803,646",0.00124,0.31956
 142,Bonine,Antihistamine,Meclizine,Meclizine,"4,349,444","1,742,409",0.00269,0.32226
 52,Zyrtec,Antihistamine,Cetirizine,Zyrtec,"13,125,543","3,357,330",0.00519,0.32745
 100,Zetia,Antihyperlipidemic,Ezetimibe,Zetia,"7,029,302","1,822,350",0.00282,0.33027

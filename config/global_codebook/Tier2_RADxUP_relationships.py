@@ -499,12 +499,12 @@ def take_presc_meds(responses):
     elif take_presc_meds_status["response_name"] == "Yes" :
         #relative path
         df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/drugs data - data.csv')
-
+        
         # Generate a random number between 0 and 15
         num_drugs = random.randint(0, 15)
 
         # Shuffle the drugs list
-        drugs = list(df['Medicine'])
+        drugs = list(df['Drug To Use'])
         random.shuffle(drugs)
 
         # Choose the desired number of drugs from the shuffled list
@@ -513,7 +513,7 @@ def take_presc_meds(responses):
 
         for drug in drugs[:num_drugs]:
             
-            drug_class = df.loc[df['Medicine'] == drug, 'Drug Class'].iloc[0]
+            drug_class = df.loc[df['Drug To Use'] == drug, 'Drug Class'].iloc[0]
             
             # Make sure drug class doesn't match any previous ones, append to chosen drugs if not
             if drug_class not in drug_classes:
@@ -521,12 +521,12 @@ def take_presc_meds(responses):
                 chosen_drugs.append((drug, drug_class))
         modified_responses = {}
         # Set all drugs to -9941 (then loop through)
-        for i, (drug_name, _) in enumerate(chosen_drugs):
-            response_key = f"name_of_rx_med{i+1}"
-            if response_key in responses:
-                modified_responses[response_key] = {
-                    "response_name": drug_name
-                }
+        for i, (drug_name, _) in enumerate(chosen_drugs, 1):
+            response_key = f"name_of_rx_med{i}"
+            # if response_key in responses:
+            modified_responses[response_key] = {
+                "response_name": drug_name
+            }
 
         # Return modified_responses with drug names as response values
         return modified_responses
