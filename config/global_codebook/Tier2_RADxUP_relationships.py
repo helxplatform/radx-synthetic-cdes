@@ -502,9 +502,6 @@ def take_presc_meds(responses):
 
         # Generate a random number between 0 and 15
         num_drugs = random.randint(0, 15)
-
-
-        # Shuffle the drugs list
         drugs = list(df['Drug To Use'])
 
         # Choose the desired number of drugs from the shuffled list
@@ -512,7 +509,6 @@ def take_presc_meds(responses):
         drug_classes = set()
 
         for drug in drugs[:num_drugs]:
-            
             drug_class = df.loc[df['Drug To Use'] == drug, 'Drug Class'].iloc[0]
             
             # Make sure drug class doesn't match any previous ones, append to chosen drugs if not
@@ -520,20 +516,20 @@ def take_presc_meds(responses):
                 drug_classes.add(drug_class)
                 chosen_drugs.append((drug, drug_class))
         modified_responses = {}
-        # need to add else for name_of_rx_meds with no drugs
-        # Set all drugs to -9941 (then loop through)
+
+        #loop through and set modified response to drug names
         for i, (drug_name, _) in enumerate(chosen_drugs, 1):
             response_key = f"name_of_rx_med{i}"
-            if drug not in chosen_drugs:
-                modified_responses[response_key] = {
-                "response_name": "Skip Logic"
-            } 
-            else :
-                # if response_key in responses:
-                modified_responses[response_key] = {
-                    "response_name": drug_name
-                }
-            
+            modified_responses[response_key] = {
+                "response_name": drug_name
+            }
+
+    #mark "Skip Logic" for values not in num_drugs
+    for n in range(num_drugs + 1, 15):
+        response_key = f"name_of_rx_med{n}"
+        modified_responses[response_key] = {
+            "response_name": "Skip Logic"
+        }
 
         # Return modified_responses with drug names as response values
         return modified_responses
