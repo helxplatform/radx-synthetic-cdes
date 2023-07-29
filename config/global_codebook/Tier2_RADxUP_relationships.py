@@ -499,37 +499,39 @@ def take_presc_meds(responses):
     elif take_presc_meds_status["response_name"] == "Yes" :
         #relative path
         df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/drugs data - data.csv')
+        drug_frequencies = list(df['Cumulative Percentage'].diff().fillna(df['Cumulative Percentage']))
 
-        # Generate a random number between 0 and 15
+        #cgenerate a random number between 0 and 15
         num_drugs = random.randint(0, 15)
-        drugs = list(df['Drug To Use'])
+        #crugs = list(df['Drug To Use'])
 
-        # Choose the desired number of drugs from the shuffled list
-        chosen_drugs = []
+        #choose 'num_drugs' randomly from the drugs list based on their drug frequencies
+        chosen_drugs = random.choices(df['Drug To Use'], weights=drug_frequencies, k=num_drugs)
+
+        #get the drug class for each chosen drug
         drug_classes = set()
-
-        for drug in drugs[:num_drugs]:
+        chosen_drugs_with_classes = []
+        for drug in chosen_drugs:
             drug_class = df.loc[df['Drug To Use'] == drug, 'Drug Class'].iloc[0]
-            
-            # Make sure drug class doesn't match any previous ones, append to chosen drugs if not
             if drug_class not in drug_classes:
                 drug_classes.add(drug_class)
-                chosen_drugs.append((drug, drug_class))
+                chosen_drugs_with_classes.append((drug, drug_class))
+
         modified_responses = {}
 
         #loop through and set modified response to drug names
-        for i, (drug_name, _) in enumerate(chosen_drugs, 1):
+        for i, drug_name in enumerate(chosen_drugs, 1):
             response_key = f"name_of_rx_med{i}"
             modified_responses[response_key] = {
                 "response_name": drug_name
             }
 
-    #mark "Skip Logic" for values not in num_drugs
-    for n in range(num_drugs + 1, 15):
-        response_key = f"name_of_rx_med{n}"
-        modified_responses[response_key] = {
-            "response_name": "Skip Logic"
-        }
+        #mark "Skip Logic" for values not in num_drugs
+        for n in range(num_drugs + 1, 15):
+            response_key = f"name_of_rx_med{n}"
+            modified_responses[response_key] = {
+                "response_name": "Skip Logic"
+            }
 
         # Return modified_responses with drug names as response values
         return modified_responses
