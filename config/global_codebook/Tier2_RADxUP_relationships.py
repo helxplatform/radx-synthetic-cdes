@@ -501,7 +501,7 @@ def take_presc_meds(responses):
         df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/drugs data - data.csv')
         drug_frequencies = list(df['Cumulative Percentage'].diff().fillna(df['Cumulative Percentage']))
 
-        #cgenerate a random number between 0 and 15
+        #generate a random number between 0 and 15
         num_drugs = random.randint(0, 15)
         #crugs = list(df['Drug To Use'])
 
