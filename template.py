@@ -1,5 +1,6 @@
 import click
 import csv
+import os
 import ruamel.yaml
 from ruamel.yaml.comments import CommentedMap, CommentedSeq
 from pathlib import Path
@@ -18,7 +19,7 @@ def generate_template_csv(mapping_file, output_path):
         "output_path": None,
         "variables": {}
     }
-    with open(mapping_file, "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), mapping_file), "r") as f:
         reader = csv.DictReader(f, delimiter=",")
         i = 0
         for row in reader:
@@ -75,7 +76,7 @@ def generate_template_csv(mapping_file, output_path):
         if not click.confirm(f"Template file already exists under \"{output_path}\". You will LOSE ALL DATA under the existing template. Continue anyways?"):
             print("Cancelled template generation.")
             return
-    with open(output_path, "w+", encoding="utf-8") as out_file:
+    with open(os.path.join(os.path.dirname(__file__), output_path), "w+", encoding="utf-8") as out_file:
         document_comment = f"""\
 Template generated using v{__version__}.
 Source mapping file: "{mapping_file}".
