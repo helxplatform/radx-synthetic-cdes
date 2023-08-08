@@ -6,13 +6,17 @@ from ruamel.yaml.comments import CommentedMap, CommentedSeq
 from pathlib import Path
 from _version import __version__
 
-def generate_template_csv(mapping_file, output_path):
+def generate_template_csv(
+    mapping_file: str,
+    output_path: str,
+    name_column: str,
+    responses_column: str,
+    response_outer_delimiter: str,
+    response_inner_delimiter: str,
+    mapping_file_delimiter: str
+):
     """
     Generate a template file for CDE generation from a RADx CDE mapping file.
-    :param mapping_file: File path to mapping file
-    :type mapping_file: str
-    :param output_path: Output path of the generated template file
-    :type output_path: str
     """
     template = {
         "row_count": 1000,
@@ -20,17 +24,17 @@ def generate_template_csv(mapping_file, output_path):
         "variables": {}
     }
     with open(os.path.join(os.path.dirname(__file__), mapping_file), "r") as f:
-        reader = csv.DictReader(f, delimiter=",")
+        reader = csv.DictReader(f, delimiter=mapping_file_delimiter)
         i = 0
         for row in reader:
             variable_template = []
-            variable_name = row["Variable"]
+            variable_name = row[name_column]
             possible_responses = [
                 # Split mapping into (value, name). Important to only split the first comma, since the name can also include commas
                 # E.g. "0, No, not of Hispanic or Latino origin" -> ("0", "No, not of Hispanic or Latino origin")
-                response.split(",", 1)
+                response.split(response_inner_delimiter, maxsplit=1)
                 # Split into individual variable mappings
-                for response in row["Responses"].split(";")
+                for response in row[responses_column].split(response_outer_delimiter)
             ]
             for possible_response in possible_responses:
                 if len(possible_response) == 2:
@@ -187,11 +191,56 @@ if __name__ == "__main__":
         "--output_path",
         help="Output path of template file",
         action="store",
-        default="cde_template.yaml"
+        default="data_dictionary_template.yaml"
+    )
+    parser.add_argument(
+        "--mapping_file_delimiter",
+        help="The CSV delimiter used in the mapping file. Most commonly \",\".",
+        action="store",
+        default=","
+    )
+    parser.add_argument(
+        "-n",
+        "--name_column",
+        help="Mapping file column that represents the variable/CDE name. For example, this is called \"Variable\" in the RADx global codebook.",
+        action="store",
+        required=True
+    )
+    # Arguments for how to parse the mapping file into a template.
+    parser.add_argument(
+        "--name_column",
+        help="Mapping file column for the variable/CDE name. For example, this is called \"Variable\" in the RADx global codebook.",
+        action="store",
+        required=True
+    )
+    parser.add_argument(
+        "--responses_column",
+        help="Mapping file column for the responses schema. For example, this is called \"Responses\" in the RADx global codebook.",
+        action="store",
+        required=True
+    )
+    parser.add_argument(
+        "--response_outer_delimiter",
+        help="The responses schema requires two delimiters to parse. The outer delimiter separates different types of responses. \"|\" or \";\" are commonly used.",
+        action="store",
+        required=True
+    )
+    parser.add_argument(
+        "--response_inner_delimiter",
+        help="The responses schema requires two delimiters to parse. The outer delimiter separates different types of responses. \",\" is commonly used.",
+        action="store",
+        required=True
     )
 
-    args = parser.parse_args()
-    mapping_file = args.mapping_file
-    output_path = args.output_path
 
-    generate_template_csv(mapping_file, output_path)
+    args = parser.parse_args()
+
+    generate_template_csv(
+        mapping_file=args.mapping_file,
+        output_path=args.output_path,
+        name_column=args.name_column,
+        responses_column=args.responses_column,
+        response_outer_delimiter=args.response_outer_delimiter,
+        response_inner_delimiter=args.response_inner_delimiter,
+        mapping_file_delimiter=","
+    )
