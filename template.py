@@ -2,6 +2,7 @@ import click
 import csv
 import os
 import ruamel.yaml
+from typing import Optional
 from ruamel.yaml.comments import CommentedMap, CommentedSeq
 from pathlib import Path
 from _version import __version__
@@ -13,7 +14,8 @@ def generate_template_csv(
     responses_column: str,
     response_outer_delimiter: str,
     response_inner_delimiter: str,
-    mapping_file_delimiter: str
+    mapping_file_delimiter: str,
+    type_column: Optional[str] = None,
 ):
     """
     Generate a template file for CDE generation from a RADx CDE mapping file.
@@ -29,6 +31,7 @@ def generate_template_csv(
         for row in reader:
             variable_template = []
             variable_name = row[name_column]
+            variable_type = row[type_column] if type_column is not None else None
             possible_responses = [
                 # Split mapping into (value, name). Important to only split the first comma, since the name can also include commas
                 # E.g. "0, No, not of Hispanic or Latino origin" -> ("0", "No, not of Hispanic or Latino origin")
@@ -41,7 +44,8 @@ def generate_template_csv(
                     # Normal response mapping of [value, name]
                     response_value, response_name = possible_response
                     response_name = response_name.strip()
-                    response_value = int(response_value)
+                    if response_value.isdigit():
+                        response_value = int(response_value)
                     variable_template.append({
                         "response_name": response_name,
                         "response_value": response_value,
@@ -199,13 +203,6 @@ if __name__ == "__main__":
         action="store",
         default=","
     )
-    parser.add_argument(
-        "-n",
-        "--name_column",
-        help="Mapping file column that represents the variable/CDE name. For example, this is called \"Variable\" in the RADx global codebook.",
-        action="store",
-        required=True
-    )
     # Arguments for how to parse the mapping file into a template.
     parser.add_argument(
         "--name_column",
@@ -220,6 +217,12 @@ if __name__ == "__main__":
         required=True
     )
     parser.add_argument(
+        "--type_column",
+        help="The mapping file column that indicates the type of the field. May or may not be present in the mapping file. For example: text, radio, checkbox, etc.",
+        action="store",
+        default=None
+    )
+    parser.add_argument(
         "--response_outer_delimiter",
         help="The responses schema requires two delimiters to parse. The outer delimiter separates different types of responses. \"|\" or \";\" are commonly used.",
         action="store",
@@ -232,13 +235,13 @@ if __name__ == "__main__":
         required=True
     )
 
-
     args = parser.parse_args()
 
     generate_template_csv(
         mapping_file=args.mapping_file,
         output_path=args.output_path,
         name_column=args.name_column,
+        type_column=args.type_column,
         responses_column=args.responses_column,
         response_outer_delimiter=args.response_outer_delimiter,
         response_inner_delimiter=args.response_inner_delimiter,
