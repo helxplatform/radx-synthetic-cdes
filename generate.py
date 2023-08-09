@@ -9,17 +9,17 @@ from pathlib import Path
 from lorem.text import TextLorem
 from relationships import Register
 
-DEFAULT_CDE_OUTPUT_NAME = f"synthetic_cde_{datetime.now().strftime('%m-%d-%Y')}"
+DEFAULT_CDE_OUTPUT_NAME = f"synthetic_datadictionary_{datetime.now().strftime('%m-%d-%Y')}"
 
 class ResponseTemplate(TypedDict):
     response_name: str
-    response_value: Union[int, None]
+    response_value: Union[int, str]
     response_value_generator: Union[Dict, None]
     frequency: Union[int, None]
 
 class Response(TypedDict):
     response_name: str
-    response_value: int
+    response_value: Union[int, str]
 
 class Template(TypedDict):
     row_count: Union[int, None]
@@ -379,7 +379,6 @@ variables:
 
 if __name__ == "__main__":
     import argparse
-    import generate
     
     parser = argparse.ArgumentParser(description="Generate synthetic CDE file")
     parser.add_argument(
@@ -450,7 +449,7 @@ If no survey cases are specified, the entire template is treated as a single sur
     case = args.case
     output_path = args.output_path
 
-    generate.generate_cde(
+    generate_cde(
         template,
         row_count,
         survey_cases,
