@@ -386,7 +386,7 @@ if __name__ == "__main__":
         "--template",
         help="CDE template specifying how to generate the mock CDE",
         action="store",
-        default="config/global_codebook/cde_template.yaml"
+        default="config/global_codebook/cde_template_data_dictionary.yaml"
     )
     parser.add_argument(
         "-r",

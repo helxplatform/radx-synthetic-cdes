@@ -498,7 +498,7 @@ def take_presc_meds(responses):
         }
     elif take_presc_meds_status["response_name"] == "Yes" :
         #relative path
-        df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/drugs data - data.csv')
+        df = pd.read_csv('/Users/asiyahahmad/Documents/GitHub/radx-synthetic-cdes/templating_data/drugs data - data.csv')
         drug_frequencies = list(df['Cumulative Percentage'].diff().fillna(df['Cumulative Percentage']))
 
         #generate a random number between 0 and 15

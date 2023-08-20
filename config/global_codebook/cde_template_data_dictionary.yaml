@@ -33453,7 +33453,6 @@ variables:
     - frequency: 0.0014800000000000368
       response_name: Rizatriptan
       response_value: Rizatriptan
-
   
   take_presc_meds:
     - response_name: No
@@ -33462,35 +33461,3 @@ variables:
     - response_name: Yes
       response_value: 1
       frequency: 1
-  # number_of_drugs:
-  #   - response_name: 1
-  #     response_value: 1
-  #   - response_name: 2
-  #     response_value: 2
-  #   - response_name: 3
-  #     response_value: 3
-  #   - response_name: 4
-  #     response_value: 4
-  #   - response_name: 5
-  #     response_value: 5
-  #   - response_name: 6
-  #     response_value: 6
-  #    - response_name: 7
-  #     response_value: 7
-  #   - response_name: 8
-  #     response_value: 8
-  #   - response_name: 9
-  #     response_value: 9
-  #   - response_name: 10
-  #     response_value: 10
-  #   - response_name: 11
-  #     response_value: 11
-  #   - response_name: 12
-  #     response_value: 12
-  #   - response_name: 13
-  #     response_value: 13
-  #   - response_name: 14
-  #     response_value: 14
-  #   - response_name: 15
-  #     response_value: 15
-  
