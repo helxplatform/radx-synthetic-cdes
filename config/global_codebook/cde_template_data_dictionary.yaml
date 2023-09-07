@@ -21498,11 +21498,292 @@ variables:
   
   take_presc_meds:
     - response_name: No
-      response_value: 0
-      frequency: 0
+      response_value: 0.5
+      frequency: 0.5
     - response_name: Yes
-      response_value: 1
-      frequency: 1
+      response_value: 0.5
+      frequency: 0.5
+
+  comp_thrombosis:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  lab_tests_performed:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  viral_positive:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  cardio_assessment:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  assessment_other:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  pulm_othertest:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  imaging_other:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  ct_brain:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  ct_chest:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  ct_abdomen:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  lung_ultrasound:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  vasc_ultrasound:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  ab_ultrasound:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  neonatal_ultrasound:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  medications_antibiotics:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  medications_diabetic:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  medications_other:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  patient_death:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  discharge_location:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  treatment_other:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  treatment_ongoing:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  breakfast_precovid:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  schooling_present:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  hc_notrec:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  any_med_condition:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  any_care_condition:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  lim_abil_condition:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  therapy:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  therapy_condition:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  treatment:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  doc_question_yr:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  mri_brain:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  mri_abdomen:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  special_ser: 
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  more_care:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  lim_abil: 
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  mri_spine:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  child_iep:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  schooling_middle:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
+  use_meds:
+    - response_name: No
+      response_value: 0.5
+      frequency: 0.5
+    - response_name: Yes
+      response_value: 0.5
+      frequency: 0.5
 
   covid_pto:
       - response_name: 0

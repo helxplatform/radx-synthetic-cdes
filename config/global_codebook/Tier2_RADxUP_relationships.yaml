@@ -13,3 +13,46 @@ relationships:
   - name: vaccine_acceptance
   - name: bio_sex_birth_2   
   - name: take_presc_meds
+  - name: lifetime_use_alcohol
+  - name: comp_thrombosis
+  - name: lab_tests_performed
+  - name: viral_positive
+  - name: cardio_assessment
+  - name: assessment_other
+  - name: pulm_othertest
+  - name: imaging_other
+  - name: ct_brain
+  - name: ct_chest
+  - name: ct_abdomen
+  - name: lung_ultrasound
+  - name: vasc_ultrasound
+  - name: ab_ultrasound
+  - name: neonatal_ultrasound
+  - name: mri_brain
+  - name: mri_spine
+  - name: mri_abdomen
+  - name: imaging_other
+  - name: medications_antibiotics
+  - name: medications_diabetic
+  - name: medications_other
+  - name: patient_death
+  - name: discharge_location
+  - name: treatment_other
+  - name: treatment_ongoing
+  - name: breakfast_precovid
+  - name: child_iep
+  - name: schooling_middle
+  - name: schooling_present
+  - name: hi_loss_covid
+  - name: hc_notrec
+  - name: special_ser
+  - name: use_meds
+  - name: any_med_condition
+  - name: more_care
+  - name: any_care_condition
+  - name: lim_abil
+  - name: lim_abil_condition
+  - name: therapy
+  - name: therapy_condition
+  - name: treatment
+  - name: doc_question_yr
