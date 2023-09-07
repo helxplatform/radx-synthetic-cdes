@@ -100,7 +100,7 @@ class Register:
         for dependency in dependency_path:
             variable_name = dependency
             for relationship in relationships:
-                if variable_name in relationship["dependencies"]:
+                if str(variable_name) in relationship["dependencies"]:
                     plan.append(relationship)
         return plan, G
 
